@@ -42,6 +42,7 @@ const AppWrapper = (props) => {
                 <Grid className={classes.sidebar} item xs={3}>
                     <SideBar />
                 </Grid>
+                
                 <Grid item xs={9}>
                     <Switch>
                         {/* <Route exact path='/' component={} /> */}
