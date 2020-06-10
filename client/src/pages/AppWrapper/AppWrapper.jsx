@@ -7,7 +7,8 @@ import { connect } from "react-redux";
 
 import SideBar from "../../components/SideBar";
 import TestPage from "../TestPage";
-import LogIn from '../LogIn'
+import LogIn from '../LogIn';
+import Appointments from '../Appointments';
 
 const mapStateToProps = (state) => ({
   state,
@@ -42,9 +43,7 @@ const AppWrapper = (props) => {
         <Grid item xs={9}>
           <Switch>
             <Route exact path="/" component={TestPage} />
-            {/* <Route path="/Messages" component={} /> */}
-
-
+            <Route path="/Appointments" component={Appointments} />
           </Switch>
         </Grid>
       </Grid>
