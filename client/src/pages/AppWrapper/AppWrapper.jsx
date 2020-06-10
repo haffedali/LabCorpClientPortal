@@ -42,6 +42,8 @@ const AppWrapper = (props) => {
         <Grid item xs={9}>
           <Switch>
             <Route exact path="/" component={TestPage} />
+            {/* <Route path="/Messages" component={} /> */}
+
 
           </Switch>
         </Grid>

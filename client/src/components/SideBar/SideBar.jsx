@@ -33,6 +33,8 @@ const SideBar = (props) => {
     actions.switchPage(index);
   };
 
+
+
   
   return (
     <List
