@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
 import thunk from 'redux-thunk';
-import rootReducer from './reducer';
+import rootReducer from './reducers';
 
 
 function configureStore(initialState) {
