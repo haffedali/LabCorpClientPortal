@@ -1,11 +1,16 @@
 import React from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useParams,
+  useRouteMatch
+} from "react-router-dom";
+import DatePicker from '../../components/Calendar';
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Breadcrumbs from "@material-ui/core/Breadcrumbs";
-import Link from "@material-ui/core/Link";
-import HomeIcon from "@material-ui/icons/Home";
-import WhatshotIcon from "@material-ui/icons/Whatshot";
-import GrainIcon from "@material-ui/icons/Grain";
 import EventIcon from '@material-ui/icons/Event';
 import EventAvailableIcon from '@material-ui/icons/EventAvailable';
 
@@ -22,33 +27,43 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function handleClick(event) {
-  event.preventDefault();
-  console.info("You clicked a breadcrumb.");
 }
 
 export default function AppointmentHeader() {
   const classes = useStyles();
+  let { path, url } = useRouteMatch();
 
   return (
-    <Breadcrumbs aria-label="breadcrumb">
-      <Link
-        color="inherit"
-        href="/"
-        onClick={handleClick}
-        className={classes.link}
-      >
-        <EventIcon className={classes.icon} />
-        Calendar
+    <Router>
+      <Breadcrumbs aria-label="breadcrumb">
+        <Link
+          color="inherit"
+          to={`${url}/Calendar`}
+          className={classes.link}
+        >
+          <EventIcon className={classes.icon} />
+          Calendar
       </Link>
-      <Link
-        color="inherit"
-        href="/getting-started/installation/"
-        onClick={handleClick}
-        className={classes.link}
-      >
-        <EventAvailableIcon className={classes.icon} />
-        Appointments
+        <Link
+          color="inherit"
+          to={`${url}/Apps`}
+          className={classes.link}
+        >
+          <EventAvailableIcon className={classes.icon} />
+          Appointments
       </Link>
-    </Breadcrumbs>
-  );
+      </Breadcrumbs>
+
+      <hr />
+
+      <Switch>
+        <Route exact path={path}>
+          <h2>Welcome To Appointments</h2>
+        </Route>
+        <Route path={`${path}/Calendar`}>
+        <DatePicker />
+        </Route>
+      </Switch>
+    </Router>
+      );
 }
