@@ -5,13 +5,9 @@ import {Container, Grid} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 
-import InnerTable from '../../components/InnerTable'
-
 const TestPage = (props) => {
     return (
-        <div>
-            <InnerTable></InnerTable>
-        </div>
+        <div>Hello</div>
     )
 }
 
