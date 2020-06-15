@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import AppWrapper from './pages/AppWrapper'
+import { SideBar } from './components'
+
+// import { BrowserRouter as Router } from "react-router-dom";
 
 class App extends Component{
   constructor(props){
@@ -7,10 +9,9 @@ class App extends Component{
   }
   render(){
     return(
-      <AppWrapper />
+        <SideBar />      
     )
   }
 }
 
 export default App;
-

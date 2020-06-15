@@ -5,10 +5,14 @@ import { Container, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 
-import SideBar from "../../components/SideBar";
-import TestPage from "../TestPage";
-import LogIn from '../LogIn';
-import Appointments from '../Appointments';
+import { SideBar } from '../../components'
+
+import { 
+  Appointment,
+  Billing,
+  LogIn,
+  TestPage
+} from '../'
 
 const mapStateToProps = (state) => ({
   state,
@@ -35,21 +39,24 @@ const AppWrapper = (props) => {
 
   const classes = useStyles();
   return (
-    <Router>
-      <Container className={classes.container}>
-        <Grid className={classes.grid} container direction="row" justify="left">
-          <Grid className={classes.sidebar} item xs={3}>
-            <SideBar />
-          </Grid>
-          <Grid item xs={9}>
-            <Switch>
-              <Route exact path="/" component={TestPage} />
-              <Route path="/Appointments" component={Appointments} />
-            </Switch>
-          </Grid>
-        </Grid>
-      </Container>
-    </Router>
+
+    <SideBar />
+    // <Router>
+    //   <Container className={classes.container}>
+    //     <Grid className={classes.grid} container direction="row" justify="left">
+    //       <Grid className={classes.sidebar} item xs={3}>
+    //         <SideBar />
+    //       </Grid>
+    //       <Grid item xs={9}>
+    //         <Switch>
+    //           <Route exact path="/" component={TestPage} />
+    //           <Route path="/Appointments" component={Appointment} />
+    //           <Route path="/Billing" component={Billing} />
+    //         </Switch>
+    //       </Grid>
+    //     </Grid>
+    //   </Container>
+    // </Router>
   );
 };
 
