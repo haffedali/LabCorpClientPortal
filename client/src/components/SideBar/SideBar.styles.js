@@ -20,6 +20,21 @@ export const useStyles = makeStyles((theme) => ({
     drawerIcon: {
       color: theme.DRAWER_TEXT,
     },
+    activeListItemIcon: {
+      '& svg': {
+        color: theme.DRAWER_TEXT_ACTIVE,
+      }
+    },
+    inactiveListItemIcon: {
+      '& svg': {
+        color: theme.DRAWER_TEXT,
+      }
+    },
+    listItemText: {
+      '& span': {
+        fontWeight: '500',
+      }
+    },
     divider: {
       backgroundColor: theme.DIVIDER,
     },

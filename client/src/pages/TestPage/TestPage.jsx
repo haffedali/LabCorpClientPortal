@@ -5,10 +5,7 @@ import {Container, Grid} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 
-const TestPage = (props) => {
-    return (
-        <div>Hello</div>
-    )
-}
+const TestPage = (props) => 
+    <h3>TestPage.js</h3>
 
 export default TestPage;

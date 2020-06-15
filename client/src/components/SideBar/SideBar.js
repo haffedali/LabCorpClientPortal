@@ -29,15 +29,29 @@ import { connect } from "react-redux";
 import { Routes } from '../../navigation'
 import { history } from '../../navigation'
 
-// logo
+import { useLocation } from 'react-router-dom'
+
 import logo from '../../assets/img/logo.png'
 import avatarSrc from '../../assets/img/headshot.png'
 import { AvatarBtn } from '../'
 
-
 function SideBar(props) {
   const classes = useStyles(props);
   const theme = useTheme();
+
+  let location = useLocation();
+
+  const checkPageCorrect = () => {
+    let stateCurrPage = props.page;
+    let pathname = location.pathname.substring(1);
+
+    if (pathname != stateCurrPage) {
+      console.log('not equal \n- state.page: ' + stateCurrPage + '\n- location.pathname: ' + pathname)
+      props.updatePage(pathname)
+    }
+
+    return pathname
+  }
 
   const tabIcons = {
     0: <EventIcon className={classes.drawerIcon} />,
@@ -47,7 +61,7 @@ function SideBar(props) {
   }
 
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [selectedIndex, setSelectedIndex] = React.useState("appointments");
+  const [selectedIndex, setSelectedIndex] = React.useState(checkPageCorrect());
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -72,8 +86,8 @@ function SideBar(props) {
                     onClick={(event) => handleListItemClick(event, text)}
                     key={`${index}-main-tabs`}
                 >
-                    <ListItemIcon>{tabIcons[index]}</ListItemIcon>
-                    <ListItemText color="green" primary={text} />
+                    <ListItemIcon className={selectedIndex === text ? classes.activeListItemIcon : classes.inactivelistItemIcon}>{tabIcons[index]}</ListItemIcon>
+                    <ListItemText primary={text} className={classes.listItemText} />
                 </ListItem>
             ))}
             </List>
@@ -83,7 +97,7 @@ function SideBar(props) {
                     <ListItemIcon>
                       <ExitToAppIcon className={classes.drawerIcon} />
                     </ListItemIcon>
-                    <ListItemText primary='Logout' />
+                    <ListItemText primary='Logout' className={classes.listItemText} />
                 </ListItem>
             </List>
         </div>
@@ -160,14 +174,15 @@ function SideBar(props) {
 }
 
 function mapStateToProps(state) {
-    return {
-        page: state.sideBarReducer.page,
-    };
+  return {
+      page: state.sideBarReducer.currentPage,
+  };
 }
   
 function mapDispathToProps(dispatch) {
     return {
         actions: bindActionCreators(sideBarActions, dispatch),
+        updatePage: (locationFromUrlPath) => dispatch(sideBarActions.switchPage(locationFromUrlPath))
     };
 }
 

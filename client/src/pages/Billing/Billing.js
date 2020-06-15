@@ -7,7 +7,7 @@ import { useStyles } from './Billing.styles';
 const Billing = (props) => {
     const classes = useStyles(props);
 
-    return <h2>Billing.js</h2>
+    return <h3>...</h3>
 }
 
 export default Billing;
