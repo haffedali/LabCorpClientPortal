@@ -4,12 +4,10 @@ import {
   Switch,
   Route,
   Link,
-  useParams,
   useRouteMatch
 } from "react-router-dom";
 import DatePicker from '../../components/Calendar';
 import { makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
 import Breadcrumbs from "@material-ui/core/Breadcrumbs";
 import EventIcon from '@material-ui/icons/Event';
 import EventAvailableIcon from '@material-ui/icons/EventAvailable';
@@ -25,9 +23,6 @@ const useStyles = makeStyles(theme => ({
     height: 20
   }
 }));
-
-function handleClick(event) {
-}
 
 export default function AppointmentHeader() {
   const classes = useStyles();

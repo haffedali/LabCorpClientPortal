@@ -1,8 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
-import { Link } from "react-router-dom";
-import Divider from "@material-ui/core/Divider";
 import { connect } from "react-redux";
 import DisplayOption from "../DisplayOption";
 import { bindActionCreators } from "redux";

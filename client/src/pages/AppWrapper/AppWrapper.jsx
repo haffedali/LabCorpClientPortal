@@ -7,7 +7,6 @@ import { connect } from "react-redux";
 
 import SideBar from "../../components/SideBar";
 import TestPage from "../TestPage";
-import LogIn from '../LogIn';
 import Appointments from '../Appointments';
 
 const mapStateToProps = (state) => ({
