@@ -48,10 +48,10 @@ function Row(props) {
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
-        <TableCell component="th" scope="row">
+        <TableCell>
           {row.name}
         </TableCell>
-        <TableCell align="right">
+        <TableCell>
           {row.date}
         </TableCell>
       </TableRow>
@@ -62,7 +62,7 @@ function Row(props) {
               <Typography variant="h6" gutterBottom component="div">
                 Itemized Results
               </Typography>
-              <Table size="small" aria-label="purchases">
+              <Table size="small" aria-label="test results">
                 <TableHead>
                   <TableRow>
                     <TableCell>Item</TableCell>
@@ -90,28 +90,22 @@ function Row(props) {
 
 Row.propTypes = {
   row: PropTypes.shape({
-    calories: PropTypes.number.isRequired,
-    carbs: PropTypes.number.isRequired,
-    fat: PropTypes.number.isRequired,
-    history: PropTypes.arrayOf(
+    date: PropTypes.instanceOf(Date),
+    items: PropTypes.arrayOf(
       PropTypes.shape({
-        amount: PropTypes.number.isRequired,
-        customerId: PropTypes.string.isRequired,
-        date: PropTypes.string.isRequired,
+        item: PropTypes.string,
+        numericValue: PropTypes.number,
+        unit: PropTypes.string,
       }),
-    ).isRequired,
-    name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    protein: PropTypes.number.isRequired,
-  }).isRequired,
+    ),
+    name: PropTypes.string,
+  }),
 };
 
 const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0, 3.99),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3, 4.99),
-  createData('Eclair', 262, 16.0, 24, 6.0, 3.79),
-  createData('Cupcake', 305, 3.7, 67, 4.3, 2.5),
-  createData('Gingerbread', 356, 16.0, 49, 3.9, 1.5),
+  createData('Hemoglobin', "2019-11-01"),
+  createData('Hemoglobin', "2018-11-01"),
+  createData('Hemoglobin', "2017-11-01"),
 ];
 
 export default function CollapsibleTable() {
@@ -121,11 +115,8 @@ export default function CollapsibleTable() {
         <TableHead>
           <TableRow>
             <TableCell />
-            <TableCell>Dessert (100g serving)</TableCell>
-            <TableCell align="right">Calories</TableCell>
-            <TableCell align="right">Fat&nbsp;(g)</TableCell>
-            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-            <TableCell align="right">Protein&nbsp;(g)</TableCell>
+            <TableCell component="th">Test</TableCell>
+            <TableCell component="th">Date</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
