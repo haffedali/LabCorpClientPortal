@@ -11,25 +11,11 @@ import {
     WeekView,
     MonthView,
     Appointments,
+    DayView,
 } from '@devexpress/dx-react-scheduler-material-ui';
 import * as scheduleActions from "../../services/Schedule/actions"
 
-/* const ViewSwitcher = ({
-    currentViewName,
-    onChange,
-}) => (
-        <RadioGroup
-            aria-label="Views"
-            style={{ flexDirection: 'row' }}
-            name="views"
-            value={currentViewName}
-            onChange={onChange}
-        >
-            <FormControlLabel value="Month" control={<Radio />} label="Month" />
-            <FormControlLabel value="Week" control={<Radio />} label="Week" />
-            <FormControlLabel value="Day" control={<Radio />} label="Day" />
-        </RadioGroup>
-    ); */
+
 function mapStateToProps(state) {
     return {
         currentView: state.scheduleReducer.currentView
@@ -77,6 +63,7 @@ const CurrentView = (props) => {
                     startDayHour={10}
                     endDayHour={19}
                 />
+                <DayView />
                 <Appointments />
             </Scheduler>
         </Paper>
