@@ -7,7 +7,7 @@ import {
   useParams,
   useRouteMatch
 } from "react-router-dom";
-import DatePicker from '../../components/Calendar';
+import { DatePicker } from '../../components';
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Breadcrumbs from "@material-ui/core/Breadcrumbs";
