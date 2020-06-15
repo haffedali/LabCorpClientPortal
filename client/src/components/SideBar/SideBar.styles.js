@@ -35,6 +35,11 @@ export const useStyles = makeStyles((theme) => ({
         fontWeight: '500',
       }
     },
+    listItemHover: {
+      '&:hover': {
+        backgroundColor: theme.DRAWER_ITEM_HOVER,
+      }
+    },
     divider: {
       backgroundColor: theme.DIVIDER,
     },
@@ -55,6 +60,7 @@ export const useStyles = makeStyles((theme) => ({
       display: 'flex',
       justifyContent: 'flex-start',
       alignItems: 'center',
+      cursor: 'pointer'
     },
     appBarText: {
       color: theme.PRIMARY,

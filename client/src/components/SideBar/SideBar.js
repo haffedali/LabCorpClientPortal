@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Divider from '@material-ui/core/Divider';
@@ -23,16 +23,13 @@ import ListAltIcon from '@material-ui/icons/ListAlt';
 
 import { useTheme } from '../../theme/ThemeContext';
 import { useStyles } from './SideBar.styles';
-import * as sideBarActions from '../../services/SideBar/actions'
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
 import { Routes } from '../../navigation'
 import { history } from '../../navigation'
 
 import { useLocation } from 'react-router-dom'
 
 import logo from '../../assets/img/logo.png'
-import avatarSrc from '../../assets/img/headshot.png'
+// import avatarSrc from '../../assets/img/headshot.png'
 import { AvatarBtn } from '../'
 
 function SideBar(props) {
@@ -41,17 +38,14 @@ function SideBar(props) {
 
   let location = useLocation();
 
-  const checkPageCorrect = () => {
-    let stateCurrPage = props.page;
+  useEffect(() => {
+    let stateCurrPage = selectedIndex;
     let pathname = location.pathname.substring(1);
 
     if (pathname != stateCurrPage) {
-      console.log('not equal \n- state.page: ' + stateCurrPage + '\n- location.pathname: ' + pathname)
-      props.updatePage(pathname)
+      setSelectedIndex(pathname)
     }
-
-    return pathname
-  }
+  });
 
   const tabIcons = {
     0: <EventIcon className={classes.drawerIcon} />,
@@ -61,16 +55,14 @@ function SideBar(props) {
   }
 
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [selectedIndex, setSelectedIndex] = React.useState(checkPageCorrect());
+  const [selectedIndex, setSelectedIndex] = React.useState(location.pathname.substring(1));
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
 
   const handleListItemClick = (event, index) => {
-    const { actions } = props;
     setSelectedIndex(index);
-    actions.switchPage(index);
     history.push(index);
   };
 
@@ -85,6 +77,7 @@ function SideBar(props) {
                     selected={selectedIndex === text}
                     onClick={(event) => handleListItemClick(event, text)}
                     key={`${index}-main-tabs`}
+                    className={classes.listItemHover}
                 >
                     <ListItemIcon className={selectedIndex === text ? classes.activeListItemIcon : classes.inactivelistItemIcon}>{tabIcons[index]}</ListItemIcon>
                     <ListItemText primary={text} className={classes.listItemText} />
@@ -118,7 +111,7 @@ function SideBar(props) {
             <MenuIcon />
           </IconButton>
           <div className={classes.appBarContainer}>
-              <div className={classes.appBarTitleContainer}>
+              <div className={classes.appBarTitleContainer} onClick={(event) => handleListItemClick(event, '')}>
                 <img src={logo} height='50px' />
                 <Typography variant="h6" className={classes.appBarText} noWrap>
                     LabCorp
@@ -130,7 +123,8 @@ function SideBar(props) {
                         <Brightness7Icon aria-label="Lights On" className={classes.lightSwitchIcon} /> : 
                         <Brightness4Icon aria-label="Lights Off" className={classes.lightSwitchIcon} />}
                 </IconButton>
-                <AvatarBtn avatarSrc={avatarSrc} page='/profile' />
+                {/* <AvatarBtn avatarSrc={avatarSrc} page='/profile' /> */}
+                <AvatarBtn page='/profile' />
             </div>
           </div>
         </Toolbar>
@@ -173,17 +167,4 @@ function SideBar(props) {
   );
 }
 
-function mapStateToProps(state) {
-  return {
-      page: state.sideBarReducer.currentPage,
-  };
-}
-  
-function mapDispathToProps(dispatch) {
-    return {
-        actions: bindActionCreators(sideBarActions, dispatch),
-        updatePage: (locationFromUrlPath) => dispatch(sideBarActions.switchPage(locationFromUrlPath))
-    };
-}
-
-export default connect(mapStateToProps, mapDispathToProps)(SideBar);
+export default SideBar;

@@ -1,17 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { SideBar } from './components'
 
-// import { BrowserRouter as Router } from "react-router-dom";
+const App = (props) => 
+  <SideBar />      
 
-class App extends Component{
-  constructor(props){
-    super(props)
-  }
-  render(){
-    return(
-        <SideBar />      
-    )
-  }
-}
 
 export default App;
