@@ -1,14 +1,19 @@
 import React from 'react';
-import {Switch, Route} from 'react-router-dom';
-
 import {Container, Grid} from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import { connect } from 'react-redux';
 
-const Messages = (props) => {
+import MessagesTabs from '../../components/MessagesTabs';
+import AppBar from '@material-ui/core/AppBar';
+
+
+export default function Message() {
+    
     return (
-        <div>This is your Message Panel</div>
-    )
+        <Grid container item xs={10}
+            container
+            direction="column"
+            justify="space-between"
+            alignItems="center">
+            <MessagesTabs />
+        </Grid>
+    );
 }
-
-export default Messages;
