@@ -24,10 +24,7 @@ const useStyles = makeStyles(theme => ({
 
 const [selectedIndex, setSelectedIndex] = React.useState("Messages");
 
-  const handleClick = (event, index) => {
-    const {actions} = props
-    setSelectedIndex(index);
-    actions.switchPage(index);
+  const handleClick = (event) {
   };
 
 export default function messagesTab () {
