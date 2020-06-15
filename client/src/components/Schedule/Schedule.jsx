@@ -30,7 +30,8 @@ function mapDispatchToProps(dispatch) {
 const ViewSwitcher = ({ onChange, currentViewName }) => (
     <RadioGroup
         aria-label="Views"
-        style={{ flexDirection: 'row' }}
+        style={{ flexDirection: 'row',
+        justifyContent: 'center' }}
         name="views"
         value={currentViewName}
         onChange={onChange}

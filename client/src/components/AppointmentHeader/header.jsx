@@ -4,7 +4,6 @@ import {
   Switch,
   Route,
   Link,
-  useParams,
   useRouteMatch
 } from "react-router-dom";
 import DatePicker from '../../components/Calendar';
@@ -13,6 +12,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Breadcrumbs from "@material-ui/core/Breadcrumbs";
 import EventIcon from '@material-ui/icons/Event';
 import EventAvailableIcon from '@material-ui/icons/EventAvailable';
+import { Button } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
   link: {
@@ -26,9 +26,6 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function handleClick(event) {
-}
-
 export default function AppointmentHeader() {
   const classes = useStyles();
   let { path, url } = useRouteMatch();
@@ -41,17 +38,22 @@ export default function AppointmentHeader() {
           to={`${url}/Calendar`}
           className={classes.link}
         >
-          <EventIcon className={classes.icon} />
-          Calendar
-      </Link>
+          <Button variant="contained" color="primary">
+            <EventIcon className={classes.icon} />
+            Calendar
+          </Button>
+        </Link>
+
         <Link
           color="inherit"
           to={`${url}/Schedule`}
           className={classes.link}
         >
-          <EventAvailableIcon className={classes.icon} />
-          Appointments
-      </Link>
+          <Button variant="contained" color="primary">
+            <EventAvailableIcon className={classes.icon} />
+            Appointments
+          </Button>
+        </Link>
       </Breadcrumbs>
 
       <hr />
