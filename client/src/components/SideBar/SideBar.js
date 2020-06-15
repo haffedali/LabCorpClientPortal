@@ -29,7 +29,6 @@ import { history } from '../../navigation'
 import { useLocation } from 'react-router-dom'
 
 import logo from '../../assets/img/logo.png'
-// import avatarSrc from '../../assets/img/headshot.png'
 import { AvatarBtn } from '../'
 
 function SideBar(props) {
