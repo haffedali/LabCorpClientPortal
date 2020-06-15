@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import { Container, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
@@ -9,6 +9,8 @@ import SideBar from "../../components/SideBar";
 import TestPage from "../TestPage";
 import LogIn from '../LogIn'
 import Messages from '../Messages/Messages';
+import LogIn from '../LogIn';
+import Appointments from '../Appointments';
 
 const mapStateToProps = (state) => ({
   state,
@@ -35,21 +37,22 @@ const AppWrapper = (props) => {
 
   const classes = useStyles();
   return (
-    <Container className={classes.container}>
-      <Grid className={classes.grid} container direction="row" justify="left">
-        <Grid className={classes.sidebar} item xs={3}>
-          <SideBar />
+    <Router>
+      <Container className={classes.container}>
+        <Grid className={classes.grid} container direction="row" justify="left">
+          <Grid className={classes.sidebar} item xs={3}>
+            <SideBar />
+          </Grid>
+          <Grid item xs={9}>
+            <Switch>
+              <Route exact path="/" component={TestPage} />
+              <Route path="/Appointments" component={Appointments} />
+              <Route path="/Messages" component={Messages} />
+            </Switch>
+          </Grid>
         </Grid>
-        <Grid item xs={9}>
-          <Switch>
-            <Route exact path="/" component={TestPage} />
-            {/* <Route path="/Messages" component={} /> */}
-
-
-          </Switch>
-        </Grid>
-      </Grid>
-    </Container>
+      </Container>
+    </Router>
   );
 };
 

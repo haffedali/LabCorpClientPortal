@@ -1,5 +1,10 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import Typography from '@material-ui/core/Typography';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import List from "@material-ui/core/List";
 import { Link } from "react-router-dom";
 import Divider from "@material-ui/core/Divider";
@@ -25,7 +30,7 @@ const messageTab = (props) => {
 
   const classes = useStyles();
 
-  const [selectedIndex, setSelectedIndex] = React.useState("Appointments");
+  const [selectedIndex, setSelectedIndex] = React.useState("Messages");
 
   const handleListItemClick = (event, index) => {
     const {actions} = props
@@ -34,38 +39,21 @@ const messageTab = (props) => {
   };
 
   return (
-    <List
-    className={classes.container}
-    component="nav"
-    aria-label="Message Center"
-    disablePadding
-    >
-      <DisplayOption
-        className={classes.option}
-        selectedIndex={selectedIndex}
-        handleClick={handleListItemClick}
-        pageName="Notices/Letters"
-        
-        />
-      <DisplayOption
-        className={classes.option}
-        selectedIndex={selectedIndex}
-        handleClick={handleListItemClick}
-        pageName="Inbox"
-        />
-      <DisplayOption
-        className={classes.option}
-        selectedIndex={selectedIndex}
-        handleClick={handleListItemClick}
-        pageName="Sent Messages"
-        />
-      <DisplayOption
-        className={classes.option}
-        selectedIndex={selectedIndex}
-        handleClick={handleListItemClick}
-        pageName="Request Information"
-        />
-    </List>
+    <DisplayOption
+        className={classes.root}
+        ExpansionPanelDetails
+          Typography
+            
+          </Typography>
+        </ExpansionPanelDetails>
+      </ExpansionPanel>
+      <ExpansionPanel>
+        <ExpansionPanelSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel2a-content"
+          id="panel2a-header"
+        >
+        /></ExpansionPanelSummary>
   );
 };
 
