@@ -4,6 +4,7 @@ import DatePicker from './Calendar/Calendar';
 import MessagesTabs from './Messages/MessagesTabs';
 import Schedule from './Schedule/Schedule'
 import SideBar from './SideBar/SideBar';
+import CollapsibleTable from './CollapsibleTable/CollapsibleTable';
 
 export {
     AppointmentHeader,
@@ -12,4 +13,5 @@ export {
     MessagesTabs,
     Schedule,
     SideBar,
+    CollapsibleTable,
 }
