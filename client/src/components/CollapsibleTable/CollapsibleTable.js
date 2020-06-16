@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Collapse from '@material-ui/core/Collapse';
@@ -15,13 +14,13 @@ import Paper from '@material-ui/core/Paper';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 
-const useRowStyles = makeStyles({
+const useRowStyles = makeStyles((theme) => ({
   root: {
     '& > *': {
       borderBottom: 'unset',
     },
   },
-});
+}));
 
 function createData(name, date) {
   return {
@@ -88,20 +87,6 @@ function Row(props) {
   );
 }
 
-Row.propTypes = {
-  row: PropTypes.shape({
-    date: PropTypes.instanceOf(Date),
-    items: PropTypes.arrayOf(
-      PropTypes.shape({
-        item: PropTypes.string,
-        numericValue: PropTypes.number,
-        unit: PropTypes.string,
-      }),
-    ),
-    name: PropTypes.string,
-  }),
-};
-
 const rows = [
   createData('Hemoglobin', "2019-11-01"),
   createData('Hemoglobin', "2018-11-01"),
@@ -121,7 +106,7 @@ export default function CollapsibleTable() {
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <Row key={row.name} row={row} />
+            <Row key={row.name + row.date} row={row} />
           ))}
         </TableBody>
       </Table>

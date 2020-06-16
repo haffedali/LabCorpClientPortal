@@ -70,7 +70,11 @@ function SideBar(props) {
             <div className={classes.toolbar} />
             <Divider className={classes.divider} />
             <List>
-            {['Appointments', 'Billing', 'Messages', 'Test Results'].map((text, index) => (
+            {['Appointments', 
+              'Billing', 
+              'Messages', 
+              'Results',
+              ].map((text, index) => (
                 <ListItem
                     button
                     selected={selectedIndex === text}

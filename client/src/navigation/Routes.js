@@ -6,6 +6,7 @@ import {
     Billing,
     Home,
     Profile,
+    Results,
 } from '../pages'
 
 const Routes = () => 
@@ -14,6 +15,7 @@ const Routes = () =>
         <Route exact path="/appointments" component={Appointment} />
         <Route exact path="/billing" component={Billing} />
         <Route exact path="/profile" component={Profile} />
+        <Route exact path="/results" component={Results} />
     </Switch>
 
 export default Routes;
