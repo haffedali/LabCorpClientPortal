@@ -15,6 +15,7 @@ const light = createMuiTheme({
     DRAWER_TEXT_ACTIVE: colors.FROST[3],
     // MessagesTabs
     MSG_TABS_CONTAINER: colors.WHITE,
+    MSG_TABS_TEXT: colors.PRIMARY_LIGHT,
     // Global
     PRIMARY: colors.PRIMARY_LIGHT,
     // Material-UI Overrides
@@ -43,6 +44,7 @@ const dark = createMuiTheme({
     DRAWER_TEXT_ACTIVE: colors.FROST[1],
     // MessagesTabs
     MSG_TABS_CONTAINER: colors.POLAR_NIGHT[3],
+    MSG_TABS_TEXT: colors.SNOW_STORM[2],
     // Global
     PRIMARY: colors.PRIMARY_DARK,
     // Material-UI Overrides

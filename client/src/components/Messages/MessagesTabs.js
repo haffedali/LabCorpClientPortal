@@ -36,8 +36,8 @@ TabPanel.propTypes = {
 
 function a11yProps(index) {
   return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
+    id: `full-width-tab-${index}`,
+    'aria-controls': `full-width-tabpanel-${index}`,
   };
 }
 
@@ -52,20 +52,22 @@ export default function MessagesTabs(props) {
   return (
     <div className={classes.root}>
       <AppBar position="static" className={classes.messagesTabsAppbar}>
-        <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
-          <Tab label="Item One" {...a11yProps(0)} style={{color: '#000 !important', backgroundColor: 'blue !important'}}/>
-          <Tab label="Item Two" {...a11yProps(1)} />
-          <Tab label="Item Three" {...a11yProps(2)} />
+        <Tabs value={value} onChange={handleChange} aria-label="message slection tabs">
+          <Tab label="Inbox" {...a11yProps(0)} />
+          <Tab label="Sent Messages" {...a11yProps(1)} />
+          <Tab label="Notices/Letter" {...a11yProps(2)} />
         </Tabs>
       </AppBar>
-      <TabPanel value={value} index={0} style={{backgroundColor: 'blue !important'}}>
-        <p className={classes.helloWorld}>Item One</p>
+      
+      {/* Setting the body of the tabs */}
+      <TabPanel value={value} index={0}>
+        <p className={classes.messagesBody}>Users can see their incoming messages</p>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Item Two
+        <p className={classes.messagesBody}>Users can see their sent messages</p>
       </TabPanel>
       <TabPanel value={value} index={2}>
-        Item Three
+        <p className={classes.messagesBody}>Letters and Notices should go here</p>
       </TabPanel>
     </div>
   );

@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 
 export const useStyles = makeStyles((theme) => ({
-    helloWorld: {
+    messagesBody: {
         color: theme.DRAWER_TEXT_ACTIVE,
     },
     messagesTabsAppbar: {
