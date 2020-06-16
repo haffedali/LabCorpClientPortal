@@ -6,7 +6,7 @@ import React from 'react';
 const Billing = (props) => {
     // const classes = useStyles(props);
 
-    return <h2>...</h2>
+    return <h2>Billing.js</h2>
 }
 
 export default Billing;
