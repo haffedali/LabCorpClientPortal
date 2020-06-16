@@ -4,6 +4,7 @@ import DatePicker from './Calendar/Calendar';
 import MessagesTabs from './Messages/MessagesTabs';
 import Schedule from './Schedule/Schedule'
 import SideBar from './SideBar/SideBar';
+import LogoutButton from './LogoutButton/LogoutButton';
 import CollapsibleTable from './CollapsibleTable/CollapsibleTable';
 
 export {
@@ -14,4 +15,5 @@ export {
     Schedule,
     SideBar,
     CollapsibleTable,
+    LogoutButton
 }
