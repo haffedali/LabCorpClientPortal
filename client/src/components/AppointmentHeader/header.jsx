@@ -4,15 +4,14 @@ import {
   Switch,
   Route,
   Link,
-  useParams,
   useRouteMatch
 } from "react-router-dom";
-import { DatePicker } from '../../components';
+import { DatePicker, Schedule } from '../';
 import { makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
 import Breadcrumbs from "@material-ui/core/Breadcrumbs";
 import EventIcon from '@material-ui/icons/Event';
 import EventAvailableIcon from '@material-ui/icons/EventAvailable';
+import { Button } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
   link: {
@@ -26,9 +25,6 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function handleClick(event) {
-}
-
 export default function AppointmentHeader() {
   const classes = useStyles();
   let { path, url } = useRouteMatch();
@@ -41,17 +37,22 @@ export default function AppointmentHeader() {
           to={`${url}/Calendar`}
           className={classes.link}
         >
-          <EventIcon className={classes.icon} />
-          Calendar
-      </Link>
+          <Button variant="contained" color="primary">
+            <EventIcon className={classes.icon} />
+            Calendar
+          </Button>
+        </Link>
+
         <Link
           color="inherit"
-          to={`${url}/Apps`}
+          to={`${url}/Schedule`}
           className={classes.link}
         >
-          <EventAvailableIcon className={classes.icon} />
-          Appointments
-      </Link>
+          <Button variant="contained" color="primary">
+            <EventAvailableIcon className={classes.icon} />
+            Appointments
+          </Button>
+        </Link>
       </Breadcrumbs>
 
       <hr />
@@ -61,9 +62,12 @@ export default function AppointmentHeader() {
           <h2>Welcome To Appointments</h2>
         </Route>
         <Route path={`${path}/Calendar`}>
-        <DatePicker />
+          <Schedule />
+        </Route>
+        <Route path={`${path}/Schedule`}>
+          <DatePicker />
         </Route>
       </Switch>
     </Router>
-      );
+  );
 }
