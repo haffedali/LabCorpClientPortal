@@ -6,7 +6,6 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import * as loginActions from "../../services/LogIn/actions";
-import { useTheme } from "../../theme/ThemeContext";
 import { useStyles } from "./LogIn.styles";
 
 function mapStateToProps(state) {
@@ -47,7 +46,7 @@ const LogIn = (props) => {
         <div className={classes.childToCenter}>
           <Paper className={classes.logInContainer} item xs={4}>
             <Grid
-              clssName={classes.grid}
+              className={classes.grid}
               container
               direction="column"
               justify="center"
