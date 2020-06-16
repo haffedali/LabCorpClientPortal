@@ -41,7 +41,7 @@ function SideBar(props) {
     let stateCurrPage = selectedIndex;
     let pathname = location.pathname.substring(1);
 
-    if (pathname != stateCurrPage) {
+    if (pathname !== stateCurrPage) {
       setSelectedIndex(pathname)
     }
   });

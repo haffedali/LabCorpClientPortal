@@ -5,7 +5,6 @@ import scheduleReducer from './Schedule/reducer'
 
 export default combineReducers({
     router: routerReducer,
-    sideBarReducer,
     loginReducer,
     scheduleReducer
 })
