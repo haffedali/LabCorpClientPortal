@@ -6,9 +6,7 @@ import {
   Link,
   useRouteMatch
 } from "react-router-dom";
-import DatePicker from '../../components/Calendar';
-import Schedule from '../../components/Schedule'
-import { DatePicker } from '../../components';
+import { DatePicker, Schedule } from '../';
 import { makeStyles } from "@material-ui/core/styles";
 import Breadcrumbs from "@material-ui/core/Breadcrumbs";
 import EventIcon from '@material-ui/icons/Event';
