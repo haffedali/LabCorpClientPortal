@@ -11,17 +11,21 @@ function mapStateToProps(state){
 
 
 const App = (props) => {
-  return (
-    <div>
-    {
-      props.loggedIn === true
-      ?
-      <SideBar />  
-      :
-      <LogIn />    
-    }
-    </div>
-  )
+  // LOGIN LOGIC IMPLEMENTED ----FOR PRODUCTION
+  // return (
+  //   <div>
+  //   {
+  //     props.loggedIn === true
+  //     ?
+  //     <SideBar />  
+  //     :
+  //     <LogIn />    
+  //   }
+  //   </div>
+  // )
+
+  // LOGIN NOT IMPLEMENTED ----FOR DEVELOPMENT
+  return <SideBar />
 
 }
 
