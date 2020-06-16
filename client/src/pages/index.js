@@ -4,6 +4,7 @@ import LogIn from './LogIn/LogIn';
 import Messages from './Messages/Messages';
 import Profile from './Profile/Profile'
 import Home from './Home/Home';
+import Results from './Results/Results';
 
 
 export {
@@ -13,4 +14,5 @@ export {
     LogIn,
     Messages,
     Profile,
+    Results,
 }
