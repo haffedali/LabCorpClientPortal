@@ -3,6 +3,7 @@ import AvatarBtn from './Avatar/AvatarBtn';
 import DatePicker from './Calendar/Calendar';
 import MessagesTabs from './Messages/MessagesTabs';
 import SideBar from './SideBar/SideBar';
+import CollapsibleTable from './CollapsibleTable/CollapsibleTable';
 
 export {
     AppointmentHeader,
@@ -10,4 +11,5 @@ export {
     DatePicker,
     MessagesTabs,
     SideBar,
+    CollapsibleTable,
 }
