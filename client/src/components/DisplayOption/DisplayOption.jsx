@@ -4,6 +4,13 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import { Link } from "react-router-dom";
 
+
+/**
+ * 
+ * @prop {string} pageName - name of the page
+ * @prop {function} handleClick - A click handling function
+ * @prop {string} selectedIndex - my state reference for current page selected
+ */
 export const DisplayOption = ({ pageName, handleClick, selectedIndex }) => {
   return (
     <ListItem

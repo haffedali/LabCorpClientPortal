@@ -9,6 +9,8 @@ import { bindActionCreators } from "redux";
 
 import * as sideBarActions from "../../services/SideBar/actions";
 
+import {testCall, testRequestString} from '../../utils/API';
+
 const SideBar = (props) => {
   const useStyles = makeStyles({
     container: {
@@ -31,6 +33,8 @@ const SideBar = (props) => {
     const {actions} = props
     setSelectedIndex(index);
     actions.switchPage(index);
+    testCall()
+    testRequestString()
   };
 
 
