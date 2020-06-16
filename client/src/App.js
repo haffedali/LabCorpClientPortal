@@ -14,7 +14,7 @@ const App = (props) => {
   return (
     <div>
     {
-      props.loggedIn === true
+      props.loggedIn === undefined
       ?
       <SideBar />  
       :
