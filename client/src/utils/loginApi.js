@@ -1,5 +1,5 @@
-import axios from 'axios';
-
+import axios from {axios};
+import  {adalApiFetch} from '../adalConfig';
 
 export const login = {
     /**
@@ -9,16 +9,4 @@ export const login = {
     isValidUser: (fullName, id) => {
         //axios logic
     }
-};
-
-export const appointments = {
-
-};
-
-export const messages = {
-
-};
-
-export const testResults = {
-
 };
