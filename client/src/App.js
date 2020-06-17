@@ -14,7 +14,7 @@ const App = (props) => {
   return (
     <div>
     {
-      props.loggedIn === undefined
+      props.loggedIn === undefined // test@gmail.com  || 1234
       ?
       <SideBar />  
       :

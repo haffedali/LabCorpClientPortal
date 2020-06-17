@@ -11,7 +11,10 @@ export default function FormFields(props) {
   return (
     <form className={classes.root} noValidate autoComplete="off">
       <div>
+        <h2> User Profile </h2>
+        <h3> Edit General Information </h3>
         <TextField
+            className={classes.fieldBox}
             required
             id="filled-required"
             label="Full Name"
@@ -20,8 +23,14 @@ export default function FormFields(props) {
         />
         <TextField
             id="filled-address"
+            label="Preferred Name"
+            defaultValue="Preferred Dummy Name"
+            variant="filled"
+        />
+        <TextField
+            id="filled-address"
             label="Street Address"
-            defaultValue="Dummy Data"
+            defaultValue="Dummy Address"
             variant="filled"
         />
         <TextField
@@ -31,6 +40,7 @@ export default function FormFields(props) {
             variant="filled"
         />
         <TextField
+            // error
             id="filled-state"
             label="State"
             defaultValue="Dummy Data"
@@ -43,10 +53,35 @@ export default function FormFields(props) {
             variant="filled"
         />
         <TextField
-            id="filled-number"
-            label="Insurance Number"
+            id="filled-phone"
+            label="Phone Number"
             type="number"
-            InputLabelProps={{ shrink: true, }}
+            variant="filled"
+        />
+        <TextField
+            id="filled-email"
+            label="Email"
+            variant="filled"
+        />
+        <h3> Insurance Information </h3>
+        <TextField
+            id="filled-insurance-number"
+            label="Insurance Name"
+            variant="filled"
+        />
+        <TextField
+            id="filled-insurance-number"
+            label="Insurance Plan Type"
+            variant="filled"
+        />
+        <TextField
+            id="filled-insurance-number"
+            label="Policy Number"
+            variant="filled"
+        />
+        <TextField
+            id="filled-insurance-number"
+            label="Group Number"
             variant="filled"
         />
         <TextField
@@ -56,6 +91,7 @@ export default function FormFields(props) {
             helperText="Some important text"
             variant="outlined"
         />
+        <h3> Your Login Credentials </h3>
         <TextField
             id="filled-read-only-input"
             label="Username"
@@ -64,7 +100,6 @@ export default function FormFields(props) {
             variant="filled"
         />
         <TextField
-            error
             id="filled-password-input"
             label="Password"
             type="password"
