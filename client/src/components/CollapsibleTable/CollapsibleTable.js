@@ -94,20 +94,33 @@ const rows = [
 ];
 
 export default function CollapsibleTable(props) {
+  const search = props.search
+  const matchingRows = rows.filter((row) => {
+    return row.date.indexOf(search) > -1 || row.name.indexOf(search) > -1;
+  })
   return (
     <TableContainer component={Paper}>
       <Table aria-label="collapsible table">
         <TableHead>
           <TableRow>
-            <TableCell>{props.search}</TableCell>
+            <TableCell></TableCell>
             <TableCell component="th">Test</TableCell>
             <TableCell component="th">Date</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <Row key={row.name + row.date} row={row} />
-          ))}
+          {matchingRows.length > 0 ? 
+            matchingRows.map((row) => (
+              <Row key={row.name + row.date} row={row} />
+            ))
+            :
+            <TableRow>
+              <TableCell colspan="3">
+                <p>Your search yeilded no matching Tests.</p>
+                <p>Only the Test and Date are searchable. Itemized Results within a Test are not.</p>
+              </TableCell>
+            </TableRow>
+          }
         </TableBody>
       </Table>
     </TableContainer>
