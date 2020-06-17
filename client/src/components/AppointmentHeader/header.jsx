@@ -6,7 +6,7 @@ import {
   Link,
   useRouteMatch
 } from "react-router-dom";
-import { DatePicker, Schedule } from '../';
+import { DatePicker, Calendar } from '../';
 import { makeStyles } from "@material-ui/core/styles";
 import Breadcrumbs from "@material-ui/core/Breadcrumbs";
 import EventIcon from '@material-ui/icons/Event';
@@ -62,7 +62,7 @@ export default function AppointmentHeader() {
           <h2>Welcome To Appointments</h2>
         </Route>
         <Route path={`${path}/Calendar`}>
-          <Schedule />
+          <Calendar />
         </Route>
         <Route path={`${path}/Schedule`}>
           <DatePicker />
