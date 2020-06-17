@@ -7,15 +7,21 @@ import { Router } from "react-router-dom";
 import App from './App';
 import { ThemeProvider } from "./theme/ThemeContext";
 import { history } from './navigation'
+import {runWithAdal} from 'react-adal';
+import {authContext} from './adalConfig'
 
 const store = configureStore();
+const DO_NOT_LOGIN = false;
 
-ReactDOM.render((
-  <Provider store={store}>
-    <Router history={history}>
-      <ThemeProvider>
-        <App />
-      </ThemeProvider>
-    </Router>
-  </Provider>
-), document.getElementById('root'));
+runWithAdal(authContext, () => {
+  ReactDOM.render((
+    <Provider store={store}>
+      <Router history={history}>
+        <ThemeProvider>
+          <App />
+        </ThemeProvider>
+      </Router>
+    </Provider>
+  ), document.getElementById('root'));
+
+}, DO_NOT_LOGIN)
