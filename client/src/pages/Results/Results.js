@@ -20,6 +20,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Results = (props) => {
+
+  const searchText = "2020";
+
   const classes = useStyles();
   return (
     <div>
@@ -27,9 +30,9 @@ const Results = (props) => {
         Test Results
       </Typography>
       <form className={classes.root} noValidate autoComplete="off">
-        <TextField id="search" label="Search tests" type="search" />
+        <TextField id="search" label="Search tests" type="search" onChange={(e) => console.log(e.target.value)}/>
       </form>
-      <CollapsibleTable className={classes.table}></CollapsibleTable>
+      <CollapsibleTable className={classes.table} search={searchText}></CollapsibleTable>
     </div>
   )
 }

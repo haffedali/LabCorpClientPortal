@@ -93,13 +93,13 @@ const rows = [
   createData('Hemoglobin', "2017-11-01"),
 ];
 
-export default function CollapsibleTable() {
+export default function CollapsibleTable(props) {
   return (
     <TableContainer component={Paper}>
       <Table aria-label="collapsible table">
         <TableHead>
           <TableRow>
-            <TableCell />
+            <TableCell>{props.search}</TableCell>
             <TableCell component="th">Test</TableCell>
             <TableCell component="th">Date</TableCell>
           </TableRow>
