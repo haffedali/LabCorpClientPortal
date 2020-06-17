@@ -1,4 +1,4 @@
-import { AuthenticationContext, adalFetch, withAdalLogin } from 'react-adal';
+import { AuthenticationContext, adalFetch } from 'react-adal';
  
 export const adalConfig = {
   tenant: '58bf51ec-ca22-48d9-ad93-e9d44309b27a',
@@ -13,5 +13,3 @@ export const authContext = new AuthenticationContext(adalConfig);
  
 export const adalApiFetch = (fetch, url, options) =>
   adalFetch(authContext, adalConfig.endpoints.api, fetch, url, options);
- 
-export const withAdalLoginApi = withAdalLogin(authContext, adalConfig.endpoints.api);
