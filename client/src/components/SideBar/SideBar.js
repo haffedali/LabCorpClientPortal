@@ -1,36 +1,36 @@
+/* React */
 import React, { useEffect } from "react";
-import AppBar from "@material-ui/core/AppBar";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Divider from "@material-ui/core/Divider";
-import Drawer from "@material-ui/core/Drawer";
-import Hidden from "@material-ui/core/Hidden";
-import IconButton from "@material-ui/core/IconButton";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
+import { useLocation } from "react-router-dom";
+/* MUI */
+import {
+  AppBar,
+  CssBaseline,
+  Divider,
+  Drawer,
+  Hidden,
+  IconButton,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Toolbar,
+  Typography,
+} from "@material-ui/core";
+/* MUI - Icons */
 import MenuIcon from "@material-ui/icons/Menu";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-
 import Brightness4Icon from "@material-ui/icons/Brightness4";
 import Brightness7Icon from "@material-ui/icons/Brightness7";
-import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import EventIcon from "@material-ui/icons/Event";
 import PaymentIcon from "@material-ui/icons/Payment";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import ListAltIcon from "@material-ui/icons/ListAlt";
-
-import { useTheme } from "../../theme/ThemeContext";
-import { useStyles } from "./SideBar.styles";
-import { Routes } from "../../navigation";
-import { history } from "../../navigation";
-import { LogoutButton } from "../../components";
-
-import { useLocation } from "react-router-dom";
-
+/* LabCorp */
 import logo from "../../assets/img/logo.png";
 import { AvatarBtn } from "../";
+import { history, Routes } from "../../navigation";
+import { LogoutButton } from "../../components";
+import { useStyles } from "./SideBar.styles";
+import { useTheme } from "../../theme/ThemeContext";
 
 function SideBar(props) {
   const classes = useStyles(props);
@@ -142,7 +142,6 @@ function SideBar(props) {
                   />
                 )}
               </IconButton>
-              {/* <AvatarBtn avatarSrc={avatarSrc} page='/profile' /> */}
               <AvatarBtn page="/profile" />
             </div>
           </div>
