@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import * as loginActions from "../../services/LogIn/actions";
+import {loginApi} from '../../utils';
 import { useStyles } from "./LogIn.styles";
 
 function mapStateToProps(state) {
@@ -33,9 +34,11 @@ const LogIn = (props) => {
   };
 
   const handleLoginAttempt = () => {
+    loginApi.isValidUserTest("jo","blo");
     const { actions } = props;
 
     actions.loginAttempt(loginInfo);
+
   };
 
   const classes = useStyles(props);
