@@ -7,7 +7,6 @@ import {
 } from '@material-ui/pickers';
 import { Container, Grid } from '@material-ui/core';
 
-
 export default function DatePicker() {
     // The first commit of Material-UI
     const [selectedDate, setSelectedDate] = React.useState(new Date());
@@ -58,6 +57,5 @@ export default function DatePicker() {
                 </Grid>
             </MuiPickersUtilsProvider>
         </Container>
-
     );
 }

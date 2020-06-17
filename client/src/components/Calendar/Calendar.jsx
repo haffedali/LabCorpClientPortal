@@ -42,7 +42,7 @@ const ViewSwitcher = ({ onChange, currentViewName }) => (
     </RadioGroup>
 );
 
-const CurrentView = (props) => {
+const CalendarView = (props) => {
     const [viewName, setViewName] = React.useState("Month");
 
     const viewChange = (e, index) => {
@@ -71,4 +71,4 @@ const CurrentView = (props) => {
     )
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CurrentView);
+export default connect(mapStateToProps, mapDispatchToProps)(CalendarView);
