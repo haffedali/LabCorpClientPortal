@@ -16,25 +16,4 @@ const mapStateToProps = (state) => {
   return {loggedIn: state.loginReducer.loggedIn};
 }
 
-<<<<<<< HEAD
-
-const App = (props) => {
-  return (
-    <div>
-    {
-      props.loggedIn === undefined // test@gmail.com  || 1234
-      ?
-      <SideBar />  
-      :
-      <LogIn />    
-    }
-    </div>
-  )
-
-}
-
-
-export default connect(mapStateToProps,{})(App);
-=======
 export default connect(mapStateToProps, {})(App);
->>>>>>> master
