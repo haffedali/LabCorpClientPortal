@@ -1,4 +1,4 @@
-import { LOGIN_FAILED, LOGIN_PENDING, LOGIN_SUCCESS } from "./actionTypes";
+import { LOGIN_FAILED, LOGIN_PENDING, LOGIN_SUCCESS, LOGOUT } from "./actionTypes";
 
 ////////TESTING PURPOSES
 const dummyUser = {
@@ -11,7 +11,7 @@ export const loginAttempt = (userInfo) => {
         dispatch(_loginStarted());
 
         if (userInfo.email === dummyUser.email && userInfo.password === dummyUser.password){
-            return dispatch(_loginSuccess())
+            return dispatch(_loginSuccess(userInfo))
         }
         else {
             return dispatch(_loginFailed())
@@ -19,11 +19,18 @@ export const loginAttempt = (userInfo) => {
     }
 };
 
+export const logoutAttempt = () => {
+  return dispatch => {
+    dispatch(_logout());
+  }
+}
+
 //For now we are not returned data on Success, but we will need to in the future
 
-const _loginSuccess = () => {
+const _loginSuccess = (userInfo) => {
   return {
     type: LOGIN_SUCCESS,
+    userInfo
   };
 };
 
@@ -38,3 +45,9 @@ const _loginStarted = () => {
     type: LOGIN_PENDING,
   };
 };
+
+const _logout = () => {
+  return {
+    type: LOGOUT
+  }
+}

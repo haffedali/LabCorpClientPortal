@@ -1,11 +1,9 @@
 import 'date-fns';
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
-import { AppointmentHeader, DatePicker } from '../../components';
-import { Router } from "react-router";
+import { AppointmentHeader } from '../../components';
 
 export default function Appointment() {
-
     return (
             <Grid container item xs={12}
                 container
@@ -14,6 +12,5 @@ export default function Appointment() {
                 alignItems="center">
                 <AppointmentHeader />
             </Grid>
-        
     );
 }

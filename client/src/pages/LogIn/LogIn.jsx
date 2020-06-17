@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { Container, Grid, Paper, TextField, Button } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import CssBaseline from "@material-ui/core/CssBaseline";
+
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import * as loginActions from "../../services/LogIn/actions";
+import { useStyles } from "./LogIn.styles";
 
 function mapStateToProps(state) {
   return {
@@ -36,55 +38,48 @@ const LogIn = (props) => {
     actions.loginAttempt(loginInfo);
   };
 
-  const useStyles = makeStyles({
-    container: {
-      height: "100vh",
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "center",
-    },
-    grid: {},
-
-    logInContainer: {
-      width: "30vw",
-    },
-    logInInput: {
-      margin: "3vw",
-    },
-  });
-
-  const classes = useStyles();
+  const classes = useStyles(props);
   return (
-    <Container className={classes.container}>
-      <Paper className={classes.logInContainer} item xs={4}>
-        <Grid
-          clssName={classes.grid}
-          container
-          direction="column"
-          justify="center"
-        >
-          <TextField
-            className={classes.logInInput}
-            id="email"
-            variant="outlined"
-            label="email"
-            name="email"
-            onChange={(e) => handleTextFieldChanges(e)}
-          />
-          <TextField
-            className={classes.logInInput}
-            id="password"
-            variant="outlined"
-            label="password"
-            name="password"
-            onChange={(e) => handleTextFieldChanges(e)}
-          />
-          <Button onClick={handleLoginAttempt}variant="contained" color="primary">
-            Log in
-          </Button>
-        </Grid>
-      </Paper>
-    </Container>
+    <div className={classes.root}>
+      <CssBaseline />
+      <Container className={classes.container}>
+        <div className={classes.childToCenter}>
+          <Paper className={classes.logInContainer} item xs={4}>
+            <Grid
+              className={classes.grid}
+              container
+              direction="column"
+              justify="center"
+            >
+              <TextField
+                className={classes.logInInput}
+                id="email"
+                variant="outlined"
+                label="email"
+                name="email"
+                onChange={(e) => handleTextFieldChanges(e)}
+              />
+              <TextField
+                className={classes.logInInput}
+                id="password"
+                variant="outlined"
+                label="password"
+                name="password"
+                onChange={(e) => handleTextFieldChanges(e)}
+              />
+              <Button
+                className={classes.logInButton}
+                onClick={handleLoginAttempt}
+                variant="contained"
+                color="primary"
+              >
+                Log in
+              </Button>
+            </Grid>
+          </Paper>
+        </div>
+      </Container>
+    </div>
   );
 };
 
