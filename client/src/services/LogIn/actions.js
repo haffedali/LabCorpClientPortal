@@ -1,4 +1,10 @@
-import { LOGIN_FAILED, LOGIN_PENDING, LOGIN_SUCCESS, LOGOUT } from "./actionTypes";
+import {
+  LOGIN_FAILED,
+  LOGIN_PENDING,
+  LOGIN_SUCCESS,
+  LOGOUT,
+} from "./actionTypes";
+import { loginApi } from "../../utils";
 
 ////////TESTING PURPOSES
 const dummyUser = {
@@ -7,30 +13,41 @@ const dummyUser = {
 };
 
 export const loginAttempt = (userInfo) => {
-    return dispatch => {
-        dispatch(_loginStarted());
+  return (dispatch) => {
+    dispatch(_loginStarted());
 
-        if (userInfo.email === dummyUser.email && userInfo.password === dummyUser.password){
-            return dispatch(_loginSuccess(userInfo))
+    // const user = await loginApi.isValidUserTest(userInfo)
+
+    loginApi
+      .isValidUser(userInfo.username, userInfo.password)
+      .then((r) => {
+        if (r.data.value.length){
+          const user = r.data.value[0]
+          dispatch(_loginSuccess(user))
+        }else{
+          dispatch(_loginFailed());
         }
-        else {
-            return dispatch(_loginFailed())
-        }
-    }
+      })
+      .catch((e) => console.log(e));
+  };
 };
 
 export const logoutAttempt = () => {
-  return dispatch => {
+  return (dispatch) => {
     dispatch(_logout());
-  }
-}
+  };
+};
 
 //For now we are not returned data on Success, but we will need to in the future
 
 const _loginSuccess = (userInfo) => {
   return {
     type: LOGIN_SUCCESS,
-    userInfo
+    userInfo: {
+      firstName: userInfo.firstname,
+      lastName: userInfo.lastname,
+      contactId: userInfo.contactid,
+    },
   };
 };
 
@@ -48,6 +65,6 @@ const _loginStarted = () => {
 
 const _logout = () => {
   return {
-    type: LOGOUT
-  }
-}
+    type: LOGOUT,
+  };
+};
