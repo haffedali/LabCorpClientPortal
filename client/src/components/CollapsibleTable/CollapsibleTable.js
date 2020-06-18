@@ -22,17 +22,6 @@ const useRowStyles = makeStyles((theme) => ({
   },
 }));
 
-function createData(name, date) {
-  return {
-    name,
-    date,
-    items: [
-      { item: 'Red Blood Cell Count', numericValue: '100', unit: 'per droplet' },
-      { item: 'Iron', numericValue: '0.5', unit: 'g' },
-      { item: 'Chemical X', numericValue: '1', unit: 'tsp' },
-    ],
-  };
-}
 
 function Row(props) {
   const { row } = props;
@@ -87,13 +76,8 @@ function Row(props) {
   );
 }
 
-const rows = [
-  createData('Hemoglobin', "2019-11-01"),
-  createData('Hemoglobin', "2018-11-01"),
-  createData('Hemoglobin', "2017-11-01"),
-];
-
-export default function CollapsibleTable() {
+export default function CollapsibleTable(props) {
+  const { rows } = props
   return (
     <TableContainer component={Paper}>
       <Table aria-label="collapsible table">
@@ -105,9 +89,18 @@ export default function CollapsibleTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <Row key={row.name + row.date} row={row} />
-          ))}
+          { rows.length > 0 ?
+            rows.map((row) => (
+              <Row key={row.name + row.date} row={row} />
+            )) :
+            <TableRow>
+              <TableCell colSpan="3" align="center">
+                <p>
+                  No matching results. 
+                </p>
+              </TableCell>
+            </TableRow>
+          }
         </TableBody>
       </Table>
     </TableContainer>
