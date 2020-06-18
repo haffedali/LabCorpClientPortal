@@ -32,8 +32,10 @@ function mapDispatchToProps(dispatch) {
 const ViewSwitcher = ({ onChange, currentViewName }) => (
     <RadioGroup
         aria-label="Views"
-        style={{ flexDirection: 'row',
-        justifyContent: 'center' }}
+        style={{
+            flexDirection: 'row',
+            justifyContent: 'center'
+        }}
         name="views"
         value={currentViewName}
         onChange={onChange}
@@ -46,6 +48,7 @@ const ViewSwitcher = ({ onChange, currentViewName }) => (
 
 const CalendarView = (props) => {
     const [viewName, setViewName] = React.useState("Month");
+    const classes = useStyles(props);
 
     const viewChange = (e, index) => {
         const { actions } = props;
@@ -55,10 +58,17 @@ const CalendarView = (props) => {
 
     return (
         <Paper>
-
-            <ViewSwitcher
-            currentViewName={viewName}
-            onChange={viewChange}/>
+            <RadioGroup
+                aria-label="Views"
+                className={classes.radio}
+                name="views"
+                value={viewName}
+                onChange={viewChange}
+            >
+                <FormControlLabel value="Month" control={<Radio />} label="Month" />
+                <FormControlLabel value="Week" control={<Radio />} label="Week" />
+                <FormControlLabel value="Day" control={<Radio />} label="Day" />
+            </RadioGroup>
             <Scheduler>
                 <ViewState currentViewName={viewName} />
                 <MonthView />
