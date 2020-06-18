@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Paper from '@material-ui/core/Paper';
@@ -14,6 +14,7 @@ import {
     DayView,
 } from '@devexpress/dx-react-scheduler-material-ui';
 import * as scheduleActions from "../../services/Schedule/actions"
+import { useStyles } from "./Appointment.styles"
 
 
 function mapStateToProps(state) {
@@ -27,6 +28,7 @@ function mapDispatchToProps(dispatch) {
         actions: bindActionCreators(scheduleActions, dispatch),
     };
 }
+
 const ViewSwitcher = ({ onChange, currentViewName }) => (
     <RadioGroup
         aria-label="Views"
@@ -54,7 +56,7 @@ const CalendarView = (props) => {
     return (
         <Paper>
 
-            <ViewSwitcher 
+            <ViewSwitcher
             currentViewName={viewName}
             onChange={viewChange}/>
             <Scheduler>
