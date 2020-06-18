@@ -6,17 +6,10 @@ import {
 } from "./actionTypes";
 import { loginApi } from "../../utils";
 
-////////TESTING PURPOSES
-const dummyUser = {
-  email: "test@gmail.com",
-  password: "1234",
-};
 
 export const loginAttempt = (userInfo) => {
   return (dispatch) => {
     dispatch(_loginStarted());
-
-    // const user = await loginApi.isValidUserTest(userInfo)
 
     loginApi
       .isValidUser(userInfo.username, userInfo.password)
