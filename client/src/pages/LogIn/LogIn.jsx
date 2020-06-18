@@ -33,7 +33,7 @@ const LogIn = (props) => {
   };
 
   const handleLoginAttempt = (firstName, lastName) => {
-    loginApi.isValidUserTest(firstName,lastName);
+    loginApi.isValidUser(firstName,lastName);
     const { actions } = props;
 
     actions.loginAttempt(loginInfo);
