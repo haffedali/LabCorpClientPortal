@@ -4,7 +4,7 @@ import { SideBar } from './components'
 import { LogIn } from './pages';
 
 // NOTE: Change "undefined" below to "true" to 
-// renable the login page 
+// re-enable the login page 
 
 const App = (props) => 
   <div>{props.loggedIn === undefined 
