@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import PropTypes from 'prop-types';
 import Paper from '@material-ui/core/Paper';
 import { ViewState } from '@devexpress/dx-react-scheduler';
 import Radio from '@material-ui/core/Radio';
@@ -28,23 +29,6 @@ function mapDispatchToProps(dispatch) {
         actions: bindActionCreators(scheduleActions, dispatch),
     };
 }
-
-const ViewSwitcher = ({ onChange, currentViewName }) => (
-    <RadioGroup
-        aria-label="Views"
-        style={{
-            flexDirection: 'row',
-            justifyContent: 'center'
-        }}
-        name="views"
-        value={currentViewName}
-        onChange={onChange}
-    >
-        <FormControlLabel value="Month" control={<Radio />} label="Month" />
-        <FormControlLabel value="Week" control={<Radio />} label="Week" />
-        <FormControlLabel value="Day" control={<Radio />} label="Day" />
-    </RadioGroup>
-);
 
 const CalendarView = (props) => {
     const [viewName, setViewName] = React.useState("Month");
