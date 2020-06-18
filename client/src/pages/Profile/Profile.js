@@ -1,15 +1,14 @@
 import React from 'react';
+import { ProfileForm } from '../../components'
 
-import { useStyles } from './Profile.styles';
+const Profile = (props) => 
+    // const classes = useStyles(props);
 
-const Profile = (props) => {
-    const classes = useStyles(props);
-
-    return (
-        <div className={classes.root}>
-            <h2>Profile.js</h2>
-        </div>
-    )
-}
+    //return (
+        //<div className={classes.root}>
+            //<h2>Profile.js</h2>
+            <ProfileForm />
+        //</div>
+    //)
 
 export default Profile;

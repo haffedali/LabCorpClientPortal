@@ -1,63 +1,74 @@
-import React from "react";
-import DateFnsUtils from '@date-io/date-fns';
+import React, { useState } from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import Paper from '@material-ui/core/Paper';
+import { ViewState } from '@devexpress/dx-react-scheduler';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel'
 import {
-    MuiPickersUtilsProvider,
-    KeyboardTimePicker,
-    KeyboardDatePicker,
-} from '@material-ui/pickers';
-import { Container, Grid } from '@material-ui/core';
+    Scheduler,
+    WeekView,
+    MonthView,
+    Appointments,
+    DayView,
+} from '@devexpress/dx-react-scheduler-material-ui';
+import * as scheduleActions from "../../services/Schedule/actions"
 
 
-export default function DatePicker() {
-    // The first commit of Material-UI
-    const [selectedDate, setSelectedDate] = React.useState(new Date());
+function mapStateToProps(state) {
+    return {
+        currentView: state.scheduleReducer.currentView
+    };
+}
 
-    const handleDateChange = (date) => {
-        setSelectedDate(date);
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators(scheduleActions, dispatch),
+    };
+}
+const ViewSwitcher = ({ onChange, currentViewName }) => (
+    <RadioGroup
+        aria-label="Views"
+        style={{ flexDirection: 'row',
+        justifyContent: 'center' }}
+        name="views"
+        value={currentViewName}
+        onChange={onChange}
+    >
+        <FormControlLabel value="Month" control={<Radio />} label="Month" />
+        <FormControlLabel value="Week" control={<Radio />} label="Week" />
+        <FormControlLabel value="Day" control={<Radio />} label="Day" />
+    </RadioGroup>
+);
+
+const CalendarView = (props) => {
+    const [viewName, setViewName] = React.useState("Month");
+
+    const viewChange = (e, index) => {
+        const { actions } = props;
+        setViewName(index);
+        actions.switchView(index);
     };
 
     return (
+        <Paper>
 
-        <Container>
-            <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                <Grid container justify="space-around">
-                    <KeyboardDatePicker
-                        disableToolbar
-                        variant="inline"
-                        format="MM/dd/yyyy"
-                        margin="normal"
-                        id="date-picker-inline"
-                        label="Date picker inline"
-                        value={selectedDate}
-                        onChange={handleDateChange}
-                        KeyboardButtonProps={{
-                            'aria-label': 'change date',
-                        }}
-                    />
-                    <KeyboardDatePicker
-                        margin="normal"
-                        id="date-picker-dialog"
-                        label="Date picker dialog"
-                        format="MM/dd/yyyy"
-                        value={selectedDate}
-                        onChange={handleDateChange}
-                        KeyboardButtonProps={{
-                            'aria-label': 'change date',
-                        }}
-                    />
-                    <KeyboardTimePicker
-                        margin="normal"
-                        id="time-picker"
-                        label="Time picker"
-                        value={selectedDate}
-                        onChange={handleDateChange}
-                        KeyboardButtonProps={{
-                            'aria-label': 'change time',
-                        }}
-                    />
-                </Grid>
-            </MuiPickersUtilsProvider>
-        </Container>
+            <ViewSwitcher 
+            currentViewName={viewName}
+            onChange={viewChange}/>
+            <Scheduler>
+                <ViewState currentViewName={viewName} />
+                <MonthView />
+                <WeekView
+                    startDayHour={10}
+                    endDayHour={19}
+                />
+                <DayView />
+                <Appointments />
+            </Scheduler>
+        </Paper>
+    )
+};
 
-    );
-}
+export default connect(mapStateToProps, mapDispatchToProps)(CalendarView);

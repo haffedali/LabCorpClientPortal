@@ -1,73 +1,91 @@
-import React from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useRouteMatch
-} from "react-router-dom";
-import { DatePicker, Schedule } from '../';
-import { makeStyles } from "@material-ui/core/styles";
-import Breadcrumbs from "@material-ui/core/Breadcrumbs";
-import EventIcon from '@material-ui/icons/Event';
-import EventAvailableIcon from '@material-ui/icons/EventAvailable';
-import { Button } from "@material-ui/core";
+import React from 'react';
+import { DatePicker, Calendar } from '../'
+import PropTypes from 'prop-types';
+import { makeStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import ScheduleIcon from '@material-ui/icons/Schedule';
+import TodayIcon from '@material-ui/icons/Today';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
 
-const useStyles = makeStyles(theme => ({
-  link: {
-    display: "flex",
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`scrollable-force-tabpanel-${index}`}
+      aria-labelledby={`scrollable-force-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box p={3}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.any.isRequired,
+  value: PropTypes.any.isRequired,
+};
+
+function a11yProps(index) {
+  return {
+    id: `scrollable-force-tab-${index}`,
+    'aria-controls': `scrollable-force-tabpanel-${index}`,
+  };
+}
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'block',
+    width: '100%',
     textAlign: "center",
+    backgroundColor: theme.palette.background.paper,
   },
-  icon: {
-    marginRight: theme.spacing(1.5),
-    width: 20,
-    height: 20
+  tab: {
+    textAlign: "center"
   }
 }));
 
-export default function AppointmentHeader() {
+export default function ScrollableTabsButtonForce() {
   const classes = useStyles();
-  let { path, url } = useRouteMatch();
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
   return (
-    <Router>
-      <Breadcrumbs aria-label="breadcrumb">
-        <Link
-          color="inherit"
-          to={`${url}/Calendar`}
-          className={classes.link}
+    <div className={classes.root}>
+      <AppBar position="static" color="default">
+        <Tabs
+          className={classes.tab}
+          value={value}
+          onChange={handleChange}
+          variant="scrollable"
+          scrollButtons="on"
+          indicatorColor="primary"
+          textColor="primary"
+          aria-label="scrollable force tabs example"
         >
-          <Button variant="contained" color="primary">
-            <EventIcon className={classes.icon} />
-            Calendar
-          </Button>
-        </Link>
-
-        <Link
-          color="inherit"
-          to={`${url}/Schedule`}
-          className={classes.link}
-        >
-          <Button variant="contained" color="primary">
-            <EventAvailableIcon className={classes.icon} />
-            Appointments
-          </Button>
-        </Link>
-      </Breadcrumbs>
-
-      <hr />
-
-      <Switch>
-        <Route exact path={path}>
-          <h2>Welcome To Appointments</h2>
-        </Route>
-        <Route path={`${path}/Calendar`}>
-          <Schedule />
-        </Route>
-        <Route path={`${path}/Schedule`}>
-          <DatePicker />
-        </Route>
-      </Switch>
-    </Router>
+          <Tab label="Calendar" icon={<TodayIcon />} {...a11yProps(0)} />
+          <Tab label="Schedule" icon={<ScheduleIcon />} {...a11yProps(1)} />
+        </Tabs>
+      </AppBar>
+      <TabPanel value={value} index={0}>
+        <Calendar />
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+        <DatePicker />
+      </TabPanel>
+    </div>
   );
 }
