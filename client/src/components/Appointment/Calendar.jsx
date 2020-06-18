@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Paper from '@material-ui/core/Paper';
@@ -14,6 +14,7 @@ import {
     DayView,
 } from '@devexpress/dx-react-scheduler-material-ui';
 import * as scheduleActions from "../../services/Schedule/actions"
+import { useStyles } from "./Appointment.styles"
 
 
 function mapStateToProps(state) {
@@ -27,11 +28,14 @@ function mapDispatchToProps(dispatch) {
         actions: bindActionCreators(scheduleActions, dispatch),
     };
 }
+
 const ViewSwitcher = ({ onChange, currentViewName }) => (
     <RadioGroup
         aria-label="Views"
-        style={{ flexDirection: 'row',
-        justifyContent: 'center' }}
+        style={{
+            flexDirection: 'row',
+            justifyContent: 'center'
+        }}
         name="views"
         value={currentViewName}
         onChange={onChange}
@@ -44,6 +48,7 @@ const ViewSwitcher = ({ onChange, currentViewName }) => (
 
 const CalendarView = (props) => {
     const [viewName, setViewName] = React.useState("Month");
+    const classes = useStyles(props);
 
     const viewChange = (e, index) => {
         const { actions } = props;
@@ -53,10 +58,17 @@ const CalendarView = (props) => {
 
     return (
         <Paper>
-
-            <ViewSwitcher 
-            currentViewName={viewName}
-            onChange={viewChange}/>
+            <RadioGroup
+                aria-label="Views"
+                className={classes.radio}
+                name="views"
+                value={viewName}
+                onChange={viewChange}
+            >
+                <FormControlLabel value="Month" control={<Radio />} label="Month" />
+                <FormControlLabel value="Week" control={<Radio />} label="Week" />
+                <FormControlLabel value="Day" control={<Radio />} label="Day" />
+            </RadioGroup>
             <Scheduler>
                 <ViewState currentViewName={viewName} />
                 <MonthView />

@@ -7,7 +7,7 @@ import { LogIn } from './pages';
 // renable the login page 
 
 const App = (props) => 
-  <div>{props.loggedIn === true 
+  <div>{props.loggedIn === undefined 
     ? <SideBar /> 
     : <LogIn />
   }</div>

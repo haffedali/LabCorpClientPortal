@@ -1,15 +1,15 @@
-import AppointmentHeader from './AppointmentHeader/header';
+import Header from './Appointment/Header';
 import AvatarBtn from './Avatar/AvatarBtn';
-import Calendar from './Calendar/Calendar';
+import Calendar from './Appointment/Calendar';
 import MessagesTabs from './Messages/MessagesTabs';
 import ProfileForm from './Profile/ProfileForm';
-import DatePicker from './Schedule/Schedule'
+import DatePicker from './Appointment/Schedule'
 import SideBar from './SideBar/SideBar';
 import LogoutButton from './LogoutButton/LogoutButton';
 import CollapsibleTable from './CollapsibleTable/CollapsibleTable';
 
 export {
-    AppointmentHeader,
+    Header,
     AvatarBtn,
     DatePicker,
     MessagesTabs,

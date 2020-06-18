@@ -46,7 +46,7 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 * **Haffed Ali** - [haffedali](https://github.com/haffedali)
 * **Daniel Barone** - [danielbarone](https://github.com/danielbarone)
-* **William Marchek** - [coletrumbo-ss](https://github.com/wilbobraggins)
+* **William Marchek** - [WilliamMarchek](https://github.com/wilbobraggins)
 * **Cole Trumbo** - [coletrumbo-ss](https://github.com/coletrumbo-ss)
 * **Vina Le** - [TramanhLe](https://github.com/TramanhLe)
 
