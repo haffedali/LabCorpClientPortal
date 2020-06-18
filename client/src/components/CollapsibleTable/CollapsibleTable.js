@@ -22,17 +22,6 @@ const useRowStyles = makeStyles((theme) => ({
   },
 }));
 
-function createData(name, date) {
-  return {
-    name,
-    date,
-    items: [
-      { item: 'Red Blood Cell Count', numericValue: '100', unit: 'per droplet' },
-      { item: 'Iron', numericValue: '0.5', unit: 'g' },
-      { item: 'Chemical X', numericValue: '1', unit: 'tsp' },
-    ],
-  };
-}
 
 function Row(props) {
   const { row } = props;
@@ -87,37 +76,28 @@ function Row(props) {
   );
 }
 
-const rows = [
-  createData('Hemoglobin', "2019-11-01"),
-  createData('Hemoglobin', "2018-11-01"),
-  createData('Hemoglobin', "2017-11-01"),
-];
-
 export default function CollapsibleTable(props) {
-  const search = props.search
-  const matchingRows = rows.filter((row) => {
-    return row.date.indexOf(search) > -1 || row.name.indexOf(search) > -1;
-  })
+  const { rows } = props
   return (
     <TableContainer component={Paper}>
       <Table aria-label="collapsible table">
         <TableHead>
           <TableRow>
-            <TableCell></TableCell>
+            <TableCell />
             <TableCell component="th">Test</TableCell>
             <TableCell component="th">Date</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {matchingRows.length > 0 ? 
-            matchingRows.map((row) => (
+          { rows.length > 0 ?
+            rows.map((row) => (
               <Row key={row.name + row.date} row={row} />
-            ))
-            :
+            )) :
             <TableRow>
-              <TableCell colspan="3">
-                <p>Your search yeilded no matching Tests.</p>
-                <p>Only the Test and Date are searchable. Itemized Results within a Test are not.</p>
+              <TableCell colSpan="3" align="center">
+                <p>
+                  No matching results. 
+                </p>
               </TableCell>
             </TableRow>
           }
