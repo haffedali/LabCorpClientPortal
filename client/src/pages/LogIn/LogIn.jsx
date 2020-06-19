@@ -6,7 +6,8 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import * as loginActions from "../../services/LogIn/actions";
-import {loginApi} from '../../utils';
+import { loginApi } from "../../utils";
+import logo from "../../assets/img/logo.png";
 import { useStyles } from "./LogIn.styles";
 
 function mapStateToProps(state) {
@@ -33,11 +34,10 @@ const LogIn = (props) => {
   };
 
   const handleLoginAttempt = (firstName, lastName) => {
-    loginApi.isValidUser(firstName,lastName);
+    loginApi.isValidUser(firstName, lastName);
     const { actions } = props;
 
     actions.loginAttempt(loginInfo);
-
   };
 
   const classes = useStyles(props);
@@ -53,6 +53,10 @@ const LogIn = (props) => {
               direction="column"
               justify="center"
             >
+              <Grid item className={classes.logoContainer}>
+                <img src={logo} height="75rem" width="75rem" />
+              </Grid>
+
               <TextField
                 className={classes.logInInput}
                 id="username"
@@ -71,7 +75,9 @@ const LogIn = (props) => {
               />
               <Button
                 className={classes.logInButton}
-                onClick={() => handleLoginAttempt(loginInfo.username, loginInfo.password)}
+                onClick={() =>
+                  handleLoginAttempt(loginInfo.username, loginInfo.password)
+                }
                 variant="contained"
                 color="primary"
               >
