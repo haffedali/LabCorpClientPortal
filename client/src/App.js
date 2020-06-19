@@ -1,16 +1,19 @@
-import React, { Component } from 'react';
-import AppWrapper from './pages/AppWrapper'
+import React from 'react';
+import { connect } from 'react-redux';
+import { SideBar } from './components'
+import { LogIn } from './pages';
 
-class App extends Component{
-  constructor(props){
-    super(props)
-  }
-  render(){
-    return(
-      <AppWrapper />
-    )
-  }
+// NOTE: Change "undefined" below to "true" to 
+// renable the login page 
+
+const App = (props) => 
+  <div>{props.loggedIn === undefined 
+    ? <SideBar /> 
+    : <LogIn />
+  }</div>
+
+const mapStateToProps = (state) => {
+  return {loggedIn: state.loginReducer.loggedIn};
 }
 
-export default App;
-
+export default connect(mapStateToProps, {})(App);
