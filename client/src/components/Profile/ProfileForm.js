@@ -1,8 +1,11 @@
 import React from 'react';
 import { useStyles } from './ProfileForm.styles';
-import TextField from '@material-ui/core/TextField';
-import { makeStyles } from '@material-ui/core/styles';
+// import TextField from '@material-ui/core/TextField';
+import {TextField, Button} from '@material-ui/core';
 
+
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
 export default function FormFields(props) {
   const classes = useStyles(props);
