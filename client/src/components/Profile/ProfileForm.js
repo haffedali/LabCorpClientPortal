@@ -22,18 +22,21 @@ export default function FormFields(props) {
             variant="filled"
         />
         <TextField
+            className={classes.fieldBox}
             id="filled-address"
             label="Preferred Name"
             defaultValue="Preferred Dummy Name"
             variant="filled"
         />
         <TextField
+            className={classes.fieldBox}
             id="filled-address"
             label="Street Address"
             defaultValue="Dummy Address"
             variant="filled"
         />
         <TextField
+            className={classes.fieldBox}
             id="filled-city"
             label="City"
             defaultValue="Dummy Data"
@@ -41,45 +44,53 @@ export default function FormFields(props) {
         />
         <TextField
             // error
+            className={classes.fieldBox}
             id="filled-state"
             label="State"
             defaultValue="Dummy Data"
             variant="filled"
         />
         <TextField
+            className={classes.fieldBox}
             id="filled-number-zip"
             label="ZIP Code"
             type="number"
             variant="filled"
         />
         <TextField
+            className={classes.fieldBox}
             id="filled-phone"
             label="Phone Number"
             type="number"
             variant="filled"
         />
         <TextField
+            className={classes.fieldBox}
             id="filled-email"
             label="Email"
             variant="filled"
         />
         <h3> Insurance Information </h3>
         <TextField
+            className={classes.fieldBox}
             id="filled-insurance-number"
             label="Insurance Name"
             variant="filled"
         />
         <TextField
+            className={classes.fieldBox}
             id="filled-insurance-number"
             label="Insurance Plan Type"
             variant="filled"
         />
         <TextField
+            className={classes.fieldBox}
             id="filled-insurance-number"
             label="Policy Number"
             variant="filled"
         />
         <TextField
+            className={classes.fieldBox}
             id="filled-insurance-number"
             label="Group Number"
             variant="filled"
@@ -93,6 +104,7 @@ export default function FormFields(props) {
         />
         <h3> Your Login Credentials </h3>
         <TextField
+            className={classes.fieldBox}
             id="filled-read-only-input"
             label="Username"
             defaultValue="Dummy Data Username"
@@ -100,6 +112,7 @@ export default function FormFields(props) {
             variant="filled"
         />
         <TextField
+            className={classes.fieldBox}
             id="filled-password-input"
             label="Password"
             type="password"
