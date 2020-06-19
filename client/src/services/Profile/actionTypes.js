@@ -1,0 +1,3 @@
+export const UPDATE_PENDING = "UPDATE_PENDING";
+export const UPDATE_FAILED = "UPDATE_FAILED";
+export const UPDATE_SUCCESS ="UPDATE_SUCCESS";
