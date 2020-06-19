@@ -12,6 +12,11 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     backgroundColor: theme.BACKGROUND_001,
   },
+  logoContainer: {
+    display: "flex",
+    justifyContent: "center",
+    marginTop: "1vw"
+  },
   logInContainer: {
     display: "flex",
     justifyContent: "center",
