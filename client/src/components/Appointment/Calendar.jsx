@@ -20,9 +20,6 @@ import {
 } from '@devexpress/dx-react-scheduler-material-ui';
 import * as scheduleActions from "../../services/Schedule/actions"
 import { useStyles } from "./Appointment.styles"
-import axios from "axios";
-import { adalApiFetch } from "../../adalConfig";
-
 function mapStateToProps(state) {
     return {
         currentView: state.scheduleReducer.currentView,
@@ -58,24 +55,6 @@ const CalendarView = (props) => {
         actions.switchView(index);
     };
 
-    const getAppointments = () => {
-        let config = {
-            method: 'get',
-            'OData-MaxVersion': 4.0,
-            'OData-Version': 4.0,
-            Accept: 'application/json',
-            'Content-Type': 'application/json; charset=utf-8',
-            headers: {
-                'Prefer': "odata.include-annotations=*"
-            }
-        };
-
-        return adalApiFetch(axios, "https://sswilbobraggins.api.crm.dynamics.com/api/data/v9.1/contacts?$select=fullname&$filter=contains(fullname,%20%27Richard%20Daley%27)&$expand=Contact_Appointments($select=subject,scheduledstart,scheduledend)", config)
-            .then(res => {
-                const apps = res.data;
-                console.log(apps)
-            })
-    }
 
     return (
         <Paper>
