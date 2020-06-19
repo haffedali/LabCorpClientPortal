@@ -40,6 +40,13 @@ const _loginSuccess = (userInfo) => {
       firstName: userInfo.firstname,
       lastName: userInfo.lastname,
       contactId: userInfo.contactid,
+      address: userInfo.address1_line1,
+      city: userInfo.address1_city,
+      state: userInfo.address1_stateorprovince,
+      phone: userInfo.mobilephone,
+      zipCode: userInfo.postalcode,
+      email: userInfo.emailaddress1,
+      insurancePlan: userInfo.ss_contact_ss_insuranceplan_Patient[0].ss_name
     },
   };
 };
