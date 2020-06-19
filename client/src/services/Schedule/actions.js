@@ -6,6 +6,8 @@ export const switchView = (view) => {
     }
 }
 
+
+
 const _switchView = (view) => {
     return {
         type: SWITCH_VIEW,
