@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import configureStore from './services/store';
 import { Provider } from 'react-redux';
 import { Router } from "react-router-dom";
 
@@ -13,7 +12,7 @@ import { authContext } from './adalConfig'
 import { ApolloProvider } from "react-apollo";
 import graphqlClient from "./microservices-api/graphqlClient"
 
-const store = configureStore();
+import store from './store'
 const DO_NOT_LOGIN = false;
 
 runWithAdal(authContext, () => {

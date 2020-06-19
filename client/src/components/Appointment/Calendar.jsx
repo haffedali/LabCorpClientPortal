@@ -1,6 +1,5 @@
 import React from "react";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+import { useDispatch } from "react-redux";
 import Paper from '@material-ui/core/Paper';
 import { ViewState } from '@devexpress/dx-react-scheduler';
 import Radio from '@material-ui/core/Radio';
@@ -13,21 +12,8 @@ import {
     Appointments,
     DayView,
 } from '@devexpress/dx-react-scheduler-material-ui';
-import * as scheduleActions from "../../services/Schedule/actions"
 import { useStyles } from "./Appointment.styles"
-
-
-function mapStateToProps(state) {
-    return {
-        currentView: state.scheduleReducer.currentView
-    };
-}
-
-function mapDispatchToProps(dispatch) {
-    return {
-        actions: bindActionCreators(scheduleActions, dispatch),
-    };
-}
+import { switchView } from "../../store/ducks/schedule";
 
 const ViewSwitcher = ({ onChange, currentViewName }) => (
     <RadioGroup
@@ -47,13 +33,13 @@ const ViewSwitcher = ({ onChange, currentViewName }) => (
 );
 
 const CalendarView = (props) => {
+    const dispatch = useDispatch();
     const [viewName, setViewName] = React.useState("Month");
     const classes = useStyles(props);
 
     const viewChange = (e, index) => {
-        const { actions } = props;
         setViewName(index);
-        actions.switchView(index);
+        dispatch(switchView(index))
     };
 
     return (
@@ -83,4 +69,4 @@ const CalendarView = (props) => {
     )
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CalendarView);
+export default CalendarView;
