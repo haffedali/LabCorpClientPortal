@@ -2,14 +2,17 @@ import React from "react";
 import theme from "./theme.js";
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 
+/* defaultContextData */
 const defaultContextData = {
   dark: false,
   toggle: () => {}
 };
 
+/* ThemeContext, useTheme */
 const ThemeContext = React.createContext(defaultContextData);
 const useTheme = () => React.useContext(ThemeContext);
 
+/* useEffectDarkMode */
 const useEffectDarkMode = () => {
   const [themeState, setThemeState] = React.useState({
     dark: false,
@@ -23,6 +26,7 @@ const useEffectDarkMode = () => {
   return [themeState, setThemeState];
 };
 
+/* ThemeProvider */
 const ThemeProvider = ({ children }) => {
   const [themeState, setThemeState] = useEffectDarkMode();
 
