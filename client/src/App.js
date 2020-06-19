@@ -3,11 +3,13 @@ import { connect } from 'react-redux';
 import { SideBar } from './components'
 import { LogIn } from './pages';
 
-// NOTE: Change "undefined" below to "true" to 
-// renable the login page 
+// NOTE: Run "npm run noauth" to avoid login
+const requireLogin = (no_auth) => {
+  return no_auth === "true" ? undefined : true;
+}
 
 const App = (props) => 
-  <div>{props.loggedIn === undefined 
+  <div>{props.loggedIn === requireLogin(process.env.REACT_APP_NOAUTH)
     ? <SideBar /> 
     : <LogIn />
   }</div>
