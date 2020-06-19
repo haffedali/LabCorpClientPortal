@@ -23,18 +23,17 @@ function mapDispatchToProps(dispatch) {
 
 const LogIn = (props) => {
   const [loginInfo, setLoginInfo] = useState({
-    email: "",
+    username: "",
     password: "",
   });
 
   const handleTextFieldChanges = (e) => {
     const { name, value } = e.target;
-    console.log(name, value);
     setLoginInfo({ ...loginInfo, [name]: value });
   };
 
-  const handleLoginAttempt = () => {
-    loginApi.isValidUserTest("jo","blo");
+  const handleLoginAttempt = (firstName, lastName) => {
+    loginApi.isValidUser(firstName,lastName);
     const { actions } = props;
 
     actions.loginAttempt(loginInfo);
@@ -56,23 +55,23 @@ const LogIn = (props) => {
             >
               <TextField
                 className={classes.logInInput}
-                id="email"
+                id="username"
                 variant="outlined"
-                label="email"
-                name="email"
+                label="username"
+                name="username"
                 onChange={(e) => handleTextFieldChanges(e)}
               />
               <TextField
                 className={classes.logInInput}
-                id="password"
+                id="ID-number"
                 variant="outlined"
-                label="password"
-                name="password"
+                label="ID number"
+                name="ID number"
                 onChange={(e) => handleTextFieldChanges(e)}
               />
               <Button
                 className={classes.logInButton}
-                onClick={handleLoginAttempt}
+                onClick={() => handleLoginAttempt(loginInfo.username, loginInfo.password)}
                 variant="contained"
                 color="primary"
               >
