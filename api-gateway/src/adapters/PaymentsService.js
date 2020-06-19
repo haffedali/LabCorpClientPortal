@@ -1,7 +1,5 @@
 import got from "got";
 
-// import accessEnv from "#root/helpers/accessEnv";
-
 const PAYMENTS_SERVICE_URI = "http://payments-service:7101";
 
 export default class PaymentsService {

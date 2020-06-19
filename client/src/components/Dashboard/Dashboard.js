@@ -20,6 +20,4 @@ export default Dashboard;
 
 // return isSigningUp ? (
 //   <SignUp onChangeToLogin={() => setIsSigningUp(false)} />
-// ) : (
-//   <Login onChangeToSignUp={() => setIsSigningUp(true)} />
-// );
+// ) 
