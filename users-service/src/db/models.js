@@ -10,6 +10,14 @@ User.init(
       primaryKey: true,
       type: DataTypes.UUID
     },
+    firstName: {
+      allowNull: false,
+      type: DataTypes.STRING
+    },
+    lastName: {
+      allowNull: false,
+      type: DataTypes.STRING
+    },
     email: {
       allowNull: false,
       type: DataTypes.STRING,
