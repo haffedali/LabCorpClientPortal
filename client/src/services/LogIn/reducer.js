@@ -6,9 +6,7 @@ export default function loginReducer(state = {}, action){
             return {...state, loggedIn: "pending"}
         case LOGIN_SUCCESS:
             return {...state, loggedIn: true, userInfo: {
-                firstName: action.userInfo.firstName,
-                contactId: action.userInfo.contactId,
-                lastName: action.userInfo.lastName
+                ...action.userInfo
             }}
         case LOGIN_FAILED:
             return {...state, loggedIn: false}

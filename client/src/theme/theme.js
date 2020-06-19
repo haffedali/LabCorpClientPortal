@@ -16,6 +16,11 @@ const light = createMuiTheme({
     // MessagesTabs
     MSG_TABS_CONTAINER: colors.WHITE,
     MSG_TABS_TEXT: colors.PRIMARY_LIGHT,
+    MSG_TABS_TABINDICATOR: colors.POLAR_NIGHT[2],
+    // ProfileForm
+    PROFILE_CONTAINER_FILL: colors.WHITE,
+    PROFILE_TEXT: colors.PRIMARY_LIGHT,
+    PROFILE_BOX_INDICATOR: colors.POLAR_NIGHT[2],
     // Global
     PRIMARY: colors.PRIMARY_LIGHT,
     // Material-UI Overrides
@@ -45,6 +50,11 @@ const dark = createMuiTheme({
     // MessagesTabs
     MSG_TABS_CONTAINER: colors.POLAR_NIGHT[3],
     MSG_TABS_TEXT: colors.SNOW_STORM[2],
+    MSG_TABS_TABINDICATOR: colors.SNOW_STORM[0],
+    // ProfileForm
+    PROFILE_BOX_FILL: colors.POLAR_NIGHT[3],
+    PROFILE_TEXT: colors.SNOW_STORM[2],
+    PROFILE_BOX_INDICATOR: colors.SNOW_STORM[0],
     // Global
     PRIMARY: colors.PRIMARY_DARK,
     // Material-UI Overrides

@@ -4,12 +4,12 @@ export const useStyles = makeStyles((theme) => ({
     root: {
       '& .MuiTextField-root': {
         margin: theme.spacing(2),
-        width: '40ch',
+        width: '50ch',
       },
     },
     fieldBox: {
-        backgroundColor: theme.MSG_TABS_CONTAINER,
-        color: theme.DRAWER_TEXT_ACTIVE,
+        backgroundColor: theme.PROFILE_CONTAINER_FILL,
+        color: theme.PRIMARY,
     },
 
   }));
