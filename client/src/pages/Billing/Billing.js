@@ -2,10 +2,11 @@
 import React from 'react';
 /* LabCorp */
 import { useStyles } from './Billing.styles';
+import { InnerSideBar } from '../../components'
 
 const Billing = (props) => {
     const classes = useStyles(props);
-    return <h2>Billing.js</h2>
+    return (<InnerSideBar />)
 }
 
 export default Billing;

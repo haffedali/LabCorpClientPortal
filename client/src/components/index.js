@@ -7,6 +7,8 @@ import DatePicker from './Appointment/Schedule'
 import SideBar from './SideBar/SideBar';
 import LogoutButton from './LogoutButton/LogoutButton';
 import CollapsibleTable from './CollapsibleTable/CollapsibleTable';
+import InnerSideBar from './SideBar/InnerSideBar';
+import CustomPaper from './CustomPaper/CustomPaper';
 
 export {
     Header,
@@ -17,5 +19,7 @@ export {
     Calendar,
     SideBar,
     CollapsibleTable,
-    LogoutButton
+    LogoutButton,
+    InnerSideBar,
+    CustomPaper
 }

@@ -13,6 +13,8 @@ const light = createMuiTheme({
     DRAWER_ITEM_HOVER: colors.SNOW_STORM[1],
     DRAWER_TEXT: colors.PRIMARY_LIGHT,
     DRAWER_TEXT_ACTIVE: colors.FROST[3],
+    // Inner Drawer
+    INNER_DRAWER: 'rgba(236, 239, 244, 0.3)',
     // MessagesTabs
     MSG_TABS_CONTAINER: colors.WHITE,
     MSG_TABS_TEXT: colors.PRIMARY_LIGHT,
@@ -23,6 +25,7 @@ const light = createMuiTheme({
     PROFILE_BOX_INDICATOR: colors.POLAR_NIGHT[2],
     // Global
     PRIMARY: colors.PRIMARY_LIGHT,
+    WHITE: colors.WHITE,
     // Material-UI Overrides
     overrides: {
         MuiListItem: {
@@ -57,6 +60,7 @@ const dark = createMuiTheme({
     PROFILE_BOX_INDICATOR: colors.SNOW_STORM[0],
     // Global
     PRIMARY: colors.PRIMARY_DARK,
+    WHITE: colors.WHITE,
     // Material-UI Overrides
     overrides: {
         MuiListItem: {

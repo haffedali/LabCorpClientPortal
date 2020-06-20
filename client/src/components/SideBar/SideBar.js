@@ -33,10 +33,15 @@ import { useStyles } from "./SideBar.styles";
 import { useTheme } from "../../theme/ThemeContext";
 
 function SideBar(props) {
-  const classes = useStyles(props);
-  const theme = useTheme();
-
   let location = useLocation();
+
+  const styleProps = { 
+    ...props, 
+    currentPage: location.pathname.substring(1),
+    noPadding: ['Billing',]
+  };
+  const classes = useStyles(styleProps);
+  const theme = useTheme();
 
   useEffect(() => {
     let stateCurrPage = selectedIndex;
