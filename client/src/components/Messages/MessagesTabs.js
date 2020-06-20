@@ -52,7 +52,7 @@ export default function MessagesTabs(props) {
   return (
     <div className={classes.root}>
       <AppBar position="static" className={classes.messagesTabsAppbar}>
-        <Tabs value={value} onChange={handleChange} aria-label="message slection tabs">
+        <Tabs value={value} onChange={handleChange} aria-label="message selection tabs">
           <Tab label="Inbox" {...a11yProps(0)} />
           <Tab label="Sent Messages" {...a11yProps(1)} />
           <Tab label="Notices/Letter" {...a11yProps(2)} />
