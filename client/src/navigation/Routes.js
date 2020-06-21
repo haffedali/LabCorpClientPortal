@@ -5,10 +5,13 @@ import {
     Appointment,
     Billing,
     Home,
-    Messages,
     Profile,
     Results,
 } from '../pages'
+
+import {
+    Messages
+} from "../components"
 
 const Routes = () => 
     <Switch>
