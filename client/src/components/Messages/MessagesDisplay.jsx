@@ -9,8 +9,19 @@ import {
 } from "@material-ui/core";
 import { useStyles } from "./MessagesDisplay.styles";
 
+
+const stringTrim = (string) => {
+  if (string){
+    let cutString = string.slice(0, 75);
+    cutString += '...'
+    return cutString
+  }
+  return string
+}
+
 const MessagesDisplayItem = ({ item }) => {
   const classes = useStyles();
+  const textContentPeek = stringTrim(item.textContent);
   return (
     <Paper className={classes.displayItemContainer}>
         <ListItem>
@@ -21,7 +32,7 @@ const MessagesDisplayItem = ({ item }) => {
             </Grid>
             <Grid item xs={6}>
               <ListItemText
-                primary={item.textContent}
+                primary={textContentPeek}
                 secondary={"Click here to read more"}
               />
             </Grid>
