@@ -13,6 +13,6 @@ export const useStyles = makeStyles((theme) => ({
     paddingTop: theme.spacing(6),
     paddingRight: theme.spacing(6),
     paddingLeft: theme.spacing(6),
-    backgroundColor: theme.WHITE,
+    backgroundColor: theme.BILLING_BACKGROUND,
   }),
 }));

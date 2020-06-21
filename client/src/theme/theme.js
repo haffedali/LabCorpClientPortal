@@ -17,6 +17,8 @@ const light = createMuiTheme({
     INNER_DRAWER: 'rgba(236, 239, 244, 0.3)',
     INNER_DRAWER_TEXT: colors.POLAR_NIGHT[0],
     INNER_DRAWER_TEXT_ACTIVE: colors.FROST[3],
+    // Billing Content 
+    BILLING_BACKGROUND: colors.WHITE,
     // MessagesTabs
     MSG_TABS_CONTAINER: colors.WHITE,
     MSG_TABS_TEXT: colors.PRIMARY_LIGHT,
@@ -52,6 +54,8 @@ const dark = createMuiTheme({
     DRAWER_ITEM_HOVER: colors.BACKGROUND_DARK_001,
     DRAWER_TEXT: colors.SNOW_STORM[2],
     DRAWER_TEXT_ACTIVE: colors.FROST[1],
+    // Billing Content 
+    BILLING_BACKGROUND: colors.POLAR_NIGHT[0],
     // MessagesTabs
     MSG_TABS_CONTAINER: colors.POLAR_NIGHT[3],
     MSG_TABS_TEXT: colors.SNOW_STORM[2],

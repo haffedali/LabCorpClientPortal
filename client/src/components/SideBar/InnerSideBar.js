@@ -16,7 +16,6 @@ import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
 
 const tabIcons = {
   0: <DescriptionIcon />,
-  10: <ReceiptIcon />,
   3: <LiveHelpIcon />,
   4: <BallotIcon />
 }
