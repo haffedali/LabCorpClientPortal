@@ -10,6 +10,12 @@ import  {adalApiFetch} from '../adalConfig';
 export const testResultsApi = {
   doSomething : () => {
     return adalApiFetch(axios, apiRoute + "ss_labresults", getConfig)
-  },  
+  },
+  getGroupedResults : () => {
+    const results = adalApiFetch(axios, apiRoute + "ss_labresults", getConfig)
+    results.forEach(value => {
+      return
+    });
+  }
 }
 
