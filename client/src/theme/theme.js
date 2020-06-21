@@ -15,6 +15,8 @@ const light = createMuiTheme({
     DRAWER_TEXT_ACTIVE: colors.FROST[3],
     // Inner Drawer
     INNER_DRAWER: 'rgba(236, 239, 244, 0.3)',
+    INNER_DRAWER_TEXT: colors.POLAR_NIGHT[0],
+    INNER_DRAWER_TEXT_ACTIVE: colors.FROST[3],
     // MessagesTabs
     MSG_TABS_CONTAINER: colors.WHITE,
     MSG_TABS_TEXT: colors.PRIMARY_LIGHT,

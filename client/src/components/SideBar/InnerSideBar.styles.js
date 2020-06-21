@@ -1,32 +1,56 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const drawerWidth = 200;
-
 export const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-    zIndex: 0
-  },
-  innerSideBar: {
+  innerSideBar: props => ({
     height: '100vh',
     position: 'fixed',
-    width: drawerWidth,
+    width: props.drawerWidth,
     color: theme.PRIMARY,
     padding: theme.spacing(3),
     paddingLeft: 0,
-    paddingTop: '50px',
+    paddingRight: 0,
     backgroundColor: theme.INNER_DRAWER,
     boxShadow: 'inset -2px 0 9px -7px rgba(0,0,0,0.4)',
-
+  }),
+  listItem: props => ({
+    color: theme.INNER_DRAWER_TEXT,
+    '&:hover': {
+      backgroundColor: theme.DRAWER_ITEM_HOVER,
+    },
+  }),
+  listItemChild: {
+    // color: 'rgba(46, 52, 64, 0.7)',
   },
-  billingContent: {
-    // flexGrow: 1,
-    minHeight: '100vh',
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: drawerWidth,
-    paddingTop: theme.spacing(6),
-    paddingRight: theme.spacing(6),
-    zIndex: 10,
-    backgroundColor: theme.WHITE,
-  }
+  listItemChildActive: {
+    color: theme.INNER_DRAWER_TEXT_ACTIVE
+  },
+  listItemActive: {
+    // color: theme.INNER_DRAWER_TEXT_ACTIVE,
+    '&:hover': {
+      backgroundColor: theme.DRAWER_ITEM_HOVER,
+    },
+  },
+  innerSideBarHeader: {
+    color: theme.INNER_DRAWER_TEXT_ACTIVE,
+    marginBottom: '20px'
+  },
+  innerSideBarHeaderIcon: {
+    color: theme.DRAWER_TEXT_ACTIVE,
+  },
+  innerSideBarHeaderText: {
+    '& span': {
+      fontWeight: '600',
+      fontSize: '1.3em'
+    }
+  },
+  listItemText: {
+    '& span': {
+      fontWeight: '600',
+    }
+  },
+  listItemIcon: {
+    '& svg': {
+      color: theme.DRAWER_TEXT_ACTIVE,
+    }
+  },
 }));
