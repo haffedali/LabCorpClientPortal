@@ -7,6 +7,7 @@ import DatePicker from './Appointment/Schedule'
 import SideBar from './SideBar/SideBar';
 import LogoutButton from './LogoutButton/LogoutButton';
 import CollapsibleTable from './CollapsibleTable/CollapsibleTable';
+import Results from './Results/Results';
 
 export {
     Header,
@@ -17,5 +18,6 @@ export {
     Calendar,
     SideBar,
     CollapsibleTable,
+    Results,
     LogoutButton
 }

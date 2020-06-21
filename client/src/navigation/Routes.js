@@ -7,8 +7,11 @@ import {
     Home,
     Messages,
     Profile,
-    Results,
 } from '../pages'
+
+import {
+    Results,
+} from '../components';
 
 const Routes = () => 
     <Switch>
