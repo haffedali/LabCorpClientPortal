@@ -40,6 +40,7 @@
   "proxy": "http://localhost:4000/api",
   "scripts": {
     "start": "react-scripts start",
+    "noauth": "REACT_APP_NOAUTH=true npm start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
