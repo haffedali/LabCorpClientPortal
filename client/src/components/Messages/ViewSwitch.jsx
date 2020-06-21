@@ -1,0 +1,57 @@
+import React from 'react';
+import AppBar from '@material-ui/core/AppBar';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import {useStyles} from './ViewSwitch.styles';
+
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as messagesActions from '../../services/Messages/actions';
+
+
+function mapStateToProps(state){
+  return {
+    currentPage: state.messagesReducer.currentPage
+  }
+}
+
+function mapDispatchToProps(dispatch){
+  return {
+    actions: bindActionCreators(messagesActions, dispatch)
+  }
+}
+
+const ViewSwitch = (props) => {
+  const classes = useStyles();
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event, newValue) => {
+    const {actions} = props;
+    const page = event.target.innerHTML;
+    setValue(newValue);
+    actions.switchPage(page);
+  };
+
+
+
+  return (
+    <div className={classes.root}>
+      <AppBar className={classes.appBar}position="static" color="default">
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          indicatorColor="primary"
+          textColor="primary"
+          variant="fullWidth"
+          aria-label="full width tabs example"
+        >
+          <Tab label="Inbox" />
+          <Tab label="Sent" />
+          <Tab label="Notifications" />
+        </Tabs>
+      </AppBar>
+    </div>
+  );
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(ViewSwitch)
