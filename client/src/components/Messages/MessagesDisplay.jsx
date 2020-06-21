@@ -12,7 +12,7 @@ import { useStyles } from "./MessagesDisplay.styles";
 
 const stringTrim = (string) => {
   if (string){
-    let cutString = string.slice(0, 75);
+    let cutString = string.slice(0, 100);
     cutString += '...'
     return cutString
   }
@@ -26,10 +26,11 @@ const MessagesDisplayItem = ({ item }) => {
     <Paper className={classes.displayItemContainer}>
         <ListItem>
           <Grid container direction="row" justify="space-between">
-            <Grid item xs={3} className={classes.displayItemFromSub}>
-              <ListItemText primary={item.sender} />
+            <Grid item xs={2} className={classes.displayItemFromSub}>
+              <ListItemText className={classes.textElement} primary={item.sender} />
               <ListItemText primary={item.subject} />
             </Grid>
+            <Grid item xs={1}></Grid>
             <Grid item xs={6}>
               <ListItemText
                 primary={textContentPeek}
