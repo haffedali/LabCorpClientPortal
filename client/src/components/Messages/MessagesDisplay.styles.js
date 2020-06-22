@@ -17,5 +17,8 @@ export const useStyles = makeStyles((theme) => ({
     listContainer: {
         maxHeight:'75vh',
         overflow:'auto'
+    },
+    displayItemFromSub: {
+        overflow:'hidden'
     }
   }));
