@@ -1,6 +1,7 @@
 import axios from "axios";
 import { adalApiFetch } from "../adalConfig";
-import { getConfig, apiRoute } from "./APIHeaders";
+import { getConfig } from "./APIHeaders";
+import {buildApiCall} from './helperFunctions'
 
 export const loginApi = {
   /**
@@ -10,9 +11,14 @@ export const loginApi = {
    */
   isValidUser: (fullname, id) => {
     fullname = fullname.replace(".", " ");
-    const queryString =
-      apiRoute +
-      `contacts?$select=firstname,ss_patientid,address1_line1,address1_city,address1_stateorprovince,address1_postalcode,address1_country,mobilephone,emailaddress1,lastname&$filter=contains(fullname, '${fullname}') and contains(ss_patientid, '${id}')&$expand=ss_contact_ss_insuranceplan_Patient($select=ss_name)`;
+    const queryObj = {
+      entity: 'contacts',
+      select: ["firstname","ss_patientid","address1_line1",'address1_city','address1_stateorprovince','address1_postalcode','address1_country','mobilephone','emailaddress1','lastname'],
+      filter: [{field: "fullname", value: fullname},{field:"ss_patientid", value: id}],
+      relatedEntity: 'ss_contact_ss_insuranceplan_Patient',
+      relatedSelect: ['ss_name']
+    }
+    const queryString = buildApiCall(queryObj)
     return adalApiFetch(axios, queryString, getConfig);
   },
 };

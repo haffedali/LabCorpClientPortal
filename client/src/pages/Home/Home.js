@@ -1,5 +1,5 @@
 import React from 'react';
-import LabCorpLogo from "../../assets/img/LabCorpLogo.png";
+import LabCorpLogo from "../../assets/img/logo.png";
 import { makeStyles } from '@material-ui/core/styles';
 
 const Home = (props) => 
