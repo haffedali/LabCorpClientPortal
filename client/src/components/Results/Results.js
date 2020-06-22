@@ -1,25 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import { CollapsibleTable } from '../../components'
 import { Typography,
   TextField
 } from '@material-ui/core';
 
-import { makeStyles } from '@material-ui/core/styles';
-
-// const useStyles = makeStyles((theme) => ({
-//   root: {
-//     '& .MuiTextField-root': {
-//       margin: theme.spacing(1),
-//       width: '25ch',
-//     },
-//   },
-//   table: {
-//     minWidth: 650,
-//   },
-// }));
-
-// const classes = useStyles();
 
 function createData(name, date) {
   return {
@@ -55,10 +40,7 @@ class Results extends React.Component {
         <Typography component="h1" variant="h3">
           Test Results
         </Typography>
-        {/*<form className={classes.root} noValidate autoComplete="off">*/}
-        <form noValidate autoComplete="off" >
-          <TextField id="search" label="Search tests" type="search" onChange={(e) => this.setState({search: e.target.value.toLowerCase()})} />
-        </form>
+        <TextField id="search" label="Search tests" type="search" onChange={(e) => this.setState({search: e.target.value.toLowerCase()})} />
         <CollapsibleTable className="minWidth: 650" rows={matchingRows} ></CollapsibleTable>
       </div>
     )
