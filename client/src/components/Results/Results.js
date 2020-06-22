@@ -40,10 +40,7 @@ class Results extends React.Component {
         <Typography component="h1" variant="h3">
           Test Results
         </Typography>
-        {/*<form className={classes.root} noValidate autoComplete="off">*/}
-        <form noValidate autoComplete="off" >
-          <TextField id="search" label="Search tests" type="search" onChange={(e) => this.setState({search: e.target.value.toLowerCase()})} />
-        </form>
+        <TextField id="search" label="Search tests" type="search" onChange={(e) => this.setState({search: e.target.value.toLowerCase()})} />
         <CollapsibleTable className="minWidth: 650" rows={matchingRows} ></CollapsibleTable>
       </div>
     )

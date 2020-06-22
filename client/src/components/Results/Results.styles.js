@@ -1,6 +1,7 @@
-import { makeStyles } from '@material-ui/core/styles';
+// import { makeStyles } from '@material-ui/core/styles';
 
 // const useStyles = makeStyles((theme) => ({
+//   // TODO Search and table need dark theme
 //   root: {
 //     '& .MuiTextField-root': {
 //       margin: theme.spacing(1),
@@ -12,4 +13,4 @@ import { makeStyles } from '@material-ui/core/styles';
 //   },
 // }));
 
-// const classes = useStyles();
+// export default useStyles();
