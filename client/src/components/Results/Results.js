@@ -1,25 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import { CollapsibleTable } from '../../components'
 import { Typography,
   TextField
 } from '@material-ui/core';
 
-import { makeStyles } from '@material-ui/core/styles';
-
-// const useStyles = makeStyles((theme) => ({
-//   root: {
-//     '& .MuiTextField-root': {
-//       margin: theme.spacing(1),
-//       width: '25ch',
-//     },
-//   },
-//   table: {
-//     minWidth: 650,
-//   },
-// }));
-
-// const classes = useStyles();
 
 function createData(name, date) {
   return {

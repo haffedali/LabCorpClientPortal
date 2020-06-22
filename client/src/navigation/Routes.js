@@ -6,10 +6,10 @@ import {
     Billing,
     Home,
     Profile,
-    Results,
 } from '../pages'
 
 import {
+    Results,
     Messages
 } from "../components"
 
