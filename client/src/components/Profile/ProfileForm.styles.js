@@ -6,6 +6,9 @@ export const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(2),
         width: '50ch',
       },
+      '.MuiFilledInput-underline': {
+        color: theme.PRIMARY,
+      },
     },
     fieldBox: {
         backgroundColor: theme.PROFILE_CONTAINER_FILL,
