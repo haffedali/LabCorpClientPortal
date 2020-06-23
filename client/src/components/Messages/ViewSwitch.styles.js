@@ -9,4 +9,10 @@ export const useStyles = makeStyles((theme) => ({
     appBar: {
       width: "80vw"
     },
+    tab: {
+      textColor: theme.MSG_TABS_TEXT
+    },
+    tabs: {
+      
+    }
   }));
