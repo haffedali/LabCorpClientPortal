@@ -1,12 +1,13 @@
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
+import React, { useEffect, useCallback, useState, useRef, setState } from "react";
+import { connect, useSelector, useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
-import PropTypes from 'prop-types';
+import PropTypes, { array } from 'prop-types';
 import Paper from '@material-ui/core/Paper';
 import { ViewState } from '@devexpress/dx-react-scheduler';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel'
+import CircularProgress from '@material-ui/core/CircularProgress';
 import {
     Scheduler,
     WeekView,
@@ -26,13 +27,10 @@ function mapStateToProps(state) {
         currentView: state.scheduleReducer.currentView,
         contactId: state.loginReducer.userInfo.contactId,
         appData: state.scheduleReducer.appointmentData,
-        /*         start: state.scheduleReducer.appointmentData.scheduledstart,
-                end: state.scheduleReducer.appointmentData.scheduledend,
-                subject: state.scheduleReducer.appointmentData.subject */
     };
 }
 
-function mapDispatchToProps(dispatch, props) {
+function mapDispatchToProps(dispatch) {
     return {
         actions: bindActionCreators(scheduleActions, dispatch),
     };
@@ -52,10 +50,17 @@ const appointments = [
 ]
 
 
+const makeData = appointment => ({
+    ...appointment,
+    title: appointment.subject,
+    startDate: appointment.scheduledstart,
+    endDate: appointment.scheduledend,
+});
 
-const CalendarView = (props, { appData }) => {
+const CalendarView = (props) => {
     const [viewName, setViewName] = React.useState("Month");
     const classes = useStyles(props);
+    const { actions } = props;
     /*     const data = {
             title: props.appointmentData.subject,
             startDate: new Date(2020, 5, 23, 9, 30),
@@ -63,35 +68,61 @@ const CalendarView = (props, { appData }) => {
         } */
 
     const viewChange = (e, index) => {
-        const { actions } = props;
         setViewName(index);
         actions.switchView(index);
-        console.log(props.appData);
-
     };
 
-    useEffect(() => {
-        const { actions } = props;
-        const fetchData = async () => {
-            await (actions.getData(props.contactId));
-        };
+    const fetchData = async () => {
+        await (actions.getData(props.contactId));
+    };
 
-        fetchData();
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        setTimeout(() => {
+            fetchData()
+            setData(props.appData)
+        }, 600)
     }, []);
+
+    /* const makeData = {
+        title: props.appData.subject,
+        startDate: new Date(2020, 5, 19, 9, 30),
+        endDate: new Date(2020, 5, 19, 11, 30),
+    }; */
+
 
     let content = '';
 
-    if (!appData || appData.requestPending) {
+    if (!props.appData || props.appData.requestPending) {
         content = (
-            <div className="d-flex justify-content-center">
-                <div className="spinner-border" role="status">
-                    <span className="sr-only">Loading...</span>
-                </div>
+            <div className={classes.root}>
+                <CircularProgress />
             </div>
         )
     }
 
-    if (appData && appData.requestSucessful) {
+    if (props.appData && props.appData.requestSucessful) {
+        const apps = props.appData.appointments;
+        console.log(apps.appointments);
+
+    
+/*     const formattedData = () => {
+       for (let i=0; i<apps.lengh; i++) {
+           const data = apps[i]
+           data ? data.map(makeData) : [];
+        }
+    } */
+    const data = props.appData.appointment;
+    const formattedData = data
+      ? data.map(makeData) : [];
+    console.log(formattedData);
+
+        /*         const dataApp = {
+                    title: props.data.subject,
+                    startDate: new Date(2020, 5, 19, 9, 30),
+                    endDate: new Date(2020, 5, 19, 11, 30),
+                } */
         content = (
             <div>
                 <Paper>
@@ -107,7 +138,7 @@ const CalendarView = (props, { appData }) => {
                         <FormControlLabel value="Day" control={<Radio />} label="Day" />
                     </RadioGroup>
                     <Scheduler
-                        data={appointments}>
+                        data={props.appData.appointments.map(makeData)}>
                         <ViewState currentViewName={viewName} />
                         <MonthView />
                         <WeekView
@@ -127,6 +158,7 @@ const CalendarView = (props, { appData }) => {
                 </Paper>
             </div>
         )
+
     }
     return (
         <div>

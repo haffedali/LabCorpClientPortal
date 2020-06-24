@@ -6,9 +6,7 @@ export default function scheduleReducer(state = {}, action) {
             return { ...state, currentView: action.data };
         case GET_DATA:
             return {
-                ...state, appointmentData: {
-                    ...action.appointmentdata, requestSucessful: true
-                }
+                ...state, appointmentData: { appointments: action.data, requestSucessful: true }
             };
         case GET_DATA_PENDING:
             return { ...state, appointmentData: { requestPending: true } };
