@@ -18,14 +18,14 @@ import {
     DateNavigator,
     Toolbar
 } from '@devexpress/dx-react-scheduler-material-ui';
-import * as scheduleActions from "../../services/Schedule/actions"
+import * as scheduleActions from "../../services/Calendar/actions"
 import { useStyles } from "./Appointment.styles"
 
 function mapStateToProps(state) {
     return {
-        currentView: state.scheduleReducer.currentView,
+        currentView: state.calendarReducer.currentView,
         contactId: state.loginReducer.userInfo.contactId,
-        appData: state.scheduleReducer.appointmentData,
+        appData: state.calendarReducer.appointmentData,
     };
 }
 
