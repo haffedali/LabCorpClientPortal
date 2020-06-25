@@ -1,7 +1,6 @@
-import React, { useEffect, useCallback, useState, useRef, setState } from "react";
-import { connect, useSelector, useDispatch } from "react-redux";
+import React, { useEffect, useState} from "react";
+import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import PropTypes, { array } from 'prop-types';
 import Paper from '@material-ui/core/Paper';
 import { ViewState } from '@devexpress/dx-react-scheduler';
 import Radio from '@material-ui/core/Radio';
@@ -36,20 +35,6 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-
-const appointments = [
-    {
-        title: 'Blood Test',
-        startDate: new Date(2020, 5, 19, 9, 30),
-        endDate: new Date(2020, 5, 19, 11, 30),
-    }, {
-        title: 'Blood Sugar Test',
-        startDate: new Date(2020, 6, 23, 12, 0),
-        endDate: new Date(2020, 6, 23, 13, 0),
-    }
-]
-
-
 const makeData = appointment => ({
     ...appointment,
     title: appointment.subject,
@@ -77,20 +62,10 @@ const CalendarView = (props) => {
     };
 
     const [data, setData] = useState([]);
-
     useEffect(() => {
-        setTimeout(() => {
             fetchData()
             setData(props.appData)
-        }, 600)
     }, []);
-
-    /* const makeData = {
-        title: props.appData.subject,
-        startDate: new Date(2020, 5, 19, 9, 30),
-        endDate: new Date(2020, 5, 19, 11, 30),
-    }; */
-
 
     let content = '';
 
@@ -104,25 +79,11 @@ const CalendarView = (props) => {
 
     if (props.appData && props.appData.requestSucessful) {
         const apps = props.appData.appointments;
-        console.log(apps.appointments);
 
-    
-/*     const formattedData = () => {
-       for (let i=0; i<apps.lengh; i++) {
-           const data = apps[i]
-           data ? data.map(makeData) : [];
-        }
-    } */
     const data = props.appData.appointment;
     const formattedData = data
       ? data.map(makeData) : [];
-    console.log(formattedData);
 
-        /*         const dataApp = {
-                    title: props.data.subject,
-                    startDate: new Date(2020, 5, 19, 9, 30),
-                    endDate: new Date(2020, 5, 19, 11, 30),
-                } */
         content = (
             <div>
                 <Paper>
@@ -166,9 +127,5 @@ const CalendarView = (props) => {
         </div>
     )
 };
-
-CalendarView.propTypes = {
-    actions: PropTypes.object
-}
 
 export default connect(mapStateToProps, mapDispatchToProps)(CalendarView);

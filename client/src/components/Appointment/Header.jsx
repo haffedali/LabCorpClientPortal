@@ -9,8 +9,8 @@ import ScheduleIcon from '@material-ui/icons/Schedule';
 import TodayIcon from '@material-ui/icons/Today';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-/* import { HeaderStyles } from './Appointment.styles'
- */
+import { useStyles } from './Appointment.styles'
+
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -45,7 +45,7 @@ function a11yProps(index) {
   };
 }
 
-const useStyles = makeStyles((theme) => ({
+/* const useStyles = makeStyles((theme) => ({
   root: {
     display: 'block',
     width: '100%',
@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
   tab: {
     textAlign: "center"
   }
-}));
+})); */
 
 export default function ScrollableTabsButtonForce() {
   const classes = useStyles();
