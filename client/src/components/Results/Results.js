@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { 
   Typography,
   TextField,
-  Button
 } from '@material-ui/core';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -14,7 +13,7 @@ function mapStateToProps(state) {
   return {
     search: state.resultsReducer.search,
     data: state.resultsReducer.ajaxData,
-    rows: state.resultsReducer.rows,
+    rows: state.resultsReducer.matchedRows,
   };
 }
 
@@ -25,25 +24,33 @@ function mapDispatchToProps(dispatch) {
 }
 
 const Results = (props) => {
-  const { actions, search, rows=[] } = props;
+  const { actions, search="", rows=[], data } = props;
   const dispatchSearch = (str) => {
     actions.changeSearch(str);
   };
   const dispatchLoad = () => {
     actions.loadData()
   }
+  useEffect(()=>{
+    dispatchLoad()
+  },[])
   return (
     <div>
       <Typography component="h1" variant="h3">
         Test Results
       </Typography>
-      <Button onClick={()=>dispatchLoad()}>Refresh</Button>
+      {/* TODO
+        I should wait until I have notifications before i need refresh button.
+        And I should put it inside the table. I think I should switch to MaterialTable at that point. 
+        <Button onClick={()=>dispatchLoad()}>Refresh</Button> 
+      */}
       <TextField 
-        id="search" 
-        label="Search tests" 
-        type="search" 
-        onChange={(e) => dispatchSearch(e.target.value.toLowerCase())} 
-        defaultValue={search} />
+        id="search"
+        label="Search tests"
+        type="search"
+        onChange={(e) => dispatchSearch(e.target.value.toLowerCase())}
+        defaultValue={search}
+        />
       <CollapsibleTable className="minWidth: 650" rows={rows} ></CollapsibleTable>
     </div>
   )
