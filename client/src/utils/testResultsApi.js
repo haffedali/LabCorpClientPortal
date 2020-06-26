@@ -9,11 +9,17 @@ export const testResultsApi = {
    */
   all: () => {
     const queryObj = {
-      entity: 'labresults',
-      select: ["firstname","ss_patientid","address1_line1",'address1_city','address1_stateorprovince','address1_postalcode','address1_country','mobilephone','emailaddress1','lastname'],
-      filter: [{field: "fullname", value: fullname},{field:"ss_patientid", value: id}],
-      relatedEntity: 'ss_contact_ss_insuranceplan_Patient',
-      relatedSelect: ['ss_name']
+      entity: 'ss_labresults',
+      select: ["_ss_appointment_value",
+        "ss_date",
+        "ss_labresultid",
+        "ss_name",
+        "ss_numericvalue",
+        "_ss_patient_value",
+        "_ss_product_value",
+        "ss_unit"],
+      relatedEntity: 'ss_Appointment',
+      relatedSelect: ['name','opportunityid']
     }
     const queryString = buildApiCall(queryObj)
     return adalApiFetch(axios, queryString, getConfig);
