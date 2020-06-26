@@ -3,6 +3,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import {useStyles} from './ViewSwitch.styles';
+import { useTheme } from "../../theme/ThemeContext";
 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -22,7 +23,8 @@ function mapDispatchToProps(dispatch){
 }
 
 const ViewSwitch = (props) => {
-  const classes = useStyles();
+  const classes = useStyles(props);
+  const theme = useTheme();
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -36,18 +38,17 @@ const ViewSwitch = (props) => {
 
   return (
     <div className={classes.root}>
-      <AppBar className={classes.appBar}position="static" color="default">
+      <AppBar className={classes.appBar} position="static">
         <Tabs
           value={value}
           onChange={handleChange}
-          indicatorColor="primary"
-          textColor="primary"
           variant="fullWidth"
-          aria-label="full width tabs example"
+          className={classes.tabs}
+          indicatorColor={theme.MSG_TABS_INDACTOR}
         >
-          <Tab label="Inbox" />
-          <Tab label="Sent" />
-          <Tab label="Notifications" />
+          <Tab label="Inbox" className={classes.tab}/>
+          <Tab label="Sent" className={classes.tab}/>
+          <Tab label="Notifications" className={classes.tab}/>
         </Tabs>
       </AppBar>
     </div>
