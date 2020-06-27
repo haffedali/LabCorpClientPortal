@@ -93,7 +93,8 @@ export const useStyles = makeStyles((theme) => ({
         flexGrow: 1,
         padding: theme.spacing(3),
         backgroundColor: theme.BACKGROUND_001,
-        height: '100vh',
+        minHeight: '100vh',
+        height: '100%',
         color: theme.PRIMARY
     },
 }));

@@ -8,7 +8,7 @@ export const useStyles = makeStyles((theme) => ({
       },
     },
     fieldBox: {
-        backgroundColor: theme.PROFILE_BOX_FILL,
+        backgroundColor: theme.PROFILE_CONTAINER_FILL,
         color: theme.PRIMARY,
     },
 
