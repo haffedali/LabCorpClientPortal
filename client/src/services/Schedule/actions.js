@@ -1,54 +1,41 @@
-import { SWITCH_VIEW, GET_DATA, GET_DATA_PENDING, GET_DATA_FAILED } from './actionTypes'
-import { appointmentsApi } from "../../utils";
+import { GET_DATE, SEND_DATE } from './actionTypes'
 
-export const switchView = (view) => {
+
+export const getDate = (date) => {
     return dispatch => {
-        dispatch(_switchView(view))
+        dispatch(_getDate(date))
     }
 }
 
-export const getData = (id) => {
+export const getStart = (time) => {
     return dispatch => {
-        dispatch(_getAppointmentsStarted())
-
-        appointmentsApi
-            .query(id)
-            .then((res) => {
-                const appData = res.data.value;
-                    dispatch(_getAppointments(appData))
-                    console.log(appData);
-                
-            })
-            .catch((error) => {
-                console.log(error);
-                dispatch(_getAppointmentsFailed(error))
-            })
+        dispatch(_getStart(time))
     }
 }
 
-const _switchView = (view) => {
-    return {
-        type: SWITCH_VIEW,
-        data: view
+export const getEnd = (time) => {
+    return dispatch => {
+        dispatch(_getEnd(time))
     }
 }
 
-const _getAppointmentsStarted = () => {
+const _getDate = (date) => {
     return {
-        type: GET_DATA_PENDING
+        type: GET_DATE,
+        data: date
     }
 }
 
-const _getAppointments = (appData) => {
+const _getStart = (time) => {
     return {
-        type: GET_DATA,
-        data: appData
+        type: GET_DATE,
+        data: time
     }
 }
 
-const _getAppointmentsFailed = (error) => {
+const _getEnd = (time) => {
     return {
-        type: GET_DATA_FAILED,
-        error
+        type: GET_DATE,
+        data: time
     }
 }

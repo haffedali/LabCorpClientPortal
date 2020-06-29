@@ -1,18 +1,16 @@
-import { SWITCH_VIEW, GET_DATA, GET_DATA_FAILED, GET_DATA_PENDING } from './actionTypes'
+import {GET_DATE, SEND_DATE} from './actionTypes'
 
-export default function calendarReducer(state = {}, action) {
+
+export default function scheduleReducer(state = {}, action) {
     switch (action.type) {
-        case SWITCH_VIEW:
-            return { ...state, currentView: action.data };
-        case GET_DATA:
-            return {
-                ...state, appointmentData: { appointments: action.data, requestSucessful: true }
-            };
-        case GET_DATA_PENDING:
-            return { ...state, appointmentData: { requestPending: true } };
-        case GET_DATA_FAILED:
-            return {...state, appointmentData: { requestFailed: true} };
+        case GET_DATE:
+            return { ...state, scheduledTime: { date: action.data, startTime: action.data, endTime: action.data } };
+        case SEND_DATE:
+            let newDate = [...state.date]
+            newDate.push(action.data)
+            return { ...state, scheduledTime: {date: newDate} }
         default:
-            return state;
+            return state
+
     }
 }

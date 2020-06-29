@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Paper from '@material-ui/core/Paper';
@@ -18,7 +18,7 @@ import {
     DateNavigator,
     Toolbar
 } from '@devexpress/dx-react-scheduler-material-ui';
-import * as scheduleActions from "../../services/Calendar/actions"
+import * as calendarActions from "../../services/Calendar/actions"
 import { useStyles } from "./Appointment.styles"
 
 function mapStateToProps(state) {
@@ -31,7 +31,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators(scheduleActions, dispatch),
+        actions: bindActionCreators(calendarActions, dispatch),
     };
 }
 
@@ -43,15 +43,10 @@ const makeData = appointment => ({
 });
 
 const CalendarView = (props) => {
-    const [viewName, setViewName] = React.useState("Month");
     const classes = useStyles(props);
     const { actions } = props;
-    /*     const data = {
-            title: props.appointmentData.subject,
-            startDate: new Date(2020, 5, 23, 9, 30),
-            endDate: new Date(2020, 5, 23, 11, 30)
-        } */
 
+    const [viewName, setViewName] = React.useState("Month");
     const viewChange = (e, index) => {
         setViewName(index);
         actions.switchView(index);
@@ -63,8 +58,8 @@ const CalendarView = (props) => {
 
     const [data, setData] = useState([]);
     useEffect(() => {
-            fetchData()
-            setData(props.appData)
+        fetchData()
+        setData(props.appData)
     }, []);
 
     let content = '';
@@ -80,9 +75,9 @@ const CalendarView = (props) => {
     if (props.appData && props.appData.requestSucessful) {
         const apps = props.appData.appointments;
 
-    const data = props.appData.appointment;
-    const formattedData = data
-      ? data.map(makeData) : [];
+        const data = props.appData.appointment;
+        const formattedData = data
+            ? data.map(makeData) : [];
 
         content = (
             <div>
