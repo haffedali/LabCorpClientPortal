@@ -6,6 +6,7 @@ import { LogIn } from './pages';
 // NOTE: Run "npm run noauth" to avoid login
 const requireLogin = (no_auth) => {
   return no_auth === "true" ? undefined : true;
+  // return undefined
 }
 
 const App = (props) => 

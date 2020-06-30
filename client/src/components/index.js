@@ -1,7 +1,6 @@
 import Header from './Appointment/Header';
 import AvatarBtn from './Avatar/AvatarBtn';
 import Calendar from './Appointment/Calendar';
-import MessagesTabs from './Messages/MessagesTabs';
 import ProfileForm from './Profile/ProfileForm';
 import DatePicker from './Appointment/Schedule'
 import SideBar from './SideBar/SideBar';
@@ -10,16 +9,19 @@ import CollapsibleTable from './CollapsibleTable/CollapsibleTable';
 import InnerSideBar from './SideBar/InnerSideBar';
 import CustomPaper from './CustomPaper/CustomPaper';
 
+import Results from './Results/Results';
+import Messages from './Messages/Messages';
 export {
     Header,
     AvatarBtn,
     DatePicker,
-    MessagesTabs,
     ProfileForm,
     Calendar,
     SideBar,
     CollapsibleTable,
     LogoutButton,
     InnerSideBar,
-    CustomPaper
+    CustomPaper,
+    Results,
+    Messages
 }
