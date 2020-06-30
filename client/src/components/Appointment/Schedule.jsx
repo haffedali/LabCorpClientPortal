@@ -11,33 +11,36 @@ import {
 import { Container, Grid } from '@material-ui/core';
 import ScheduledAlert from './ScheduledAlert';
 
-function mapStateToProps(state) {
-    return {
-        date: state.scheduleReducer.date,
-        startTime: state.scheduleReducer.startTime,
-        endTime: state.scheduleReducer.endTime
-    };
-}
 
 function mapDispatchToProps(dispatch) {
     return {
         actions: bindActionCreators(scheduleActions, dispatch)
     };
 }
+    
 const DatePicker = (props) => {
     const { actions } = props;
 
     const [selectedDate, setSelectedDate] = React.useState({
         startDate: new Date(),
         startTime: new Date(),
-        endTime: new Date()
+        endTime: new Date()    
     });
-    
+
     const handleDateChange = (name, value) => {
         setSelectedDate({
-            ...selectedDate,
-            [name]: value
+             ...selectedDate, 
+            [name]: value 
         });
+        if (name === 'startDate') {
+            actions.getDate(value)
+        }
+        if (name === 'startTime') {
+            actions.getStart(value)
+        }
+        if (name === 'endTime') {
+            actions.getEnd(value)
+        }
     };
 
     return (
@@ -50,7 +53,7 @@ const DatePicker = (props) => {
                         format="MM/dd/yyyy"
                         margin="normal"
                         id="date-picker-inline"
-                        label="Date picker inline"
+                        label="Date"
                         name="startDate"
                         value={selectedDate.startDate}
                         onChange={(date) => handleDateChange('startDate', date)}
@@ -87,4 +90,4 @@ const DatePicker = (props) => {
     );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DatePicker)
+export default connect(null, mapDispatchToProps)(DatePicker)

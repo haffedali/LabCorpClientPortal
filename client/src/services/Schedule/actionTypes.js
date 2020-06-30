@@ -1,4 +1,6 @@
 export const GET_DATE = 'GET_DATE'
+export const GET_START_TIME = 'GET_START_TIME'
+export const GET_END_TIME = 'GET_END_TIME'
 export const SEND_DATE = 'SEND_DATE'
 export const SEND_DATE_PENDING = 'SEND_DATE_PENDING'
 export const SEND_DATE_SUCCESS = 'SEND_DATE_SUCCESS'
