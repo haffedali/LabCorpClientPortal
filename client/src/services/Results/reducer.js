@@ -6,7 +6,7 @@ import {
 } from './actions';
 
 export default function resultsReducer(state = {}, action){
-  // Results mapStateToProps expects
+  // Expected fields in Results mapStateToProps
   // {
   //   search: state.resultsReducer.search,
   //   data: state.resultsReducer.ajaxData,

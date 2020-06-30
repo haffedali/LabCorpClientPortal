@@ -14,6 +14,7 @@ function mapStateToProps(state) {
     search: state.resultsReducer.search,
     data: state.resultsReducer.ajaxData,
     rows: state.resultsReducer.matchedRows,
+    // user: state.loginReducer.alsdfj
   };
 }
 

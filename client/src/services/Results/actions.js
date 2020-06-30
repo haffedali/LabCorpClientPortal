@@ -14,7 +14,8 @@ export const changeSearch = (searchString) => {
 export const loadData = () => {
   return (dispatch) => {
     dispatch(_load_pending());
-    return testResultsApi.all()
+    return testResultsApi.allRichard()
+    // return testResultsApi.all()
       .then(res => {
         dispatch(_load_success(res));
       })

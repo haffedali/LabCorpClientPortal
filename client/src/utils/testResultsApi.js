@@ -1,6 +1,6 @@
 import axios from "axios";
 import { adalApiFetch } from "../adalConfig";
-import { getConfig } from "./APIHeaders";
+import { getConfig, apiRoute } from "./APIHeaders";
 import {buildApiCall} from './helperFunctions'
 
 export const testResultsApi = {
@@ -26,12 +26,16 @@ export const testResultsApi = {
     const queryString = buildApiCall(queryObj)
     return adalApiFetch(axios, queryString, getConfig);
   },
-  // allRichard: () => {
-  //   const queryObj = {
-  //     entity: 'ss_labresults',
-  //     filter: ["_ss_patient_value eq 8937d501-96b1-ea11-a812-000d3a31f370"],
-  //   }
-  //   const queryString = "ss_labresults?$filter=_ss_patient_value eq 8937d501-96b1-ea11-a812-000d3a31f370&$orderby=ss_date asc"
-  //   return adalApiFetch(axios, queryString, getConfig);
-  // },
+  allRichard: () => {
+    const RichardID = "8937d501-96b1-ea11-a812-000d3a31f370"
+    const queryString = apiRoute 
+                        + "ss_labresults"
+                        + "?" 
+                        + "$expand=ss_Patient($select=contactid),ss_Appointment($select=name)"
+                        + "&"
+                        + "$filter="
+                        + "_ss_patient_value eq " 
+                        + RichardID
+    return adalApiFetch(axios, queryString, getConfig);
+  },
 }
