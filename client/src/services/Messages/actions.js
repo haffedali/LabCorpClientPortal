@@ -22,6 +22,7 @@ export const getInboxEmails = (contactId) => {
         const emailArray = [];
         const emailResponseArray = r.data.value;
         emailResponseArray.forEach((email) => {
+          // console.log(email)
           let emailObject = {};
           emailObject.subject = email.subject;
           emailObject.sender = email.sender;
