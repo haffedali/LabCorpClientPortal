@@ -2,7 +2,6 @@ import React from 'react';
 import { useStyles } from './ProfileForm.styles';
 import {TextField, Button} from '@material-ui/core';
 
-
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
@@ -64,7 +63,7 @@ function FormFields(props) {
         />
         <TextField
             className={classes.fieldBox}
-            error
+            // error
             id="filled-number-zip"
             label="ZIP Code"
             defaultValue= {props.userInfo.zipCode}
