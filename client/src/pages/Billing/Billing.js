@@ -14,9 +14,10 @@ const Billing = (props) => {
     
     const [billingPage, setBillingPage] = useState(0);
     const invoiceData = useSelector(state => state.invoiceReducer.invoices);
+    const customerid = useSelector(state => state.loginReducer.userInfo.contactId);
 
     useEffect(() => {
-        dispatch(grabInvoices());
+        dispatch(grabInvoices(customerid));
     }, []);
     
     return (
@@ -28,7 +29,7 @@ const Billing = (props) => {
                 innerPage={billingPage}
             />
             <div className={classes.billingContent}>
-                <CustomPaper innerPage={billingPage} invoiceData={invoiceData} />
+                <CustomPaper innerPage={billingPage} />
             </div></>
             }
         </div>
