@@ -34,23 +34,40 @@ export const logoutAttempt = () => {
 //For now we are not returned data on Success, but we will need to in the future
 
 const _loginSuccess = (userInfo) => {
-  return {
-    type: LOGIN_SUCCESS,
-    userInfo: {
-      firstName: userInfo.firstname,
-      lastName: userInfo.lastname,
-      contactId: userInfo.contactid,
-      address: userInfo.address1_line1,
-      city: userInfo.address1_city,
-      state: userInfo.address1_stateorprovince,
-      phone: userInfo.mobilephone,
-      zipCode: userInfo.postalcode,
-      email: userInfo.emailaddress1,
-      insurancePlan: userInfo.ss_contact_ss_insuranceplan_Patient[0].ss_name
-    },
-  };
+  if (userInfo.ss_contact_ss_insuranceplan_Patient[0].ss_name){
+    return {
+      type: LOGIN_SUCCESS,
+      userInfo: {
+        firstName: userInfo.firstname,
+        lastName: userInfo.lastname,
+        contactId: userInfo.contactid,
+        address: userInfo.address1_line1,
+        city: userInfo.address1_city,
+        state: userInfo.address1_stateorprovince,
+        phone: userInfo.mobilephone,
+        zipCode: userInfo.postalcode,
+        email: userInfo.emailaddress1,
+        insurancePlan: userInfo.ss_contact_ss_insuranceplan_Patient[0].ss_name
+      },
+  }
+  }
+  else{
+    return {
+      type: LOGIN_SUCCESS,
+      userInfo: {
+        firstName: userInfo.firstname,
+        lastName: userInfo.lastname,
+        contactId: userInfo.contactid,
+        address: userInfo.address1_line1,
+        city: userInfo.address1_city,
+        state: userInfo.address1_stateorprovince,
+        phone: userInfo.mobilephone,
+        zipCode: userInfo.postalcode,
+        email: userInfo.emailaddress1,
+      },
+  }
 };
-
+}
 const _loginFailed = () => {
   return {
     type: LOGIN_FAILED,

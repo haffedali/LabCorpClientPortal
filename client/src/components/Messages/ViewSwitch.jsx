@@ -29,6 +29,7 @@ const ViewSwitch = (props) => {
 
   const handleChange = (event, newValue) => {
     const {actions} = props;
+    console.log(event.target)
     const page = event.target.innerHTML;
     setValue(newValue);
     actions.switchPage(page);
@@ -48,7 +49,6 @@ const ViewSwitch = (props) => {
         >
           <Tab label="Inbox" className={classes.tab}/>
           <Tab label="Sent" className={classes.tab}/>
-          <Tab label="Notifications" className={classes.tab}/>
         </Tabs>
       </AppBar>
     </div>
