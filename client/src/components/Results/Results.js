@@ -14,7 +14,7 @@ function mapStateToProps(state) {
     search: state.resultsReducer.search,
     data: state.resultsReducer.ajaxData,
     rows: state.resultsReducer.matchedRows,
-    // user: state.loginReducer.alsdfj
+    contactId: state.loginReducer.userInfo.contactId,
   };
 }
 
@@ -25,12 +25,12 @@ function mapDispatchToProps(dispatch) {
 }
 
 const Results = (props) => {
-  const { actions, search="", rows=[], data } = props;
+  const { actions, search="", rows=[], data, contactId } = props;
   const dispatchSearch = (str) => {
     actions.changeSearch(str);
   };
   const dispatchLoad = () => {
-    actions.loadData()
+    actions.loadData(contactId)
   }
   useEffect(()=>{
     dispatchLoad()

@@ -11,11 +11,10 @@ export const changeSearch = (searchString) => {
   };
 };
 
-export const loadData = () => {
+export const loadData = (id) => {
   return (dispatch) => {
     dispatch(_load_pending());
-    return testResultsApi.allRichard()
-    // return testResultsApi.all()
+    return testResultsApi.getByContact(id)
       .then(res => {
         dispatch(_load_success(res));
       })
