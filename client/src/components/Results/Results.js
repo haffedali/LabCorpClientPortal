@@ -1,50 +1,60 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { 
+  Typography,
+  TextField,
+} from '@material-ui/core';
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
 import { CollapsibleTable } from '../../components'
-import { Typography,
-  TextField
-} from '@material-ui/core';
+import * as resultsActions from "../../services/Results/actions";
 
-
-function createData(name, date) {
+function mapStateToProps(state) {
   return {
-    name,
-    date,
-    items: [
-      { item: 'Red Blood Cell Count', numericValue: '100', unit: 'per droplet' },
-      { item: 'Iron', numericValue: '0.5', unit: 'g' },
-      { item: 'Chemical X', numericValue: '1', unit: 'tsp' },
-    ],
+    search: state.resultsReducer.search,
+    data: state.resultsReducer.ajaxData,
+    rows: state.resultsReducer.matchedRows,
+    contactId: state.loginReducer.userInfo.contactId,
   };
 }
 
-function isFound(str, q) {
-  return str.toLowerCase().indexOf(q) > -1
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(resultsActions, dispatch),
+  };
 }
 
-const rows = [
-  createData('Hemoglobin', "2019-11-01"),
-  createData('Hemoglobin', "2018-11-01"),
-  createData('Hemoglobin', "2017-11-01"),
-];
-
-
-class Results extends React.Component {
-  state = {
-    search: "",
+const Results = (props) => {
+  const { actions, search="", rows=[], data, contactId } = props;
+  const dispatchSearch = (str) => {
+    actions.changeSearch(str);
+  };
+  const dispatchLoad = () => {
+    actions.loadData(contactId)
   }
-  render() {
-      const matchingRows = rows.filter((row) => isFound(row.name, this.state.search) || isFound(row.date, this.state.search))
-      return (
-      <div>
-        <Typography component="h1" variant="h3">
-          Test Results
-        </Typography>
-        <TextField id="search" label="Search tests" type="search" onChange={(e) => this.setState({search: e.target.value.toLowerCase()})} />
-        <CollapsibleTable className="minWidth: 650" rows={matchingRows} ></CollapsibleTable>
-      </div>
-    )
-  }
+  useEffect(()=>{
+    dispatchLoad()
+  },[])
+  return (
+    <div>
+      <Typography component="h1" variant="h3">
+        Test Results
+      </Typography>
+      {/* TODO
+        I should wait until I have notifications before i need refresh button.
+        And I should put it inside the table. I think I should switch to MaterialTable at that point. 
+        <Button onClick={()=>dispatchLoad()}>Refresh</Button> 
+      */}
+      <TextField 
+        id="search"
+        label="Search tests"
+        type="search"
+        onChange={(e) => dispatchSearch(e.target.value.toLowerCase())}
+        defaultValue={search}
+        />
+      <CollapsibleTable className="minWidth: 650" rows={rows} ></CollapsibleTable>
+    </div>
+  )
 }
 
-export default Results;
+export default connect(mapStateToProps, mapDispatchToProps)(Results);
