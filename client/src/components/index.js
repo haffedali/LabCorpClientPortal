@@ -11,11 +11,13 @@ import InnerSideBar from './SideBar/InnerSideBar';
 import Results from './Results/Results';
 import Messages from './Messages/Messages';
 import BasicTable from './Table/BasicTable';
-import BillingOverview from './Billing/BillingOverview'
+import BillingOverview from './Billing/BillingOverview';
+import Checkout from './Checkout/Checkout';
 
 export {
     BasicTable,
     BillingOverview,
+    Checkout,
     Header,
     AvatarBtn,
     DatePicker,

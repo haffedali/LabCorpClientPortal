@@ -2,9 +2,10 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import { Button } from '@material-ui/core'
 /* LabCorp */
 import { useStyles } from './Billing.styles';
-import { BillingOverview, InnerSideBar } from '../../components';
+import { BillingOverview, Checkout, InnerSideBar } from '../../components';
 import { grabInvoices } from '../../services/billing/actions';
 
 const Billing = (props) => {
@@ -18,10 +19,11 @@ const Billing = (props) => {
 
     const pages = {
         0: <BillingOverview />,
-        1: <h1>Hey 1</h1>,
-        2: <h1>Hey 2</h1>,
-        3: <h1>Hey 3</h1>,
-        4: <h1>Hey 4</h1>,
+        1: <h2>Invoices</h2>,
+        2: <h1>Payments</h1>,
+        3: <h1>Help</h1>,
+        4: <h1>Terms & Conditions<br /><Button onClick={() => setBillingPage(5)}>Hey 4</Button></h1>,
+        5: <Checkout />
     }
 
     useEffect(() => {
