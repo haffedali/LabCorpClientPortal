@@ -6,6 +6,9 @@ export const useStyles = makeStyles((theme) => ({
     //   width: 500,
     //   padding:'0px'
     // },
+    '.MuiTabs-indicator' : {
+        color: theme.MSG_TABS_TABINDICATOR,
+    },
     displayItemContainer: {
         margin: '1vw',
         overflow: 'auto',
