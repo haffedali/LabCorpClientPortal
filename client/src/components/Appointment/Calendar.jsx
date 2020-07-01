@@ -66,7 +66,7 @@ const CalendarView = (props) => {
 
     if (!props.appData || props.appData.requestPending) {
         content = (
-            <div className={classes.root}>
+            <div className={classes.radio}>
                 <CircularProgress />
             </div>
         )

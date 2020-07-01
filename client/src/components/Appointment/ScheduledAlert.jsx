@@ -8,13 +8,14 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import { AlertTitle, Alert } from '@material-ui/lab';
 
 function mapDispatchToProps(dispatch) {
   return {
-      actions: bindActionCreators(scheduleActions, dispatch)
+    actions: bindActionCreators(scheduleActions, dispatch)
   };
 }
-  
+
 function mapStateToProps(state) {
   return {
     date: state.scheduleReducer
@@ -23,7 +24,11 @@ function mapStateToProps(state) {
 
 function ScheduledAlert(props) {
   const [open, setOpen] = React.useState(false);
+  const date = props.date.date
+  const start = props.date.startTime
+  const end = props.date.endTime
 
+  let content = '';
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -47,21 +52,38 @@ function ScheduledAlert(props) {
         <DialogTitle id="alert-dialog-title">{"Your next Appointment Request"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            You've chosen {props.date.date} between {props.date.startTime} and {props.date.endTime} for your next appoitnment.
+            You've chosen {date} between {start} and {end} for your next appoitnment.
 
-          </DialogContentText>
+      </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
             Disagree
-          </Button>
+      </Button>
           <Button onClick={handleClose} color="primary" autoFocus>
             Agree
-          </Button>
+      </Button>
         </DialogActions>
       </Dialog>
+  
     </div>
   );
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ScheduledAlert)
+
+{/* <Dialog>
+open={open}
+onClose={handleClose}
+aria-labelledby="alert-dialog-title"
+aria-describedby="alert-dialog-description"
+<DialogTitle id="alert-dialog-title">{"Please select Date and Time Range"}</DialogTitle>
+<DialogContentText id="alert-dialog-description">
+  Please Select
+  </DialogContentText>
+<DialogActions>
+  <Button onClick={handleClose} color="primary" autoFocus>
+    Agree
+  </Button>
+</DialogActions>
+</Dialog> */}
