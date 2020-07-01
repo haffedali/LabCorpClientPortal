@@ -21,7 +21,6 @@ export default function SimplePaper(props) {
 
   return (
     <div className={classes.root}>
-      <h1>{props.innerPage}</h1>
       <h2>Overview</h2>
       <Paper elevation={2} className={classes.customPaper}/>
       <Divider className={classes.divider} />

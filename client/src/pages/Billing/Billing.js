@@ -18,10 +18,18 @@ const Billing = (props) => {
     const invoiceData = useSelector(state => state.invoiceReducer.invoices);
     const customerid = useSelector(state => state.loginReducer.userInfo.contactId);
 
+    const pages = {
+        0: <CustomPaper innerPage={billingPage} />,
+        1: <h1>Hey 1</h1>,
+        2: <h1>Hey 2</h1>,
+        3: <h1>Hey 3</h1>,
+        4: <h1>Hey 4</h1>,
+    }
+
     useEffect(() => {
         dispatch(grabInvoices(customerid));
     }, []);
-    
+
     return (
         <div className={classes.root}>
             {!invoiceData ? <CircularProgress /> : <>
@@ -31,7 +39,7 @@ const Billing = (props) => {
                     innerPage={billingPage}
                 />
                 <div className={classes.billingContent}>
-                    <CustomPaper innerPage={billingPage} />
+                    {pages[billingPage]}
                 </div>
             </>}
         </div>
