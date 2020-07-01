@@ -7,6 +7,8 @@ import { useStyles } from './Billing.styles';
 import { CustomPaper, InnerSideBar } from '../../components';
 import { grabInvoices } from '../../services/billing/actions';
 
+
+
 const Billing = (props) => {
     const dispatch = useDispatch();
     const styleProps = {...props, drawerWidth: 240};
@@ -22,16 +24,16 @@ const Billing = (props) => {
     
     return (
         <div className={classes.root}>
-            {!invoiceData ? <CircularProgress /> :
-            <><InnerSideBar 
-                changeTab={(page) => setBillingPage(page)} 
-                drawerWidth={styleProps.drawerWidth} 
-                innerPage={billingPage}
-            />
-            <div className={classes.billingContent}>
-                <CustomPaper innerPage={billingPage} />
-            </div></>
-            }
+            {!invoiceData ? <CircularProgress /> : <>
+                <InnerSideBar 
+                    changeTab={(page) => setBillingPage(page)} 
+                    drawerWidth={styleProps.drawerWidth} 
+                    innerPage={billingPage}
+                />
+                <div className={classes.billingContent}>
+                    <CustomPaper innerPage={billingPage} />
+                </div>
+            </>}
         </div>
     );
 }

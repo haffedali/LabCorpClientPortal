@@ -1,41 +1,68 @@
-import React, { Fragment, useEffect } from 'react';
+import React from 'react';
 import {Paper, Divider} from '@material-ui/core';
 import { useSelector } from 'react-redux';
 
 import { useStyles } from './CustomPaper.styles';
+import { BasicTable } from '../';
 
-
-const invoiceList = (data) => {
-  return (
-    <Fragment>
-      <h3>Invoice History</h3>
-
-      {data.map((obj, i) => (
-        <div key={i}>
-          {Object.keys(data[i]).map((key, index) => (
-            <div key={index}>{key}: {data[i][key]}</div>
-          ))}
-        </div>
-    ))}
-    </Fragment>
-  )
-}
+const getTableData = (data) => 
+  data.map((cols) => ({
+    invId: cols[0], 
+    name: cols[1], 
+    duedate: cols[2], 
+    totalamount: cols[3], 
+    description: cols[4], 
+    products: cols[5]
+  }))
 
 export default function SimplePaper(props) {
   const classes = useStyles(props);
   const invoices = useSelector(state => state.invoiceReducer.invoices);
 
-  useEffect(() => {
-    console.log('Invoices: ', invoices)
-  }, []);
-
   return (
     <div className={classes.root}>
+      <h1>{props.innerPage}</h1>
       <h2>Overview</h2>
-      <Paper elevation={3} className={classes.customPaper}/>
+      <Paper elevation={2} className={classes.customPaper}/>
       <Divider className={classes.divider} />
-      {invoiceList(invoices)}
+      
+      <div>
+        <h3>Invoice History</h3>
+        <BasicTable 
+          rows={getTableData(invoices.map((obj) => 
+            Object.keys(obj).map((key) => {
+              return key === 'products' 
+                ? JSON.parse(obj[key]).map((productField) => (
+                  productField
+                )) 
+                : obj[key]
+            })
+          ))}/>
+      </div>
+      <Divider className={classes.divider} />
+      <div>
+        <h3>Completed Payments</h3>
+      </div>
     </div>
   );
 }
 
+
+
+
+
+
+
+
+
+
+
+
+// const invoiceList = (data, classes) => {
+//   return (
+//     <div>
+//       <h3>Invoice History</h3>
+//       {data.map((obj, i) => invoiceListItem(data, i, classes))}
+//     </div>
+//   )
+// }

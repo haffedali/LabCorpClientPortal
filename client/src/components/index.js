@@ -11,7 +11,10 @@ import CustomPaper from './CustomPaper/CustomPaper';
 
 import Results from './Results/Results';
 import Messages from './Messages/Messages';
+import BasicTable from './Table/BasicTable'
+
 export {
+    BasicTable,
     Header,
     AvatarBtn,
     DatePicker,

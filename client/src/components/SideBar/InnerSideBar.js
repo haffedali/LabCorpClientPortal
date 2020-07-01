@@ -27,7 +27,7 @@ const InnerSideBar = (props) => {
       <div className={classes.innerSideBar}>
         <List>
 
-          {["Overview", "Invoices", "Payments", "Help", "Terms & Conditions"].map(
+          {["Billing", "Invoices", "Payments", "Help", "Terms & Conditions"].map(
             (text, index) => (
               <ListItem
                 button

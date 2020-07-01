@@ -27,9 +27,32 @@ const light = createMuiTheme({
     PROFILE_CONTAINER_FILL: colors.WHITE,
     PROFILE_TEXT: colors.PRIMARY_LIGHT,
     PROFILE_BOX_INDICATOR: colors.POLAR_NIGHT[2],
+    // TABLE_DIVIDER
+    TABLE_DIVIDER: colors.FROST[1],
+    // Invoices
+    DUE_DATE: colors.AURORA[1],
+    PAID: colors.AURORA[3],
     // Global
     PRIMARY: colors.PRIMARY_LIGHT,
     WHITE: colors.WHITE,
+    HIGHLIGHT: colors.FROST[1],
+    // MONEY: colors.AURORA[3],
+    MONEY: colors.FROST[1],
+    PRIORITY_1: colors.AURORA[0],
+    PRIORITY_2: colors.AURORA[1],
+    // Button Primary
+    BTN_PRIMARY: colors.FROST[3],
+    BTN_PRIMARY_TXT: colors.WHITE,
+    BTN_PRIMARY_BORDER: 'solid 1px rgba(0, 0, 0, 0)',
+    
+    // Button Secondary
+    BTN_SECONDARY: colors.WHITE,
+    BTN_SECONDARY_TXT: colors.FROST[3],
+    BTN_SECONDARY_BORDER: `solid 1px ${colors.FROST[3]}`,
+    
+    BTN_SECONDARY_HOVER: colors.SNOW_STORM[2],
+    BTN_SECONDARY_TXT_HOVER: colors.FROST[1],
+    BTN_SECONDARY_BORDER_HOVER: `solid 1px ${colors.FROST[1]}`,
     // Material-UI Overrides
     overrides: {
         MuiListItem: {
@@ -64,9 +87,31 @@ const dark = createMuiTheme({
     PROFILE_BOX_FILL: colors.POLAR_NIGHT[3],
     PROFILE_TEXT: colors.SNOW_STORM[2],
     PROFILE_BOX_INDICATOR: colors.SNOW_STORM[0],
+    // TABLE_DIVIDER
+    TABLE_DIVIDER: colors.FROST[1],
+    // Invoices
+    DUE_DATE: colors.AURORA[2],
+    PAID: colors.AURORA[3],
     // Global
     PRIMARY: colors.PRIMARY_DARK,
     WHITE: colors.WHITE,
+    HIGHLIGHT: colors.FROST[1],
+    // MONEY: colors.AURORA[3],
+    MONEY: colors.FROST[1],
+    PRIORITY_1: colors.AURORA[0],
+    PRIORITY_2: colors.AURORA[1],
+    // Button Primary
+    BTN_PRIMARY: colors.FROST[3],
+    BTN_PRIMARY_TXT: colors.WHITE,
+    BTN_PRIMARY_BORDER: 'solid 1px rgba(0, 0, 0, 0)',
+    // Button Secondary
+    BTN_SECONDARY: colors.POLAR_NIGHT[0],
+    BTN_SECONDARY_TXT: colors.FROST[1],
+    BTN_SECONDARY_BORDER: `solid 1px ${colors.FROST[1]}`,
+    
+    BTN_SECONDARY_HOVER: colors.POLAR_NIGHT[3],
+    BTN_SECONDARY_TXT_HOVER: colors.FROST[1],
+    BTN_SECONDARY_BORDER: `solid 1px ${colors.FROST[3]}`,
     // Material-UI Overrides
     overrides: {
         MuiListItem: {

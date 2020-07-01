@@ -1,22 +1,5 @@
-
 import { GRAB_INVOICES_SUCCESFUL, GRAB_INVOICES_FAILURE, GRAB_INVOICES_PENDING} from './actionTypes';
 import { invoiceApi } from "../../utils";
-
-export const grabInvoices = (customerid) => {
-    return dispatch => {
-        dispatch(_grabInvoicesStarted());
-  
-        return invoiceApi
-        .isValidInvoice(customerid)
-        .then(res => {
-            dispatch(_grabInvoicesSuccess(res.data.value));
-        })
-        .catch( (error) => {
-            console.log(error);
-            dispatch(_grabInvoicesFailed(error));
-        });
-    };
-}
 
 // USING PAYMENT MICROSERVICE
 // import axios from 'axios'
@@ -35,12 +18,42 @@ export const grabInvoices = (customerid) => {
 //   };
 // }
 
+export const grabInvoices = (customerid) => {
+    return dispatch => {
+        dispatch(_grabInvoicesStarted());
+  
+        return invoiceApi
+        .isValidInvoice(customerid)
+        .then(res => {
+            dispatch(_grabInvoicesSuccess(res.data.value));
+        })
+        .catch( (error) => {
+            console.log(error);
+            dispatch(_grabInvoicesFailed(error));
+        });
+    };
+}
+
+// Helper function
+const parseProducts = (products) => {
+    const product_list = products.map((prod) => ({
+        invoicedetailid: prod.invoicedetailid,
+        productname: prod.productname,
+        priceperunit: prod.priceperunit
+    }))
+    return JSON.stringify(product_list)
+}
+
 const _grabInvoicesSuccess = (invoiceList) => {
     return {
         type: GRAB_INVOICES_SUCCESFUL,
-        data: invoiceList.map((obj) => ({
-            id: obj.invoiceid,
-            name: obj.name
+        data: invoiceList.map((obj, indx) => ({
+            id: obj.invoicenumber,
+            name: obj.name,
+            duedate: obj.duedate,
+            totalamount: obj.totalamount,
+            description: obj.description,
+            products: parseProducts(obj.invoice_details)
         }))
     };
 }
