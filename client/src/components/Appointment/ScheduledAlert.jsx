@@ -24,11 +24,28 @@ function mapStateToProps(state) {
 
 function ScheduledAlert(props) {
   const [open, setOpen] = React.useState(false);
-  const date = props.date.date
-  const start = props.date.startTime
-  const end = props.date.endTime
 
-  let content = '';
+  const date = props.date.date;
+  const start = props.date.startTime;
+  const end = props.date.endTime;
+
+
+  const alertString = () => {
+    if (date && start && end !== undefined) {
+      return (
+        `You've chosen ${date} between ${start} and ${end} for your next appoitnment.`
+      )
+    }
+    else {
+      return (
+
+        <Alert severity="error">
+          <AlertTitle>Error</AlertTitle>
+          Please Choose — <strong>Date and Time Range</strong>
+        </Alert>
+      )
+    }
+  }
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -51,21 +68,26 @@ function ScheduledAlert(props) {
       >
         <DialogTitle id="alert-dialog-title">{"Your next Appointment Request"}</DialogTitle>
         <DialogContent>
+          {alertString()}
           <DialogContentText id="alert-dialog-description">
-            You've chosen {date} between {start} and {end} for your next appoitnment.
 
-      </DialogContentText>
+
+          </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
-            Disagree
+            Close
       </Button>
-          <Button onClick={handleClose} color="primary" autoFocus>
-            Agree
-      </Button>
+          <Button
+            onClick={handleClose}
+            disabled={!date || !start || !end}
+            color="primary"
+            autoFocus>
+              Submit
+          </Button>
         </DialogActions>
       </Dialog>
-  
+
     </div>
   );
 }
