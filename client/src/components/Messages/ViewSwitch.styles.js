@@ -7,6 +7,9 @@ export const useStyles = makeStyles((theme) => ({
       padding:'0px'
     },
     appBar: {
+      backgroundColor: theme.DRAWER_TEXT,
+      width: 500,
+      padding:'0px',
       width: "80vw"
     },
     tab: {

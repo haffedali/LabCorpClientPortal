@@ -6,9 +6,14 @@ import {TextField, Button} from '@material-ui/core';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
+function mapStateToProps(state) {
+    return {
+      userInfo: state.loginReducer.userInfo,
+    };
+  }
 
 
-export default function FormFields(props) {
+function FormFields(props) {
   const classes = useStyles(props);
   const [value, setValue] = React.useState(0);
 
@@ -19,62 +24,70 @@ export default function FormFields(props) {
         <h3> Edit General Information </h3>
         <TextField
             className={classes.fieldBox}
-            required
             id="filled-required"
             label="Full Name"
-            defaultValue="Dummy Data"
+            defaultValue= {props.userInfo.firstName + " " + props.userInfo.lastName}
+            InputProps={{ readOnly: true, }}
             variant="filled"
         />
         <TextField
             className={classes.fieldBox}
-            id="filled-address"
-            label="Preferred Name"
-            defaultValue="Preferred Dummy Name"
+            id="filled-insurance-number"
+            label="Insurance Plan"
+            defaultValue= {props.userInfo.insurancePlan}
+            InputProps={{ readOnly: true, }}
             variant="filled"
         />
         <TextField
             className={classes.fieldBox}
             id="filled-address"
             label="Street Address"
-            defaultValue="Dummy Address"
+            defaultValue= {props.userInfo.address}
+            InputProps={{ readOnly: true, }}
             variant="filled"
         />
         <TextField
             className={classes.fieldBox}
             id="filled-city"
             label="City"
-            defaultValue="Dummy Data"
+            defaultValue= {props.userInfo.city}
+            InputProps={{ readOnly: true, }}
             variant="filled"
         />
         <TextField
-            // error
             className={classes.fieldBox}
             id="filled-state"
             label="State"
-            defaultValue="Dummy Data"
+            defaultValue= {props.userInfo.state}
+            InputProps={{ readOnly: true, }}
             variant="filled"
         />
         <TextField
             className={classes.fieldBox}
+            error
             id="filled-number-zip"
             label="ZIP Code"
-            type="number"
+            defaultValue= {props.userInfo.zipCode}
+            InputProps={{ readOnly: true, }}
             variant="filled"
         />
         <TextField
             className={classes.fieldBox}
             id="filled-phone"
             label="Phone Number"
-            type="number"
+            defaultValue= {props.userInfo.phone}
+            InputProps={{ readOnly: true, }}
             variant="filled"
         />
         <TextField
             className={classes.fieldBox}
             id="filled-email"
             label="Email"
+            defaultValue= {props.userInfo.email}
+            InputProps={{ readOnly: true, }}
             variant="filled"
         />
-        <h3> Insurance Information </h3>
+        {/* <h3> Insurance Information </h3>
         <TextField
             className={classes.fieldBox}
             id="filled-insurance-number"
@@ -84,7 +97,7 @@ export default function FormFields(props) {
         <TextField
             className={classes.fieldBox}
             id="filled-insurance-number"
-            label="Insurance Plan Type"
+            label="Insurance Plan"
             variant="filled"
         />
         <TextField
@@ -98,32 +111,28 @@ export default function FormFields(props) {
             id="filled-insurance-number"
             label="Group Number"
             variant="filled"
-        />
-        <TextField
-            id="outlined-helperText"
-            label="Helper text"
-            defaultValue="Default Value"
-            helperText="Some important text"
-            variant="outlined"
-        />
+        /> */}
         <h3> Your Login Credentials </h3>
         <TextField
             className={classes.fieldBox}
             id="filled-read-only-input"
             label="Username"
-            defaultValue="Dummy Data Username"
+            defaultValue={props.userInfo.firstName + "." + props.userInfo.lastName}
             InputProps={{ readOnly: true, }}
             variant="filled"
         />
-        <TextField
+        {/* <TextField
             className={classes.fieldBox}
             id="filled-password-input"
             label="Password"
             type="password"
-            autoComplete="current-password"
+            defaultValue= {props.userInfo.contactId}
+            //autoComplete="current-password"
             variant="filled"
-        />
+        /> */}
       </div>
     </form>
   );
 }
+
+export default connect(mapStateToProps, {})(FormFields);
