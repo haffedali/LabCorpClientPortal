@@ -22,10 +22,17 @@ export const useStyles = makeStyles((theme) => ({
     // color: 'rgba(46, 52, 64, 0.7)',
   },
   listItemChildActive: {
-    color: theme.INNER_DRAWER_TEXT_ACTIVE
+    color: theme.INNER_DRAWER_TEXT_ACTIVE,
+    backgroundColor: theme.DRAWER_ITEM_HOVER,
   },
   listItemActive: {
-    // color: theme.INNER_DRAWER_TEXT_ACTIVE,
+    color: theme.INNER_DRAWER_TEXT_ACTIVE,
+    backgroundColor: theme.DRAWER_ITEM_HOVER,
+    '&:hover': {
+      backgroundColor: theme.DRAWER_ITEM_HOVER,
+    },
+  },
+  listItemNotActive: {
     '&:hover': {
       backgroundColor: theme.DRAWER_ITEM_HOVER,
     },

@@ -26,18 +26,22 @@ const InnerSideBar = (props) => {
   return (
       <div className={classes.innerSideBar}>
         <List>
-
-          {["Billing", "Invoices", "Payments", "Help", "Terms & Conditions"].map(
+          {["Billing Overview", "Invoices", "Payments", "Help", "Terms & Conditions"].map(
             (text, index) => (
               <ListItem
                 button
                 selected={'REPLACE ME' === text}
                 onClick={() => props.changeTab(index)}
                 key={`${index}-main-tabs`}
+                // className={
+                //   index in tabIcons ? 
+                //     classes.listItemActive : 
+                //     props.innerPage === index ? classes.listItemChildActive : classes.listItemChild
+                // }
                 className={
-                  index in tabIcons ? 
-                    classes.listItemActive : 
-                    props.innerPage === index ? classes.listItemChildActive : classes.listItemChild
+                  props.innerPage === index 
+                    ? (index in tabIcons ? classes.listItemActive : classes.listItemChildActive) 
+                    : (index in tabIcons ? classes.listItemNotActive : classes.listItemChild)                    
                 }
               >
                 {index in tabIcons ? (

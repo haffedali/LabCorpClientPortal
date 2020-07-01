@@ -4,10 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import CircularProgress from '@material-ui/core/CircularProgress';
 /* LabCorp */
 import { useStyles } from './Billing.styles';
-import { CustomPaper, InnerSideBar } from '../../components';
+import { BillingOverview, InnerSideBar } from '../../components';
 import { grabInvoices } from '../../services/billing/actions';
-
-
 
 const Billing = (props) => {
     const dispatch = useDispatch();
@@ -19,7 +17,7 @@ const Billing = (props) => {
     const customerid = useSelector(state => state.loginReducer.userInfo.contactId);
 
     const pages = {
-        0: <CustomPaper innerPage={billingPage} />,
+        0: <BillingOverview />,
         1: <h1>Hey 1</h1>,
         2: <h1>Hey 2</h1>,
         3: <h1>Hey 3</h1>,

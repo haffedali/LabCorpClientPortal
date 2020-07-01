@@ -7,14 +7,15 @@ import SideBar from './SideBar/SideBar';
 import LogoutButton from './LogoutButton/LogoutButton';
 import CollapsibleTable from './CollapsibleTable/CollapsibleTable';
 import InnerSideBar from './SideBar/InnerSideBar';
-import CustomPaper from './CustomPaper/CustomPaper';
 
 import Results from './Results/Results';
 import Messages from './Messages/Messages';
-import BasicTable from './Table/BasicTable'
+import BasicTable from './Table/BasicTable';
+import BillingOverview from './Billing/BillingOverview'
 
 export {
     BasicTable,
+    BillingOverview,
     Header,
     AvatarBtn,
     DatePicker,
@@ -24,7 +25,6 @@ export {
     CollapsibleTable,
     LogoutButton,
     InnerSideBar,
-    CustomPaper,
     Results,
     Messages
 }

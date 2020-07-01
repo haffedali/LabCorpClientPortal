@@ -2,7 +2,7 @@ import React from 'react';
 import {Paper, Divider} from '@material-ui/core';
 import { useSelector } from 'react-redux';
 
-import { useStyles } from './CustomPaper.styles';
+import { useStyles } from './BillingOverview.styles';
 import { BasicTable } from '../';
 
 const getTableData = (data) => 
@@ -15,7 +15,7 @@ const getTableData = (data) =>
     products: cols[5]
   }))
 
-export default function SimplePaper(props) {
+export default function BillingOverview(props) {
   const classes = useStyles(props);
   const invoices = useSelector(state => state.invoiceReducer.invoices);
 
