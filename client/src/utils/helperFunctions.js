@@ -131,7 +131,13 @@ const buildRelatedString = (relatedEntity, relatedSelect) => {
 }
 
 
-
+/**
+ * 
+ * @param {string} entityName - Entity of record you wish to create
+ */
+export const buildApiPost = (entityName) => {
+    return apiRoute + entityName
+}
 
 
 

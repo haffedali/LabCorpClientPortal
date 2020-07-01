@@ -59,11 +59,11 @@ function Row(props) {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {row.items.map((itemsRow) => (
-                    <TableRow key={itemsRow.item}>
-                      <TableCell component="th" scope="row">{itemsRow.item}</TableCell>
-                      <TableCell align="right">{itemsRow.numericValue}</TableCell>
-                      <TableCell>{itemsRow.unit}</TableCell>
+                  {row.items.map((i) => (
+                    <TableRow key={i.item}>
+                      <TableCell component="th" scope="row">{i.item}</TableCell>
+                      <TableCell align="right">{i.numericValue}</TableCell>
+                      <TableCell>{i.unit}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -91,7 +91,7 @@ export default function CollapsibleTable(props) {
         <TableBody>
           { rows.length > 0 ?
             rows.map((row) => (
-              <Row key={row.name + row.date} row={row} />
+              <Row key={row.rowKey} row={row} />
             )) :
             <TableRow>
               <TableCell colSpan="3" align="center">

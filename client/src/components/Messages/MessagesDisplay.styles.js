@@ -11,16 +11,16 @@ export const useStyles = makeStyles((theme) => ({
     },
     displayItemContainer: {
         margin: '1vw',
-        overflow: 'auto',
-        width: '75vw',
+        width: '95%',
         backgroundColor: theme.DRAWER_BACKGROUNG,
     },
     displayItemDate: {
-        display: "flex",
+        display: "inline-flex",
         justifyContent: 'end'
     },
     listContainer: {
         maxHeight:'75vh',
+        width:'100%',
         // backgroundColor: theme.DRAWER_BACKGROUNG,
         overflow:'auto'
     },

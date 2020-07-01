@@ -40,7 +40,7 @@ const MessagesDisplayItem = ({ item }) => {
   const textContentPeek = messageContentStringTrim(item.textContent);
   const subjectText = messageSubjectStringTrim(item.subject)
   return (
-    <Paper className={classes.displayItemContainer}>
+    <Paper key={item.subject} className={classes.displayItemContainer}>
       <ListItem >
         <Grid container direction="row" justify="space-between">
           <Grid item xs={2} className={classes.displayItemFromSub}>
@@ -88,7 +88,7 @@ export const MessagesDisplay = (props) => {
   return (
     <List className={classes.listContainer}>
       {props.messages.length ? (
-        props.messages.map((message) => <MessagesDisplayItem item={message} />)
+        props.messages.map((message) => <MessagesDisplayItem key={message.subject} item={message} />)
       ) : (
         <div>No Messages at this time</div>
       )}
