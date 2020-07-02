@@ -15,7 +15,7 @@ export const useStyles = makeStyles((theme) => ({
     drawerContainer: {
       backgroundColor: theme.DRAWER_BACKGROUNG,
       height: '100%',
-      color: theme.DRAWER_TEXT
+      color: theme.DRAWER_TEXT,
     },
     drawerIcon: {
       color: theme.DRAWER_TEXT,
@@ -89,12 +89,12 @@ export const useStyles = makeStyles((theme) => ({
       width: drawerWidth,
       borderColor: `${theme.DRAWER_BORDER}`,
     },
-    content: {
-        flexGrow: 1,
-        padding: theme.spacing(3),
-        backgroundColor: theme.BACKGROUND_001,
-        minHeight: '100vh',
-        height: '100%',
-        color: theme.PRIMARY
-    },
+    content: props => ({
+      flexGrow: 1,
+      backgroundColor: theme.BACKGROUND_001,
+      minHeight: '100vh',
+      height: '100%',
+      color: theme.PRIMARY,
+      padding: props.noPadding.includes(props.currentPage) ? '0px' : theme.spacing(3),
+  }),
 }));
