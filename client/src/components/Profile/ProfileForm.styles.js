@@ -6,12 +6,22 @@ export const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(2),
         width: '50ch',
       },
+      '& .MuiInputLabel': {
+        color: theme.DRAWER_TEXT,
+      },
       '& .MuiFilledInput-underline': {
         color: theme.PRIMARY,
+        //borderBottom: colors.DRAWER_TEXT,
       },
+      '& .MuiFormLabel-root.Mui-focused': {
+          color: theme.DRAWER_TEXT_ACTIVE,
+      },
+      '& .MuiFilledInput-underline:after': {
+        borderColor: theme.DRAWER_TEXT_ACTIVE,
+      }
     },
     fieldBox: {
-        backgroundColor: theme.PROFILE_CONTAINER_FILL,
+        backgroundColor: theme.PROFILE_BOX_FILL,
         color: theme.PRIMARY,
     },
 
