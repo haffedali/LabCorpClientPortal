@@ -18,12 +18,14 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
   return {
-    date: state.scheduleReducer
+    date: state.scheduleReducer,
+    contact: state.loginReducer.userInfo
   }
 }
 
 function ScheduledAlert(props) {
   const [open, setOpen] = React.useState(false);
+  const { actions } = props;
 
   const date = props.date.date;
   const start = props.date.startTime;
@@ -31,7 +33,7 @@ function ScheduledAlert(props) {
 
 
   const alertString = () => {
-    if (date && start && end !== undefined) {
+    if (date && start && end) {
       return (
         `You've chosen ${date} between ${start} and ${end} for your next appoitnment.`
       )
@@ -47,11 +49,26 @@ function ScheduledAlert(props) {
     }
   }
 
+  const handleSubmit = () => {
+    let appDate = {}
+    appDate.scheduledstart = new Date(`${props.date.date} ${start}`).toISOString();
+    appDate.scheduledend = new Date(`${props.date.date} ${end}`).toISOString();
+    /* appDate.regardingobjectid = props.contact.contactId;  */
+    appDate.subject = `Request Test for ${props.contact.firstName} ${props.contact.lastName}` ;
+    appDate.ss_standing = 1 ;
+  
+
+    actions.createAppointment(appDate);
+    setOpen(false);
+  }
   const handleClickOpen = () => {
     setOpen(true);
   };
 
   const handleClose = () => {
+    let oldD = `${props.date.date} ${start}`
+    let newD = new Date(oldD).toISOString()
+    console.log(newD)
     setOpen(false);
   };
 
@@ -70,8 +87,6 @@ function ScheduledAlert(props) {
         <DialogContent>
           {alertString()}
           <DialogContentText id="alert-dialog-description">
-
-
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -79,7 +94,7 @@ function ScheduledAlert(props) {
             Close
       </Button>
           <Button
-            onClick={handleClose}
+            onClick={handleSubmit}
             disabled={!date || !start || !end}
             color="primary"
             autoFocus>

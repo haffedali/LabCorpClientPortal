@@ -1,5 +1,5 @@
-import { GET_DATE, GET_START_TIME, GET_END_TIME } from './actionTypes'
-
+import { GET_DATE, GET_START_TIME, GET_END_TIME, SEND_DATE_PENDING, SEND_DATE_SUCCESS, SEND_DATE_FAILED } from './actionTypes'
+import { appointmentsApi } from '../../utils'
 
 export const getDate = (date) => {
     return (dispatch) => {
@@ -15,7 +15,7 @@ export const getDate = (date) => {
 export const getStart = (time) => {
     return (dispatch) => {
         const t = time;
-        const newTime = t.toLocaleTimeString(); 
+        const newTime = t.toLocaleTimeString();
         dispatch(_getStartTime(newTime))
     }
 }
@@ -25,6 +25,25 @@ export const getEnd = (time) => {
         const t = time;
         const newTime = t.toLocaleTimeString();
         dispatch(_getEndTime(newTime))
+    }
+}
+
+export const createAppointment = (date) => {
+    return (dispatch) => {
+        dispatch(_getDatePending())
+
+        appointmentsApi
+            .createApp(date)
+            .then(res => {
+                dispatch(_createAppointmentSuccess(res));
+            })
+            .catch((error) => {
+                console.log(error);
+                dispatch(_createAppointmentFailed(error))
+            })
+
+
+
     }
 }
 const _getDate = (date) => {
@@ -46,5 +65,25 @@ const _getEndTime = (time) => {
     return {
         type: GET_END_TIME,
         data: time
+    }
+}
+
+const _getDatePending = () => {
+    return {
+        type: SEND_DATE_PENDING
+    }
+}
+
+const _createAppointmentSuccess = (res) => {
+    return {
+        type: SEND_DATE_SUCCESS,
+        data: res.data
+    }
+}
+
+const _createAppointmentFailed = (error) => {
+    return {
+        type: SEND_DATE_FAILED,
+        error
     }
 }
