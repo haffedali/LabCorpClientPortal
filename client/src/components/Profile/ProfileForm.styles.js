@@ -6,7 +6,7 @@ export const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(2),
         width: '50ch',
       },
-      '.MuiFilledInput-underline': {
+      '& .MuiFilledInput-underline': {
         color: theme.PRIMARY,
       },
     },
