@@ -33,11 +33,6 @@ const InnerSideBar = (props) => {
                 selected={'REPLACE ME' === text}
                 onClick={() => props.changeTab(index)}
                 key={`${index}-main-tabs`}
-                // className={
-                //   index in tabIcons ? 
-                //     classes.listItemActive : 
-                //     props.innerPage === index ? classes.listItemChildActive : classes.listItemChild
-                // }
                 className={
                   props.innerPage === index 
                     ? (index in tabIcons ? classes.listItemActive : classes.listItemChildActive) 

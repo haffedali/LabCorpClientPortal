@@ -18,9 +18,7 @@ export const useStyles = makeStyles((theme) => ({
       backgroundColor: theme.DRAWER_ITEM_HOVER,
     },
   }),
-  listItemChild: {
-    // color: 'rgba(46, 52, 64, 0.7)',
-  },
+  listItemChild: {},
   listItemChildActive: {
     color: theme.INNER_DRAWER_TEXT_ACTIVE,
     backgroundColor: theme.DRAWER_ITEM_HOVER,

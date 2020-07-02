@@ -45,23 +45,3 @@ export default function BillingOverview(props) {
     </div>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-// const invoiceList = (data, classes) => {
-//   return (
-//     <div>
-//       <h3>Invoice History</h3>
-//       {data.map((obj, i) => invoiceListItem(data, i, classes))}
-//     </div>
-//   )
-// }
