@@ -6,9 +6,18 @@ import DatePicker from './Appointment/Schedule'
 import SideBar from './SideBar/SideBar';
 import LogoutButton from './LogoutButton/LogoutButton';
 import CollapsibleTable from './CollapsibleTable/CollapsibleTable';
+import InnerSideBar from './SideBar/InnerSideBar';
+
 import Results from './Results/Results';
 import Messages from './Messages/Messages';
+import BasicTable from './Table/BasicTable';
+import BillingOverview from './Billing/BillingOverview';
+import Checkout from './Checkout/Checkout';
+
 export {
+    BasicTable,
+    BillingOverview,
+    Checkout,
     Header,
     AvatarBtn,
     DatePicker,
@@ -17,6 +26,7 @@ export {
     SideBar,
     CollapsibleTable,
     LogoutButton,
+    InnerSideBar,
     Results,
     Messages
 }

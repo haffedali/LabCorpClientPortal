@@ -3,16 +3,18 @@ import { connect } from 'react-redux';
 import { SideBar } from './components'
 import { LogIn } from './pages';
 
-// NOTE: Run "npm run noauth" to avoid login
-const requireLogin = (no_auth) => {
-  return no_auth === "true" ? undefined : true;
-  // return undefined
-}
+/* NOTE: The 'username' prop in the Login component below is
+   only for development, and should be deleted for production
+   along with the its usage in Login.js (change 'props.username'
+   back to an empty string in the state initializer)
+   
+   It is necessary to auto login the user when the app is 
+   started with 'npm run noauth'. */
 
 const App = (props) => 
-  <div>{props.loggedIn === requireLogin(process.env.REACT_APP_NOAUTH)
+  <div>{props.loggedIn === true
     ? <SideBar /> 
-    : <LogIn />
+    : <LogIn username={process.env.REACT_APP_NOAUTH === 'true' ? 'daniel.barone' : ''} />
   }</div>
 
 const mapStateToProps = (state) => {
