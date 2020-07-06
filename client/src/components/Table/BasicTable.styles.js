@@ -3,9 +3,13 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
   root: {
     '& > *': {
-      borderBottom: 'unset',
+      // borderBottom: 'unset',
       color: theme.PRIMARY,
     },
+    '&:hover': {
+      backgroundColor: `${theme.BACKGROUND_001} !important`,
+    },
+    cursor: 'pointer'
   },
   detailsRoot: {
     '& > *': {

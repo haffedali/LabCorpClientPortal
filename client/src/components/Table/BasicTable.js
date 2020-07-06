@@ -44,7 +44,11 @@ function Row(props) {
   return (
     <React.Fragment>
 
-      <TableRow className={classes.root}>
+      <TableRow 
+        hover 
+        className={classes.root}
+        onClick={() => setOpen(!open)}
+      >
         <TableCell component="th" scope="row" className={classes.firstcol}>
           {row.invId}
         </TableCell>
