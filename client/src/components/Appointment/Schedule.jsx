@@ -31,6 +31,9 @@ const DatePicker = (props) => {
         if (selectedDate.startDate < new Date()) {
             return "Date Must be after Today"
         }
+        if (selectedDate.startTime < new Date()) {
+
+        }
     }
 
     const handleDateChange = (name, value) => {
