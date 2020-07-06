@@ -14,9 +14,6 @@ import {authContext} from './adalConfig'
 import { ApolloProvider } from "react-apollo";
 import graphqlClient from "./utils/graphqlClient";
 
-// import store from './store';
-// import store from './services';
-
 const store = configureStore();
 
 const DO_NOT_LOGIN = false;

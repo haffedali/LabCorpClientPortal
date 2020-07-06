@@ -14,7 +14,7 @@ function mapStateToProps(state) {
     search: state.resultsReducer.search,
     data: state.resultsReducer.ajaxData,
     rows: state.resultsReducer.matchedRows,
-    contactId: state.loginReducer.userInfo.contactId,
+    contactId: state.session.user.contactId,
   };
 }
 

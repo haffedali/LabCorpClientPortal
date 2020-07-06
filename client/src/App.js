@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Dashboard } from './components'
-
 // For microservices
 import gql from "graphql-tag";
 import graphqlClient from "./utils/graphqlClient";
 import { setSession } from './services/Session/actions';
+import { loginAttempt } from './services/LogIn/actions';
 
 const query = gql`
   {
@@ -15,6 +15,8 @@ const query = gql`
         contactId
         email
         id
+        firstName
+        lastName
       }
     }
   }
@@ -28,6 +30,7 @@ const App = () => {
     graphqlClient.query({ query }).then(({ data }) => {
       if (data.userSession) {
         dispatch(setSession(data.userSession));
+        dispatch(loginAttempt(data.userSession.user.contactId));
       }
       setInitialised(true);
     });
@@ -41,25 +44,3 @@ const App = () => {
 };
 
 export default App;
-
-
-
-/* NOTE: The 'username' prop in the Login component below is
-   only for development, and should be deleted for production
-   along with the its usage in Login.js (change 'props.username'
-   back to an empty string in the state initializer)
-   
-   It is necessary to auto login the user when the app is 
-   started with 'npm run noauth'. */
-
-// const App = (props) => 
-//   <div>{props.loggedIn === true
-//     ? <SideBar /> 
-//     : <LogIn username={process.env.REACT_APP_NOAUTH === 'true' ? 'daniel.barone' : ''} />
-//   }</div>
-
-// const mapStateToProps = (state) => {
-//   return {loggedIn: state.loginReducer.loggedIn};
-// }
-
-// export default connect(mapStateToProps, {})(App);

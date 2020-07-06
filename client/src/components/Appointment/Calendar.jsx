@@ -25,7 +25,7 @@ import { useStyles } from "./Appointment.styles"
 function mapStateToProps(state) {
     return {
         currentView: state.scheduleReducer.currentView,
-        contactId: state.loginReducer.userInfo.contactId,
+        contactId: state.session.user.contactId,
         appData: state.scheduleReducer.appointmentData,
     };
 }

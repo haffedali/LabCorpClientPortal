@@ -14,6 +14,8 @@ const mutation = gql`
         contactId
         email
         id
+        firstName
+        lastName
       }
     }
   }

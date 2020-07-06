@@ -13,7 +13,7 @@ import {messagesApi} from '../../utils';
 function mapStateToProps(state) {
   return {
     currentPage: state.messagesReducer.currentPage,
-    userInfo: state.loginReducer.userInfo,
+    userInfo: state.session.user,
     inboxMessages: state.messagesReducer.inboxMessages,
     getMessageRequest: state.messagesReducer.getMessageRequest,
   };
