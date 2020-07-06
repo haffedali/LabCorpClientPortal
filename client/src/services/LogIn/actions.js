@@ -7,15 +7,15 @@ import {
 import { loginApi } from "../../utils";
 
 
-export const loginAttempt = (userInfo) => {
+export const loginAttempt = (contactId) => {
   return (dispatch) => {
     dispatch(_loginStarted());
 
     loginApi
-      .isValidUser(userInfo.username, userInfo.password)
+      .isValidUser(contactId)
       .then((r) => {
-        if (r.data.value.length){
-          const user = r.data.value[0]
+        if (r.data){
+          const user = r.data
           dispatch(_loginSuccess(user))
         }else{
           dispatch(_loginFailed());

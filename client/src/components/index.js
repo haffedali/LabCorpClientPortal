@@ -17,7 +17,9 @@ import Checkout from './Checkout/Checkout';
 import InvoiceList from './Billing/InvoiceList';
 import InvoiceTabContent from './Billing/InvoiceTabContent';
 import PaymentTabContent from './Billing/PaymentTabContent';
-import TermsAndConditions from './Billing/TermsAndConditions'
+import TermsAndConditions from './Billing/TermsAndConditions';
+
+import Dashboard from './Dashboard/Dashboard'
 
 export {
     AvatarBtn,
@@ -26,6 +28,7 @@ export {
     Calendar,
     Checkout,
     CollapsibleTable,
+    Dashboard,
     DatePicker,
     Header,
     InnerSideBar,

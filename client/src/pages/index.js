@@ -4,7 +4,6 @@ import Home from './Home/Home';
 import LogIn from './LogIn/LogIn';
 import Profile from './Profile/Profile';
 
-
 export {
     Appointment,
     Billing,

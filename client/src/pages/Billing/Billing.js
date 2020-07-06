@@ -22,7 +22,7 @@ const Billing = (props) => {
     
     const [billingPage, setBillingPage] = useState(0);
     const invoiceData = useSelector(state => state.invoiceReducer.invoices);
-    const customerid = useSelector(state => state.loginReducer.userInfo.contactId);
+    const customerid = useSelector(state => state.session.user.contactId);
 
     const pages = {
         0: <BillingOverview />,
