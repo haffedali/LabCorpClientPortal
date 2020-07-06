@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     radio: {
-        display: 'block',
+        display: 'block!important',
         flexDirection: 'row',
         justifyContent: 'center'
     },

@@ -70,7 +70,7 @@ function ScheduledAlert(props) {
 
   return (
     <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+      <Button variant="outlined" color="primary" className="button" onClick={handleClickOpen}>
         Confirm Date Request
       </Button>
       <Dialog
