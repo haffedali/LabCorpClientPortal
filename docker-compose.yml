@@ -45,3 +45,10 @@ services:
     image: mysql:5.7.20
     ports:
       - 0.0.0.0:7200:3306
+
+  stripe-service:
+    build: "./stripe-service"
+    ports:
+      - 7102:7102
+    volumes: 
+      - ./stripe-service:/opt/app
