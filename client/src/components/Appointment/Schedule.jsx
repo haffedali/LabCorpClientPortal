@@ -27,6 +27,12 @@ const DatePicker = (props) => {
         endTime: new Date()    
     });
 
+    const dateError = () => {
+        if (selectedDate.startDate < new Date()) {
+            return "Date Must be after Today"
+        }
+    }
+
     const handleDateChange = (name, value) => {
         setSelectedDate({
              ...selectedDate, 
@@ -57,6 +63,8 @@ const DatePicker = (props) => {
                         name="startDate"
                         value={selectedDate.startDate}
                         onChange={(date) => handleDateChange('startDate', date)}
+                        error={dateError()}
+                        helperText={dateError()}
                         KeyboardButtonProps={{
                             'aria-label': 'change date',
                         }}
@@ -68,6 +76,8 @@ const DatePicker = (props) => {
                         name="startTime"
                         value={selectedDate.startTime}
                         onChange={(date) => handleDateChange('startTime', date)}
+                        error={dateError}
+                        helperText={dateError()}
                         KeyboardButtonProps={{
                             'aria-label': 'change time',
                         }}

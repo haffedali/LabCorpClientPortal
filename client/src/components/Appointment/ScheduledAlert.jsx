@@ -54,9 +54,8 @@ function ScheduledAlert(props) {
     appDate.scheduledstart = new Date(`${props.date.date} ${start}`).toISOString();
     appDate.scheduledend = new Date(`${props.date.date} ${end}`).toISOString();
     /* appDate.regardingobjectid = props.contact.contactId;  */
-    appDate.subject = `Request Test for ${props.contact.firstName} ${props.contact.lastName}` ;
-    appDate.ss_standing = 1 ;
-  
+    appDate.subject = `Request Test for ${props.contact.firstName} ${props.contact.lastName}`;
+    appDate.ss_standing = 1;
 
     actions.createAppointment(appDate);
     setOpen(false);
@@ -66,9 +65,6 @@ function ScheduledAlert(props) {
   };
 
   const handleClose = () => {
-    let oldD = `${props.date.date} ${start}`
-    let newD = new Date(oldD).toISOString()
-    console.log(newD)
     setOpen(false);
   };
 
@@ -98,7 +94,7 @@ function ScheduledAlert(props) {
             disabled={!date || !start || !end}
             color="primary"
             autoFocus>
-              Submit
+            Submit
           </Button>
         </DialogActions>
       </Dialog>
