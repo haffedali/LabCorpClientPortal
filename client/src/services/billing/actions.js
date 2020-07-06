@@ -45,6 +45,7 @@ const parseProducts = (products) => {
 }
 
 const _grabInvoicesSuccess = (invoiceList) => {
+    console.log(invoiceList)
     return {
         type: GRAB_INVOICES_SUCCESFUL,
         data: invoiceList.map((obj, indx) => ({
@@ -53,7 +54,8 @@ const _grabInvoicesSuccess = (invoiceList) => {
             duedate: obj.duedate,
             totalamount: obj.totalamount,
             description: obj.description,
-            products: parseProducts(obj.invoice_details)
+            products: parseProducts(obj.invoice_details),
+            stripeid: obj.customerid_contact.ss_stripeid,
         }))
     };
 }

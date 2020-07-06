@@ -9,7 +9,7 @@ const PaymentTabContent = (props) => {
   return (
     <div className={classes.root}>
       <h2>Payments</h2>
-      <Button variant='contained' color='primary'>Pay</Button>
+      <Button variant='contained' color='primary' onClick={() => props.changeTab(5)}>Pay</Button>
     </div>
   );
 }
