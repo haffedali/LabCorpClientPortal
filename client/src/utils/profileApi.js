@@ -3,4 +3,5 @@ import { adalApiFetch } from "../adalConfig";
 import { getConfig, apiRoute } from "./APIHeaders";
 
 export const profileApi = {
+    // Update profile method
 };

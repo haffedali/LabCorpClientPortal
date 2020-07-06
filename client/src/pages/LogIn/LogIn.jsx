@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Grid, Paper, TextField, Button } from "@material-ui/core";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
@@ -24,7 +24,7 @@ function mapDispatchToProps(dispatch) {
 
 const LogIn = (props) => {
   const [loginInfo, setLoginInfo] = useState({
-    username: "",
+    username: props.username,
     password: "",
   });
 
@@ -39,6 +39,13 @@ const LogIn = (props) => {
 
     actions.loginAttempt(loginInfo);
   };
+
+  useEffect(() => {
+    // NOTE: For development only. Needed to auto log in when app started w/ 'npm run noauth'
+    process.env.REACT_APP_NOAUTH === 'true' ? 
+      handleLoginAttempt(props.username, '') : 
+      console.log('Login required. Delete me during production!')
+  }, []);
 
   const classes = useStyles(props);
   return (

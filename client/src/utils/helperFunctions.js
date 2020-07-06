@@ -36,7 +36,6 @@ const camelToDynamicsValueMatrix = (camelCaseValue) => {
     }
 }
 
-
 /**
  * @param {string} obj.entity - The entity you wish to search
  * @param {string[]} obj.select - Array of fields you want returned
@@ -65,12 +64,6 @@ export const buildApiCall = ({entity, select, filter, id, relatedEntity, related
     }
     return string
 }
-
-
-
-
-
-
 
 /**
  * @param {object[]} filterArray - Array of filter
@@ -131,7 +124,13 @@ const buildRelatedString = (relatedEntity, relatedSelect) => {
 }
 
 
-
+/**
+ * 
+ * @param {string} entityName - Entity of record you wish to create
+ */
+export const buildApiPost = (entityName) => {
+    return apiRoute + entityName
+}
 
 
 
