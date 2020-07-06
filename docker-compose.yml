@@ -3,30 +3,11 @@ services:
   api-gateway:
     build: "./api-gateway"
     depends_on: 
-      - payments-service
       - users-service
     ports:
       - 7000:7000
     volumes: 
       - ./api-gateway:/opt/app 
-      
-  payments-service:
-    build: "./payments-service"
-    depends_on:
-      - payments-service-db
-    environment: 
-      - DB_URI=mysql://root:password@payments-service-db/db?charset=UTF8
-    ports:
-      - 7101:7101
-    volumes: 
-      - ./payments-service:/opt/app
-  payments-service-db:
-    environment: 
-      - MYSQL_ROOT_PASSWORD=password
-      - MYSQL_DATABASE=db
-    image: mysql:5.7.20
-    ports:
-      - 0.0.0.0:7201:3306
 
   users-service:
     build: "./users-service"
