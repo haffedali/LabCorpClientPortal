@@ -5,6 +5,7 @@ import invoiceReducer from './billing/reducers';
 import scheduleReducer from './Schedule/reducer'
 import messagesReducer from './Messages/reducer'
 import resultsReducer from './Results/reducer'
+import notificationCounterReducer from './NotificationCounter/reducer'
 
 export default combineReducers({
     router: routerReducer,
@@ -13,4 +14,5 @@ export default combineReducers({
     invoiceReducer,
     messagesReducer,
     resultsReducer,
+    notificationCounterReducer,
 })

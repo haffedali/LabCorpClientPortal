@@ -8,6 +8,7 @@ import { bindActionCreators } from "redux";
 
 import { CollapsibleTable } from '../../components'
 import * as resultsActions from "../../services/Results/actions";
+import NotificationCounter from '../NotificationCounter/NotificationCounter';
 
 function mapStateToProps(state) {
   return {
@@ -40,6 +41,7 @@ const Results = (props) => {
       <Typography component="h1" variant="h3">
         Test Results
       </Typography>
+      <NotificationCounter />
       {/* TODO
         I should wait until I have notifications before i need refresh button.
         And I should put it inside the table. I think I should switch to MaterialTable at that point. 
