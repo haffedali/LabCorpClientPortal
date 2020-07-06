@@ -1,0 +1,32 @@
+[
+  [
+    {"@odata.etag":"W/\"5349498\"","invoicedetailid":"d099c5eb-b6ba-ea11-a812-000d3a31f370","productname":"Blood Count","_invoiceid_value@OData.Community.Display.V1.FormattedValue":"Patient Barone, Daniel [NI2]","_invoiceid_value@Microsoft.Dynamics.CRM.associatednavigationproperty":"invoiceid","_invoiceid_value@Microsoft.Dynamics.CRM.lookuplogicalname":"invoice","_invoiceid_value":"ce99c5eb-b6ba-ea11-a812-000d3a31f370"
+    }
+  ],
+  [
+    {
+      "@odata.etag":"W/\"5350047\"","invoicedetailid":"a41486f6-daba-ea11-a812-000d3a31f370","productname":"Complete Sequence and Count","_invoiceid_value@OData.Community.Display.V1.FormattedValue":"2nd Patient Barone, Daniel","_invoiceid_value@Microsoft.Dynamics.CRM.associatednavigationproperty":"invoiceid","_invoiceid_value@Microsoft.Dynamics.CRM.lookuplogicalname":"invoice","_invoiceid_value":"a21486f6-daba-ea11-a812-000d3a31f370"
+    },
+    {
+      "@odata.etag":"W/\"5350048\"","invoicedetailid":"a51486f6-daba-ea11-a812-000d3a31f370","productname":"Liver Panel","_invoiceid_value@OData.Community.Display.V1.FormattedValue":"2nd Patient Barone, Daniel","_invoiceid_value@Microsoft.Dynamics.CRM.associatednavigationproperty":"invoiceid","_invoiceid_value@Microsoft.Dynamics.CRM.lookuplogicalname":"invoice","_invoiceid_value":"a21486f6-daba-ea11-a812-000d3a31f370"
+    },
+    {
+      "@odata.etag":"W/\"5350049\"","invoicedetailid":"a61486f6-daba-ea11-a812-000d3a31f370","productname":"Genome Sequencing","_invoiceid_value@OData.Community.Display.V1.FormattedValue":"2nd Patient Barone, Daniel","_invoiceid_value@Microsoft.Dynamics.CRM.associatednavigationproperty":"invoiceid","_invoiceid_value@Microsoft.Dynamics.CRM.lookuplogicalname":"invoice","_invoiceid_value":"a21486f6-daba-ea11-a812-000d3a31f370"
+    },
+    {
+      "@odata.etag":"W/\"5350050\"","invoicedetailid":"a71486f6-daba-ea11-a812-000d3a31f370","productname":"Blood Count","_invoiceid_value@OData.Community.Display.V1.FormattedValue":"2nd Patient Barone, Daniel","_invoiceid_value@Microsoft.Dynamics.CRM.associatednavigationproperty":"invoiceid","_invoiceid_value@Microsoft.Dynamics.CRM.lookuplogicalname":"invoice","_invoiceid_value":"a21486f6-daba-ea11-a812-000d3a31f370"
+    },
+    {
+      "@odata.etag":"W/\"5350051\"","invoicedetailid":"a81486f6-daba-ea11-a812-000d3a31f370","productname":"Hemoglobin A1C","_invoiceid_value@OData.Community.Display.V1.FormattedValue":"2nd Patient Barone, Daniel","_invoiceid_value@Microsoft.Dynamics.CRM.associatednavigationproperty":"invoiceid","_invoiceid_value@Microsoft.Dynamics.CRM.lookuplogicalname":"invoice","_invoiceid_value":"a21486f6-daba-ea11-a812-000d3a31f370"
+    }
+  ]
+]
+
+
+
+
+[
+  {
+    "@odata.etag":"W/\"5349498\"","invoicedetailid":"d099c5eb-b6ba-ea11-a812-000d3a31f370","productname":"Blood Count","_invoiceid_value@OData.Community.Display.V1.FormattedValue":"Patient Barone, Daniel [NI2]","_invoiceid_value@Microsoft.Dynamics.CRM.associatednavigationproperty":"invoiceid","_invoiceid_value@Microsoft.Dynamics.CRM.lookuplogicalname":"invoice","_invoiceid_value":"ce99c5eb-b6ba-ea11-a812-000d3a31f370"
+  }
+]
