@@ -5,9 +5,7 @@ import calendarReducer from './Calendar/reducer';
 import messagesReducer from './Messages/reducer';
 import scheduleReducer from './Schedule/reducer';
 import invoiceReducer from './billing/reducers';
-import scheduleReducer from './Schedule/reducer'
-import messagesReducer from './Messages/reducer'
-import resultsReducer from './Results/reducer'
+import resultsReducer from './Results/reducer';
 
 export default combineReducers({
     router: routerReducer,
