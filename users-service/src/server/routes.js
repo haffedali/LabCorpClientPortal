@@ -65,11 +65,12 @@ const setupRoutes = app => {
   });
   
   app.post("/users", async (req, res, next) => {
-    if (!req.body.firstName ||!req.body.lastName || !req.body.email || !req.body.password) {
+    if (!req.body.firstName ||!req.body.lastName || !req.body.email || !req.body.password || !req.body.contactId) {
       return next(new Error("Invalid body!"));
     }
     try {
       const newUser = await User.create({
+        contactId: req.body.contactId,
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,

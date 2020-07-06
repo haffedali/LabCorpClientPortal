@@ -4,6 +4,7 @@ const typeDefs = gql`
   scalar Date
 
   type User {
+    contactId: String!
     firstName: String!
     lastName: String!
     email: String!
@@ -18,7 +19,7 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    createUser(firstName: String!, lastName: String!, email: String!, password: String!): User!
+    createUser(contactId: String!, firstName: String!, lastName: String!, email: String!, password: String!): User!
     createUserSession(email: String!, password: String!): UserSession!
     deleteUserSession(sessionId: ID!): Boolean!
   }

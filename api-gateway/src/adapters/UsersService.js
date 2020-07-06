@@ -3,9 +3,9 @@ import got from "got";
 const USERS_SERVICE_URI = "http://users-service:7100";
 
 export default class UsersService {
-  static async createUser({ firstName, lastName, email, password }) {
+  static async createUser({ contactId, firstName, lastName, email, password }) {
     const body = await got.post(`${USERS_SERVICE_URI}/users`, {
-      json: { firstName, lastName, email, password }
+      json: { contactId, firstName, lastName, email, password }
     }).json();
     return body;
   }
