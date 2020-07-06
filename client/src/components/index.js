@@ -13,7 +13,7 @@ import BasicTable from './Table/BasicTable';
 
 /* Billing */
 import BillingOverview from './Billing/BillingOverview';
-import Checkout from './Checkout/Checkout';
+import { Canceled, Checkout, Success } from './Checkout';
 import InvoiceList from './Billing/InvoiceList';
 import InvoiceTabContent from './Billing/InvoiceTabContent';
 import PaymentTabContent from './Billing/PaymentTabContent';
@@ -26,6 +26,7 @@ export {
     BasicTable,
     BillingOverview,
     Calendar,
+    Canceled,
     Checkout,
     CollapsibleTable,
     Dashboard,
@@ -40,5 +41,6 @@ export {
     ProfileForm,
     Results,
     SideBar,
+    Success,
     TermsAndConditions,
 }

@@ -27,10 +27,10 @@ const Billing = (props) => {
     const pages = {
         0: <BillingOverview />,
         1: <InvoiceTabContent />,
-        2: <PaymentTabContent />,
+        2: <PaymentTabContent changeTab={(page) => setBillingPage(page)} />,
         3: <h2>Help</h2>,
         4: <TermsAndConditions />,
-        5: <Checkout />
+        5: <Checkout price={50000} />
     }
 
     useEffect(() => {

@@ -17,10 +17,15 @@ import { useStyles } from './BasicTable.styles';
 import { Divider, Button } from '@material-ui/core';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 
+import { Checkout } from '../'
+
 const paymentPriority = (classes, due) => {
 
-  const [year, month, date] = due.split('-');
+  if (due === null) {
+    return classes.datePriority3;
+  }
 
+  const [year, month, date] = due.split('-');
   const duedate = new Date(`${month}/${date}/${year}`);
   const diffDays = Math.ceil((duedate - Date.now()) / (1000 * 60 * 60 * 24)); 
 
@@ -41,27 +46,30 @@ function Row(props) {
   const [open, setOpen] = React.useState(false);
   const classes = useStyles(props);
 
+  console.log('ROWPROPS: ', row)
+
   return (
     <React.Fragment>
 
       <TableRow 
         hover 
         className={classes.root}
-        onClick={() => setOpen(!open)}
       >
         <TableCell component="th" scope="row" className={classes.firstcol}>
           {row.invId}
         </TableCell>
         <TableCell className={classes.name}>{row.name}</TableCell>
-        <TableCell align='center' className={paymentPriority(classes, row.duedate)}>{row.duedate}</TableCell>
+        <TableCell align='center' className={paymentPriority(classes, row.duedate)}>{row.duedate || 'N/A'}</TableCell>
         <TableCell align='center' className={classes.money}>${row.totalamount}</TableCell>
         <TableCell align='center' className={classes.paymentStatus}>
           {PAID ? (
             <CheckCircleIcon className={classes.paymentCompleteIcon} />
           ) : (
-            <Button variant='outlined' className={classes.btnSecondary}>
-              <p className={classes.btnPrimaryTxt}>Pay ${row.totalamount}</p>
-            </Button>
+            <Checkout 
+              price={row.totalamount * 100} 
+              name={row.name}
+              stripeid={row.stripeid}
+            />
           ) }
         </TableCell>
         <TableCell align="right">

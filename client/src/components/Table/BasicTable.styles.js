@@ -9,7 +9,6 @@ export const useStyles = makeStyles((theme) => ({
     '&:hover': {
       backgroundColor: `${theme.BACKGROUND_001} !important`,
     },
-    cursor: 'pointer'
   },
   detailsRoot: {
     '& > *': {

@@ -13,7 +13,8 @@ const getTableData = (data) =>
     duedate: cols[2], 
     totalamount: cols[3], 
     description: cols[4], 
-    products: cols[5]
+    products: cols[5],
+    stripeid: cols[6],
   }));
 
 const InvoiceList = (props) => {
