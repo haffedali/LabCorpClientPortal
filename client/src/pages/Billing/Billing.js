@@ -5,7 +5,14 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import { Button } from '@material-ui/core'
 /* LabCorp */
 import { useStyles } from './Billing.styles';
-import { BillingOverview, Checkout, InnerSideBar } from '../../components';
+import { 
+    BillingOverview, 
+    Checkout, 
+    InnerSideBar,
+    InvoiceTabContent,
+    PaymentTabContent,
+    TermsAndConditions,
+} from '../../components';
 import { grabInvoices } from '../../services/billing/actions';
 
 const Billing = (props) => {
@@ -19,10 +26,10 @@ const Billing = (props) => {
 
     const pages = {
         0: <BillingOverview />,
-        1: <h2>Invoices</h2>,
-        2: <h1>Payments</h1>,
-        3: <h1>Help</h1>,
-        4: <h1>Terms & Conditions<br /><Button onClick={() => setBillingPage(5)}>Hey 4</Button></h1>,
+        1: <InvoiceTabContent />,
+        2: <PaymentTabContent />,
+        3: <h2>Help</h2>,
+        4: <TermsAndConditions />,
         5: <Checkout />
     }
 
