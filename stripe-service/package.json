@@ -1,12 +1,11 @@
 {
-  "name": "checkout-one-time-payments",
+  "name": "stripe-service",
   "version": "1.0.0",
   "description": "Accept payments with Stripe Checkout",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "babel-watch -L src/index.js"
+    "watch": "babel-watch -L src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "stripe-demos",
   "license": "ISC",

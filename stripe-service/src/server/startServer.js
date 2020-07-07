@@ -4,7 +4,7 @@ const PORT = accessEnv("PORT", 7102);
 
 const express = require('express');
 const app = express();
-const { resolve } = require('path');
+// const { resolve } = require('path');
 
 require('dotenv').config({ path: './.env' });
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
@@ -26,12 +26,12 @@ app.get("/", (req, res) => {
 });
 
 app.get('/config', async (req, res) => {
-  const price = await stripe.prices.retrieve(process.env.PRICE);
+  // const price = await stripe.prices.retrieve(process.env.PRICE);
 
   res.send({
     publicKey: process.env.STRIPE_PUBLISHABLE_KEY,
-    unitAmount: price.unit_amount,
-    currency: price.currency,
+    // unitAmount: price.unit_amount,
+    currency: 'usd',
   });
 });
 
@@ -45,27 +45,41 @@ app.get('/checkout-session', async (req, res) => {
 app.post('/create-checkout-session', async (req, res) => {
   const domainURL = process.env.DOMAIN;
 
-  const { quantity, locale } = req.body;
+  const { quantity, price, name, stripeid, locale } = req.body;
+
+  const sessionObj = {
+    payment_method_types: process.env.PAYMENT_METHODS.split(', '),
+    mode: 'payment',
+    locale: locale,
+    line_items: [
+      {
+        price_data: {
+          currency: 'usd',
+          product_data: {
+            name: name,
+          },
+          unit_amount: price,
+        },
+        quantity: quantity
+      },
+    ],
+    // ?session_id={CHECKOUT_SESSION_ID} means the redirect will have the session ID set as a query param
+    success_url: `${domainURL}/success?session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: `${domainURL}/canceled`,
+  };
+
+  // Connect payment to stripe customer if one exists
+  if (stripeid) {
+    sessionObj.customer = stripeid;
+  }
+  
   // Create new Checkout Session for the order
   // Other optional params include:
   // [billing_address_collection] - to display billing address details on the page
   // [customer] - if you have an existing Stripe Customer ID
   // [customer_email] - lets you prefill the email input in the Checkout page
   // For full details see https://stripe.com/docs/api/checkout/sessions/create
-  const session = await stripe.checkout.sessions.create({
-    payment_method_types: process.env.PAYMENT_METHODS.split(', '),
-    mode: 'payment',
-    locale: locale,
-    line_items: [
-      {
-        price: process.env.PRICE,
-        quantity: quantity
-      },
-    ],
-    // ?session_id={CHECKOUT_SESSION_ID} means the redirect will have the session ID set as a query param
-    success_url: `${domainURL}/success.html?session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: `${domainURL}/canceled.html`,
-  });
+  const session = await stripe.checkout.sessions.create(sessionObj);
 
   res.send({
     sessionId: session.id,

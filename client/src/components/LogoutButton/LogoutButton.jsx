@@ -5,38 +5,38 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-
-import * as loginActions from "../../services/LogIn/actions";
 import { useStyles } from "./LogoutButton.styles";
 
-function mapStateToProps(state) {
-  return {
-    state
-  };
-}
+import { useDispatch, useSelector } from "react-redux";
+import { logoutAttempt } from '../../services/LogIn/actions';
+import { useMutation } from "@apollo/react-hooks";
+import gql from "graphql-tag";
+import { clearSession } from "../../services/Session/actions";
 
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(loginActions, dispatch),
-  };
-}
+const mutation = gql`
+  mutation($sessionId: ID!) {
+    deleteUserSession(sessionId: $sessionId)
+  }
+`;
 
 const LogoutButton = (props) => {
-  const handleLogoutAttempt = () => {
-    const { actions } = props;
-
-    actions.logoutAttempt();
-  };
-
   const classes = useStyles(props);
+
+  const [deleteUserSession] = useMutation(mutation);
+  const dispatch = useDispatch();
+  const session = useSelector(state => state.session);
+
   return (
     <List>
       <ListItem
         key="logout-button"
         button
-        onClick={() => handleLogoutAttempt()}
+        onClick={evt => {
+          evt.preventDefault();
+          dispatch(clearSession());
+          dispatch(logoutAttempt());
+          deleteUserSession({ variables: { sessionId: session.id } });
+        }}
       >
         <ListItemIcon>
           <ExitToAppIcon className={classes.drawerIcon} />
@@ -47,4 +47,4 @@ const LogoutButton = (props) => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LogoutButton);
+export default LogoutButton;

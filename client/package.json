@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@apollo/react-hooks": "^3.1.5",
     "@date-io/date-fns": "^1.3.13",
     "@date-io/dayjs": "^1.3.13",
     "@date-io/luxon": "^1.3.13",
@@ -48,7 +49,7 @@
     "redux-thunk": "^2.3.0",
     "stripe": "^8.64.0"
   },
-  "proxy": "http://localhost:7000",
+  "proxy": "http://localhost:7102",
   "scripts": {
     "start": "react-scripts start",
     "noauth": "REACT_APP_NOAUTH=true npm start",
