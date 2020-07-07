@@ -36,6 +36,13 @@ const ThemeProvider = ({ children }) => {
     setThemeState({ ...themeState, dark });
   };
 
+  const restoreDefaultTheme = () => {
+    console.log(themeState.dark);
+    const dark = false;
+    localStorage.setItem("dark", JSON.stringify(dark));
+    setThemeState({ ...themeState, dark });
+  }
+
   const computedTheme = themeState.dark ? theme("dark") : theme("light");
 
   return (
@@ -43,7 +50,8 @@ const ThemeProvider = ({ children }) => {
       <ThemeContext.Provider
         value={{
           dark: themeState.dark,
-          toggle
+          toggle,
+          restoreDefaultTheme
         }}
       >
         {children}

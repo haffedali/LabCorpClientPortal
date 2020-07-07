@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { Button } from '@material-ui/core'
 /* LabCorp */
 import { useStyles } from './Billing.styles';
 import { 

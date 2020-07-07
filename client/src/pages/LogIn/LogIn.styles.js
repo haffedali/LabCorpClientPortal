@@ -11,6 +11,7 @@ export const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     justifyContent: "center",
     backgroundColor: theme.BACKGROUND_001,
+    maxWidth: '100vw'
   },
   logoContainer: {
     display: "flex",

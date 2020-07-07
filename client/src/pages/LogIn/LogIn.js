@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useTheme } from '../../theme/ThemeContext';
 import { useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag"
 import { useForm } from "react-hook-form";
@@ -28,6 +29,8 @@ const mutation = gql`
 
 const LogIn = ({ onChangeToSignUp: pushChangeToSignUp }, props) => {
   const classes = useStyles(props);
+  const theme = useTheme();
+
 
   const [authError, setAuthError] = useState();
 
@@ -51,8 +54,11 @@ const LogIn = ({ onChangeToSignUp: pushChangeToSignUp }, props) => {
       console.log(e.message);
       setAuthError(e.message.split(':')[1]);
     }
-    
   });
+
+  useEffect(() => {
+    theme.restoreDefaultTheme();
+  }, []);
 
   return (
     <div className={classes.root}>
