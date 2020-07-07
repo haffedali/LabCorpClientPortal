@@ -2,6 +2,8 @@
 
 One Paragraph of project description goes here
 
+![Project Architecture](https://drive.google.com/file/d/15o4kTQ0qtVRs5b7ZwOp1VQwM4DjHkr7y)
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
