@@ -1,12 +1,16 @@
-import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
+import { 
+  applyMiddleware, 
+  combineReducers,
+  compose, 
+  createStore
+} from 'redux';
 import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
 import thunk from 'redux-thunk';
-// import rootReducer from './reducers';
-
 
 import * as ducks from "./ducks";
 
 const rootReducer = combineReducers(ducks);
+
 /**
  * 
  * @param {string} currentPage - current page we are showing in ui
