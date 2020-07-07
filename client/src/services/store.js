@@ -7,9 +7,9 @@ import {
 import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
 import thunk from 'redux-thunk';
 
-import * as ducks from "./ducks";
+import * as reducers from "./reducers";
 
-const rootReducer = combineReducers(ducks);
+const rootReducer = combineReducers(reducers);
 
 /**
  * 

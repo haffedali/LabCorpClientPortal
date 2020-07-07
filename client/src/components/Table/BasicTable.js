@@ -46,8 +46,6 @@ function Row(props) {
   const [open, setOpen] = React.useState(false);
   const classes = useStyles(props);
 
-  console.log('ROWPROPS: ', row)
-
   return (
     <React.Fragment>
 

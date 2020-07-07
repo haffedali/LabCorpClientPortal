@@ -1,18 +1,7 @@
-import { combineReducers } from 'redux';
-import { routerReducer } from 'react-router-redux';
-import loginReducer from './LogIn/reducer';
-import calendarReducer from './Calendar/reducer';
-import messagesReducer from './Messages/reducer';
-import scheduleReducer from './Schedule/reducer';
-import invoiceReducer from './billing/reducers';
-import resultsReducer from './Results/reducer';
-
-export default combineReducers({
-    router: routerReducer,
-    loginReducer,
-    calendarReducer,
-    scheduleReducer,
-    invoiceReducer,
-    messagesReducer,
-    resultsReducer,
-})
+export { default as session } from './Session/reducers';
+export { default as loginReducer } from './LogIn/reducer';
+export { default as scheduleReducer } from './Schedule/reducer';
+export { default as invoiceReducer } from './billing/reducers';
+export { default as messagesReducer } from './Messages/reducer';
+export { default as resultsReducer } from './Results/reducer';
+export { default as calendarReducer } from './Calendar/reducer';
