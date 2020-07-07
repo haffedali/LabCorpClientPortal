@@ -9,7 +9,7 @@ const Home = (props) =>  {
     return (
         <div>
         <h1 className={classes.header}>Welcome to your Patient Portal!</h1>
-        <img src={homePageLogo} className={classes.logo}/>
+        {/* <img src={homePageLogo} className={classes.logo}/> */}
         </div>
     )
 }

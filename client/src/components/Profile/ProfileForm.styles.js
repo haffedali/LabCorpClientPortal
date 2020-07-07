@@ -7,11 +7,10 @@ export const useStyles = makeStyles((theme) => ({
         width: '50ch',
       },
       '& .MuiInputLabel': {
-        color: theme.DRAWER_TEXT,
+        color: theme.PROFILE_TEXT,
       },
       '& .MuiFilledInput-underline': {
         color: theme.PRIMARY,
-        //borderBottom: colors.DRAWER_TEXT,
       },
       '& .MuiFormLabel-root.Mui-focused': {
           color: theme.DRAWER_TEXT_ACTIVE,
@@ -22,7 +21,8 @@ export const useStyles = makeStyles((theme) => ({
     },
     fieldBox: {
         backgroundColor: theme.PROFILE_BOX_FILL,
-        color: theme.PRIMARY,
+        //color: theme.PRIMARY,
+        textColor: theme.PRIMARY,
     },
 
   }));
