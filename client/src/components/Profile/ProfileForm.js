@@ -1,23 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useStyles } from './ProfileForm.styles';
-import {TextField, Button} from '@material-ui/core';
+import { TextField } from '@material-ui/core';
 
-
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-
-function mapStateToProps(state) {
-    return {
-      userInfo: state.loginReducer.userInfo,
-    };
-  }
-
+import { useSelector, useDispatch } from "react-redux";
+import { loginAttempt } from '../../services/LogIn/actions';
 
 function FormFields(props) {
   const classes = useStyles(props);
-  const [value, setValue] = React.useState(0);
+  const dispatch = useDispatch();
 
-  console.log(props.userInfo)
+
+  const userInfo = useSelector(state => state.session.user);
+
+  const insurancePlan = useSelector(state => state.loginReducer.userInfo ? state.loginReducer.userInfo.insurancePlan : '')
+
+    useEffect(() => {
+        dispatch(loginAttempt(userInfo.contactId));
+    }, []);
 
   return (
     <form className={classes.root} noValidate autoComplete="off">
@@ -28,7 +27,7 @@ function FormFields(props) {
             className={classes.fieldBox}
             id="filled-required"
             label="Full Name"
-            defaultValue= {props.userInfo.firstName + " " + props.userInfo.lastName}
+            defaultValue= {userInfo.firstName + " " + userInfo.lastName}
             InputProps={{ readOnly: true, }}
             variant="filled"
         />
@@ -36,7 +35,7 @@ function FormFields(props) {
             className={classes.fieldBox}
             id="filled-insurance-number"
             label="Insurance Plan"
-            defaultValue= {props.userInfo.insurancePlan}
+            defaultValue={insurancePlan || null}
             InputProps={{ readOnly: true, }}
             variant="filled"
         />
@@ -44,7 +43,7 @@ function FormFields(props) {
             className={classes.fieldBox}
             id="filled-address"
             label="Street Address"
-            defaultValue= {props.userInfo.address}
+            defaultValue= {userInfo.address}
             InputProps={{ readOnly: true, }}
             variant="filled"
         />
@@ -52,7 +51,7 @@ function FormFields(props) {
             className={classes.fieldBox}
             id="filled-city"
             label="City"
-            defaultValue= {props.userInfo.city}
+            defaultValue= {userInfo.city}
             InputProps={{ readOnly: true, }}
             variant="filled"
         />
@@ -60,7 +59,7 @@ function FormFields(props) {
             className={classes.fieldBox}
             id="filled-state"
             label="State"
-            defaultValue= {props.userInfo.state}
+            defaultValue= {userInfo.state}
             InputProps={{ readOnly: true, }}
             variant="filled"
         />
@@ -69,7 +68,7 @@ function FormFields(props) {
             error
             id="filled-number-zip"
             label="ZIP Code"
-            defaultValue= {props.userInfo.zipCode}
+            defaultValue= {userInfo.zipCode}
             InputProps={{ readOnly: true, }}
             variant="filled"
         />
@@ -77,7 +76,7 @@ function FormFields(props) {
             className={classes.fieldBox}
             id="filled-phone"
             label="Phone Number"
-            defaultValue= {props.userInfo.phone}
+            defaultValue= {userInfo.phone}
             InputProps={{ readOnly: true, }}
             variant="filled"
         />
@@ -85,7 +84,7 @@ function FormFields(props) {
             className={classes.fieldBox}
             id="filled-email"
             label="Email"
-            defaultValue= {props.userInfo.email}
+            defaultValue= {userInfo.email}
             InputProps={{ readOnly: true, }}
             variant="filled"
         />
@@ -119,7 +118,7 @@ function FormFields(props) {
             className={classes.fieldBox}
             id="filled-read-only-input"
             label="Username"
-            defaultValue={props.userInfo.firstName + "." + props.userInfo.lastName}
+            defaultValue={userInfo.firstName + "." + userInfo.lastName}
             InputProps={{ readOnly: true, }}
             variant="filled"
         />
@@ -128,7 +127,7 @@ function FormFields(props) {
             id="filled-password-input"
             label="Password"
             type="password"
-            defaultValue= {props.userInfo.contactId}
+            defaultValue= {userInfo.contactId}
             //autoComplete="current-password"
             variant="filled"
         /> */}
@@ -137,4 +136,4 @@ function FormFields(props) {
   );
 }
 
-export default connect(mapStateToProps, {})(FormFields);
+export default FormFields;
