@@ -15,4 +15,14 @@ export const useStyles = makeStyles((theme) => ({
     paddingLeft: theme.spacing(6),
     backgroundColor: theme.BILLING_BACKGROUND,
   }),
+  spinnerContainer: {
+    width: '100%',
+    height: '100ch',
+    display: 'flex',
+    justifyContent: 'center',
+    paddingTop: '30ch'
+  },
+  spinner: {
+    color: theme.HIGHLIGHT,
+  }
 }));

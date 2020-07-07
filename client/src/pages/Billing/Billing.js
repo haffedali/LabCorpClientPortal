@@ -39,16 +39,20 @@ const Billing = (props) => {
 
     return (
         <div className={classes.root}>
-            {!invoiceData ? <CircularProgress /> : <>
-                <InnerSideBar 
-                    changeTab={(page) => setBillingPage(page)} 
-                    drawerWidth={styleProps.drawerWidth} 
-                    innerPage={billingPage}
-                />
-                <div className={classes.billingContent}>
-                    {pages[billingPage]}
-                </div>
-            </>}
+            {!invoiceData ? 
+                <div className={classes.spinnerContainer}>
+                    <CircularProgress className={classes.spinner}/> 
+                </div> : 
+                <React.Fragment>
+                    <InnerSideBar 
+                        changeTab={(page) => setBillingPage(page)} 
+                        drawerWidth={styleProps.drawerWidth} 
+                        innerPage={billingPage}
+                    />
+                    <div className={classes.billingContent}>
+                        {pages[billingPage]}
+                    </div>
+                </React.Fragment>}
         </div>
     );
 }
