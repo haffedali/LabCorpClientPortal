@@ -17,6 +17,8 @@ function FormFields(props) {
   const classes = useStyles(props);
   const [value, setValue] = React.useState(0);
 
+  console.log(props.userInfo)
+
   return (
     <form className={classes.root} noValidate autoComplete="off">
       <div>

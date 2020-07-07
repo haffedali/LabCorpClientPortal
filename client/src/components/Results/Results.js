@@ -3,7 +3,7 @@ import {
   Typography,
   TextField,
 } from '@material-ui/core';
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import { CollapsibleTable } from '../../components'
@@ -14,7 +14,7 @@ function mapStateToProps(state) {
     search: state.resultsReducer.search,
     data: state.resultsReducer.ajaxData,
     rows: state.resultsReducer.matchedRows,
-    contactId: state.session.user.contactId,
+    // contactId: state.session.user.contactId,
   };
 }
 
@@ -25,10 +25,13 @@ function mapDispatchToProps(dispatch) {
 }
 
 const Results = (props) => {
-  const { actions, search="", rows=[], data, contactId } = props;
+  const { actions, search="", rows=[], data } = props;
   const dispatchSearch = (str) => {
     actions.changeSearch(str);
   };
+
+  const contactId = useSelector(state => state.session.user.contactId);
+
   const dispatchLoad = () => {
     actions.loadData(contactId)
   }

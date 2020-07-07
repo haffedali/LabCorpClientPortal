@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Container, Grid, Paper, TextField, Button } from "@material-ui/core";
 
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as messagesActions from "../../services/Messages/actions";
-
 import { useStyles } from "./Messages.styles";
 import ViewSwitch from "./ViewSwitch";
 import { MessagesDisplay } from "./MessagesDisplay";
@@ -13,7 +12,6 @@ import {messagesApi} from '../../utils';
 function mapStateToProps(state) {
   return {
     currentPage: state.messagesReducer.currentPage,
-    userInfo: state.session.user,
     inboxMessages: state.messagesReducer.inboxMessages,
     getMessageRequest: state.messagesReducer.getMessageRequest,
   };
@@ -25,12 +23,12 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-
-
 const Messages = (props) => {
   const classes = useStyles();
-  const {actions, userInfo, test} = props;
-  console.log(test)
+  const {actions, test} = props;
+  console.log(test);
+
+  const userInfo = useSelector(state => state.session.user);
 
   const displayPage = ()=> {
     switch (props.currentPage) {

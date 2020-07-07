@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 import Paper from '@material-ui/core/Paper';
 import { ViewState } from '@devexpress/dx-react-scheduler';
@@ -24,7 +24,6 @@ import { useStyles } from "./Appointment.styles"
 function mapStateToProps(state) {
     return {
         currentView: state.calendarReducer.currentView,
-        contactId: state.session.user.contactId,
         appData: state.calendarReducer.appointmentData,
     };
 }
@@ -46,6 +45,8 @@ const CalendarView = (props) => {
     const classes = useStyles(props);
     const { actions } = props;
 
+    const contactId = useSelector(state => state.session.user.contactId);
+
     const [viewName, setViewName] = React.useState("Month");
     const viewChange = (e, index) => {
         setViewName(index);
@@ -53,7 +54,7 @@ const CalendarView = (props) => {
     };
 
     const fetchData = async () => {
-        await (actions.getData(props.contactId));
+        await (actions.getData(contactId));
     };
 
     const [data, setData] = useState([]);

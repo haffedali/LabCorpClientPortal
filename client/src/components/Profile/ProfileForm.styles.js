@@ -14,5 +14,8 @@ export const useStyles = makeStyles((theme) => ({
         backgroundColor: theme.PROFILE_CONTAINER_FILL,
         color: theme.PRIMARY,
     },
+    '& > *': {
+      color: 'red !important'
+    }
 
   }));
