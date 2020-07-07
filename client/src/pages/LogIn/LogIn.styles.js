@@ -30,8 +30,24 @@ export const useStyles = makeStyles((theme) => ({
   grid: {},
   logInInput: {
     margin: "3vw",
+    marginTop: 0
   },
   logInButton: {
     backgroundColor: theme.PRIMARY,
+  },
+  signUpButton: {
+    display: 'flex',
+    justifyContent: 'center',
+    paddingTop: '20px',
+    '& > button': {
+      color: `${theme.PRIMARY} !important`
+    }
+  },
+  authError: {
+    display: 'flex',
+    justifyContent: 'center',
+    color: theme.ERROR,
+    minHeight: '3vw',
+    paddingTop: '10px'
   },
 }));

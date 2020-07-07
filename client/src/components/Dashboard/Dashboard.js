@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { SideBar } from '../';
 
-import TempLogin from './TempLogin';
+import { LogIn } from '../../pages';
 import { Button } from "@material-ui/core";
 
 const Dashboard = () => {
@@ -18,7 +18,7 @@ const Dashboard = () => {
       <div><Button variant='contained' onClick={() => setIsSigningUp(false)}>Back to Login</Button></div>
     </div>
   ) : (
-    <TempLogin onChangeToSignUp={() => setIsSigningUp(true)} />
+    <LogIn onChangeToSignUp={() => setIsSigningUp(true)} />
   );
 };
 

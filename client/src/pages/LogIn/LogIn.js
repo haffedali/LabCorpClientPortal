@@ -9,7 +9,7 @@ import { loginAttempt } from '../../services/LogIn/actions';
 import { Container, Grid, Paper, TextField, Button } from "@material-ui/core";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import logo from '../../assets/img/logo.png';
-import { useStyles } from './Login.styles';
+import { useStyles } from './LogIn.styles';
 
 const mutation = gql`
   mutation($email: String!, $password: String!) {
@@ -26,7 +26,7 @@ const mutation = gql`
   }
 `;
 
-const TempLogin = ({ onChangeToSignUp: pushChangeToSignUp }, props) => {
+const LogIn = ({ onChangeToSignUp: pushChangeToSignUp }, props) => {
   const classes = useStyles(props);
 
   const [authError, setAuthError] = useState();
@@ -116,4 +116,4 @@ const TempLogin = ({ onChangeToSignUp: pushChangeToSignUp }, props) => {
   );
 };
 
-export default TempLogin;
+export default LogIn;
