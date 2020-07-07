@@ -2,6 +2,8 @@
 
 One Paragraph of project description goes here
 
+### Project Architecture
+
 ![Project Architecture](https://drive.google.com/uc?export=view&id=15o4kTQ0qtVRs5b7ZwOp1VQwM4DjHkr7y)
 
 ## Getting Started
