@@ -1,23 +1,6 @@
 import { GRAB_INVOICES_SUCCESFUL, GRAB_INVOICES_FAILURE, GRAB_INVOICES_PENDING} from './actionTypes';
 import { invoiceApi } from "../../utils";
 
-// USING PAYMENT MICROSERVICE
-// import axios from 'axios'
-// export const grabInvoices = () => {
-//   return dispatch => {
-//       dispatch(_grabInvoicesStarted());
-
-//       return axios.get(`http://localhost:7101/payments`)
-//       .then(res => {
-//           dispatch(_grabInvoicesSuccess(res));
-//       })
-//       .catch( (error) => {
-//           console.log(error);
-//           dispatch(_grabInvoicesFailed(error));
-//       });
-//   };
-// }
-
 export const grabInvoices = (customerid) => {
     return dispatch => {
         dispatch(_grabInvoicesStarted());
