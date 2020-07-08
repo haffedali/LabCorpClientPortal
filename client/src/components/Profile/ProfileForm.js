@@ -11,6 +11,15 @@ function mapStateToProps(state) {
     };
   }
 
+const handleInfoChange = (e) => {
+  setButtonDisable(false);
+  const { name, value } = e.target;
+  setTextValues({ 
+    ...textValues,
+    [name]: value,
+    ["contactId"]: info.pData.value[0]["contactId"],
+  });
+};
 
 function FormFields(props) {
   const classes = useStyles(props);
@@ -23,15 +32,16 @@ function FormFields(props) {
         <h3> Edit General Information </h3>
         <TextField
             className={classes.fieldBox}
-            id="filled-required"
+            id="contactFullName"
             label="Full Name"
             defaultValue= {props.userInfo.firstName + " " + props.userInfo.lastName}
             InputProps={{ readOnly: true, }}
+            onChange={(e) => handleInfoChange(e)}
             variant="filled"
         />
         <TextField
             className={classes.fieldBox}
-            id="filled-insurance-number"
+            id="contactInsNum"
             label="Insurance Plan"
             defaultValue= {props.userInfo.insurancePlan}
             InputProps={{ readOnly: true, }}
@@ -39,7 +49,7 @@ function FormFields(props) {
         />
         <TextField
             className={classes.fieldBox}
-            id="filled-address"
+            id="contactAddrStreet"
             label="Street Address"
             defaultValue= {props.userInfo.address}
             InputProps={{ readOnly: true, }}
@@ -47,7 +57,7 @@ function FormFields(props) {
         />
         <TextField
             className={classes.fieldBox}
-            id="filled-city"
+            id="contactAddrCity"
             label="City"
             defaultValue= {props.userInfo.city}
             InputProps={{ readOnly: true, }}
@@ -55,7 +65,7 @@ function FormFields(props) {
         />
         <TextField
             className={classes.fieldBox}
-            id="filled-state"
+            id="contactAddrState"
             label="State"
             defaultValue= {props.userInfo.state}
             InputProps={{ readOnly: true, }}
@@ -64,7 +74,7 @@ function FormFields(props) {
         <TextField
             className={classes.fieldBox}
             // error
-            id="filled-number-zip"
+            id="contactAddrZip"
             label="ZIP Code"
             defaultValue= {props.userInfo.zipCode}
             InputProps={{ readOnly: true, }}
@@ -72,7 +82,7 @@ function FormFields(props) {
         />
         <TextField
             className={classes.fieldBox}
-            id="filled-phone"
+            id="contactPhone"
             label="Phone Number"
             defaultValue= {props.userInfo.phone}
             InputProps={{ readOnly: true, }}
@@ -80,7 +90,7 @@ function FormFields(props) {
         />
         <TextField
             className={classes.fieldBox}
-            id="filled-email"
+            id="contactEmail"
             label="Email"
             defaultValue= {props.userInfo.email}
             InputProps={{ readOnly: true, }}
@@ -89,7 +99,7 @@ function FormFields(props) {
         <h3> Your Login Credentials </h3>
         <TextField
             className={classes.fieldBox}
-            id="filled-read-only-input"
+            id="contactLoginUsername"
             label="Username"
             defaultValue={props.userInfo.firstName + "." + props.userInfo.lastName}
             InputProps={{ readOnly: true, }}
@@ -104,6 +114,16 @@ function FormFields(props) {
             //autoComplete="current-password"
             variant="filled"
         /> */}
+        <Button
+          className={classes.button}
+          disable={buttonDisabled}
+          variant="filled"
+          onClick={() => {
+            dispatchEvent(profileActionc.updateProfile(textValues));
+            setButtonDisable(true);
+          }} >
+              Update Information
+        </Button>
       </div>
     </form>
   );
