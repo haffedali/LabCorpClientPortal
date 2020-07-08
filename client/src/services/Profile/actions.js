@@ -6,7 +6,18 @@ import {
 
 
 export const updateAttempt = (userInfo) => {
-    return (dispatch) => {
-        // Make update api call
-    }
+    // return (dispatch) => {
+    //     // Make update api call
+
+    // }
+    let updateData = {
+        address = userInfo.address,
+        city: userInfo.city,
+        state: userInfo.state,
+        zipCode: userInfo.zipCode,
+        phone: userInfo.phone,
+    };
+    const config = {
+
+    };
 }
