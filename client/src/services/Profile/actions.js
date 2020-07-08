@@ -57,7 +57,7 @@ const _updateProfileSuccess = (res) => {
     }
 };
 
-const _updateProfileFailed = () => {
+const _updateProfileFailed = (error) => {
     return {
         type: UPDATE_FAILED,
     }
