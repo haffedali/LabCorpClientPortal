@@ -1,54 +1,89 @@
-import { SWITCH_VIEW, GET_DATA, GET_DATA_PENDING, GET_DATA_FAILED } from './actionTypes'
-import { appointmentsApi } from "../../utils";
+import { GET_DATE, GET_START_TIME, GET_END_TIME, SEND_DATE_PENDING, SEND_DATE_SUCCESS, SEND_DATE_FAILED } from './actionTypes'
+import { appointmentsApi } from '../../utils'
 
-export const switchView = (view) => {
-    return dispatch => {
-        dispatch(_switchView(view))
+export const getDate = (date) => {
+    return (dispatch) => {
+        const d = date
+        const ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(d)
+        const mo = new Intl.DateTimeFormat('en', { month: 'long' }).format(d)
+        const da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d)
+        const formatDate = `${mo}-${da}-${ye}`
+        dispatch(_getDate(formatDate))
     }
 }
 
-export const getData = (id) => {
-    return dispatch => {
-        dispatch(_getAppointmentsStarted())
+export const getStart = (time) => {
+    return (dispatch) => {
+        const t = time;
+        const newTime = t.toLocaleTimeString();
+        dispatch(_getStartTime(newTime))
+    }
+}
+
+export const getEnd = (time) => {
+    return (dispatch) => {
+        const t = time;
+        const newTime = t.toLocaleTimeString();
+        dispatch(_getEndTime(newTime))
+    }
+}
+
+export const createAppointment = (date) => {
+    return (dispatch) => {
+        dispatch(_getDatePending())
 
         appointmentsApi
-            .query(id)
-            .then((res) => {
-                const appData = res.data.value;
-                    dispatch(_getAppointments(appData))
-                    console.log(appData);
-                
+            .createApp(date)
+            .then(res => {
+                dispatch(_createAppointmentSuccess(res));
             })
             .catch((error) => {
                 console.log(error);
-                dispatch(_getAppointmentsFailed(error))
+                dispatch(_createAppointmentFailed(error))
             })
+
+
+
+    }
+}
+const _getDate = (date) => {
+    return {
+        type: GET_DATE,
+        data: date
+
     }
 }
 
-const _switchView = (view) => {
+const _getStartTime = (time) => {
     return {
-        type: SWITCH_VIEW,
-        data: view
+        type: GET_START_TIME,
+        data: time
     }
 }
 
-const _getAppointmentsStarted = () => {
+const _getEndTime = (time) => {
     return {
-        type: GET_DATA_PENDING
+        type: GET_END_TIME,
+        data: time
     }
 }
 
-const _getAppointments = (appData) => {
+const _getDatePending = () => {
     return {
-        type: GET_DATA,
-        data: appData
+        type: SEND_DATE_PENDING
     }
 }
 
-const _getAppointmentsFailed = (error) => {
+const _createAppointmentSuccess = (res) => {
     return {
-        type: GET_DATA_FAILED,
+        type: SEND_DATE_SUCCESS,
+        data: res.data
+    }
+}
+
+const _createAppointmentFailed = (error) => {
+    return {
+        type: SEND_DATE_FAILED,
         error
     }
 }
