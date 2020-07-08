@@ -9,6 +9,7 @@ import { useStyles } from "./Messages.styles";
 import ViewSwitch from "./ViewSwitch";
 import { MessagesDisplay } from "./MessagesDisplay";
 import {messagesApi} from '../../utils';
+import CreateMessageButton from './CreateMessageButton'
 
 
 function mapStateToProps(state) {
@@ -61,14 +62,21 @@ const Messages = (props) => {
   
   return (
     <Container className={classes.container}>
-      <Grid container direction={"column"} spacing={12}>
+      <Paper>
+
+
+      <Grid className={classes.gridContainer}container direction={"column"} spacing={12}>
         <Grid item>
           <ViewSwitch />
+        </Grid>
+        <Grid item className={classes.buttonContainer}>
+          <CreateMessageButton></CreateMessageButton>
         </Grid>
         <Grid xs={12} item className={classes.displayContainer}>
           {displayPage(props.currentPage, props.inboxMessages)}
         </Grid>
       </Grid>
+      </Paper>
     </Container>
   );
 };

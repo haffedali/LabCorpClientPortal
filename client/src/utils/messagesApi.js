@@ -32,18 +32,18 @@ export const messagesApi = {
 
 
   createNewEmail: (email) =>{
-  //   const data = {
-  //     ss_sentfrom: "haffedmcnair@gmail.com",
-  //     subject: "Hi, I'm paul mach 23",
-  //     description: "When I was young I was petrified, but now I've grown and I'm still petrified. Maybe this is because I've never been outside of my house before, but as spongebob says, 'Indoooooooooooooooors'"
-  //   }
-  //   const postConfig = postConfigGenerator(data);
-  //   const postString = buildApiPost("emails");
-  //   adalApiFetch(axios, postString, postConfig)
-  //   .then((r)=>{
-  //     console.log(r)
-  //   })
-  //   .catch((e)=>console.log(e))
+    const data = {
+      ss_sentfrom: "haffedmcnair@gmail.com",
+      subject: "Hi, I'm paul mach 23",
+      description: "When I was young I was petrified, but now I've grown and I'm still petrified. Maybe this is because I've never been outside of my house before, but as spongebob says, 'Indoooooooooooooooors'"
+    }
+    const postConfig = postConfigGenerator(data);
+    const postString = buildApiPost("emails");
+    adalApiFetch(axios, postString, postConfig)
+    .then((r)=>{
+      console.log(r)
+    })
+    .catch((e)=>console.log(e))
   }
 
 

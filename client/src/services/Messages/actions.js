@@ -43,6 +43,7 @@ export const getInboxEmails = (contactId) => {
           console.log(e);
           dispatch(_getEmailsFailed)
       });
+    // await messagesApi.getInboxEmails(emails)
   };
 };
 
