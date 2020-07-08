@@ -16,7 +16,15 @@ export default function resultsReducer(state = {}, action){
     return (str.toLowerCase().indexOf(q) > -1)
   }
   function matchedRows(rows=[], search="") {
-    return rows.filter(row => isFound(row.name, search) || isFound(row.date, search))
+    return rows.filter((row) => {
+      const flatItems = []
+      row.items.forEach((i) => {
+        flatItems.push(i["item"])
+        flatItems.push(i["unit"])
+        flatItems.push(i["numericValue"])
+       })
+      return [row.name, row.date, ...flatItems].some(v => isFound(v, search))
+    })
   }
 
   switch (action.type){
