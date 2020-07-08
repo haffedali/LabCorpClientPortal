@@ -10,6 +10,7 @@ import {
 } from '@material-ui/pickers';
 import { Container, Grid } from '@material-ui/core';
 import ScheduledAlert from './ScheduledAlert';
+import {dateError, startTimeError, endTimeError} from '../../utils/dateValidation'
 
 
 function mapDispatchToProps(dispatch) {
@@ -27,14 +28,34 @@ const DatePicker = (props) => {
         endTime: new Date()    
     });
 
-    const dateError = () => {
+/*     const dateError = () => {
         if (selectedDate.startDate < new Date()) {
-            return "Date Must be after Today"
+            return "Date Must be after Today"   
         }
-        if (selectedDate.startTime < new Date()) {
 
+        if (selectedDate.startDate.getDay() === 0 || selectedDate.startDate.getDay() === 6) {
+            return "Closed On Weekends"
         }
     }
+
+    const startTimeError = () => {
+        if (selectedDate.startTime.getHours() < 8) {
+            console.log(selectedDate.startTime.getMinutes())
+            return "Time must be After 8:00 AM"
+        }
+        if (selectedDate.startTime.getHours() > 16) {
+            return "Time Must be an Hour Before 5:00 PM"
+        }
+    }
+
+    const endTimeError = () => {
+        if (selectedDate.endTime.getHours() <= selectedDate.startTime.getHours()) {
+            return "Choose End Time an Hour Passed Start Time"
+        }
+        if (selectedDate.endTime.getHours() > 17) {
+            return "Choose End Time Before 5 PM"
+        }
+    } */
 
     const handleDateChange = (name, value) => {
         setSelectedDate({
@@ -66,8 +87,8 @@ const DatePicker = (props) => {
                         name="startDate"
                         value={selectedDate.startDate}
                         onChange={(date) => handleDateChange('startDate', date)}
-                        error={dateError()}
-                        helperText={dateError()}
+                        error={dateError(selectedDate)}
+                        helperText={dateError(selectedDate)}
                         KeyboardButtonProps={{
                             'aria-label': 'change date',
                         }}
@@ -79,8 +100,8 @@ const DatePicker = (props) => {
                         name="startTime"
                         value={selectedDate.startTime}
                         onChange={(date) => handleDateChange('startTime', date)}
-                        error={dateError}
-                        helperText={dateError()}
+                        error={startTimeError(selectedDate)}
+                        helperText={startTimeError(selectedDate)}
                         KeyboardButtonProps={{
                             'aria-label': 'change time',
                         }}
@@ -92,6 +113,8 @@ const DatePicker = (props) => {
                         name="endTime"
                         value={selectedDate.endTime}
                         onChange={(date) => handleDateChange('endTime', date)}
+                        error={endTimeError(selectedDate)}
+                        helperText={endTimeError(selectedDate)}
                         KeyboardButtonProps={{
                             'aria-label': 'change time',
                         }}
