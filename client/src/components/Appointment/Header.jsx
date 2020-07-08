@@ -45,18 +45,6 @@ function a11yProps(index) {
   };
 }
 
-/* const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'block',
-    width: '100%',
-    textAlign: "center",
-    backgroundColor: theme.palette.background.paper,
-  },
-  tab: {
-    textAlign: "center"
-  }
-})); */
-
 export default function ScrollableTabsButtonForce() {
   const classes = useStyles();
 
