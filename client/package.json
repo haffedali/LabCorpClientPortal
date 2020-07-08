@@ -26,6 +26,7 @@
     "axios": "^0.18.0",
     "date-fns": "^2.14.0",
     "dayjs": "^1.8.28",
+    "form-data": "^3.0.0",
     "graphql": "^15.3.0",
     "graphql-tag": "^2.10.3",
     "luxon": "^1.24.1",
