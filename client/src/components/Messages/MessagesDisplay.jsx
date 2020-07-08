@@ -32,13 +32,19 @@ const messageSubjectStringTrim = (string) => {
       endpoint = i-1
     }
   }
-  return string.slice(0,endpoint)
+  if (endpoint > 0) {
+    return string.slice(0,endpoint)
+  }
+  else {
+    return string
+  }
 }
 
 const MessagesDisplayItem = ({ item }) => {
   const classes = useStyles();
   const textContentPeek = messageContentStringTrim(item.textContent);
   const subjectText = messageSubjectStringTrim(item.subject)
+  console.log(item)
   return (
     <Paper key={item.subject} className={classes.displayItemContainer}>
       <ListItem >

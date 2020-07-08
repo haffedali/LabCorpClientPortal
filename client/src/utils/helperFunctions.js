@@ -47,17 +47,34 @@ const camelToDynamicsValueMatrix = (camelCaseValue) => {
  * -NOTE-
  * filter object should be shaped as follows
  * {field: string, value :string}
+ * 
+ * Select is required as of now
  */
 export const buildApiCall = ({entity, select, filter, id, relatedEntity, relatedSelect})=>{
     let string = apiRoute + entity;
     if (id){
         string += `(${id})/`
+    }else{
+        string += '/'
     }
     if (select){
         string += buildSelectString(select)
+        if (filter){
+            string += '&'
+        }
     }
     if (filter){
-        string += buildFilterString(filter)
+        if (select){
+            string += buildFilterString(filter)
+            if (relatedEntity){
+                string += '&'
+            }
+        }else{
+            string += buildFilterNoSelect(filter)
+            if (relatedEntity){
+                string += '&'
+            }
+        }
     }
     if (relatedEntity){
         string += buildRelatedString(relatedEntity, relatedSelect)
@@ -74,13 +91,28 @@ export const buildApiCall = ({entity, select, filter, id, relatedEntity, related
 
 const buildFilterString = (filterArray) => {
     let first = true
-    let string = `&$filter=`
+    let string = `$filter=`
     filterArray.forEach((filterItem)=>{
         if (!first){
             string += ' and '
         }
         string += `contains(${filterItem.field}, '${filterItem.value}')`
         first = false
+    })
+    return string
+}
+
+/**
+ * @param {object[]} filterArray - Array of filter
+ * In the array the object should looks like 
+ * {field: string, value: string}
+ * Field being the field to filter on, value being what you are looking for
+ */
+const buildFilterNoSelect = (filterArray) => {
+    let first = true;
+    let string = `$filter=`
+    filterArray.forEach((filterItem) => {
+        string += `${filterItem.field}%20eq%${filterItem.value}`
     })
     return string
 }
@@ -115,7 +147,7 @@ const buildSelectString = (selectArray, isRelatedSelect) => {
  * @param {string[]} relatedSelect 
  */
 const buildRelatedString = (relatedEntity, relatedSelect) => {
-    let string = '&$expand=';
+    let string = '$expand=';
     string += relatedEntity;
     if (relatedSelect){
         string += `(${buildSelectString(relatedSelect, true)})`
@@ -130,6 +162,10 @@ const buildRelatedString = (relatedEntity, relatedSelect) => {
  */
 export const buildApiPost = (entityName) => {
     return apiRoute + entityName
+}
+
+export const buildApiCallRelatedEntity = (queryObj) =>{
+    
 }
 
 

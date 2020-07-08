@@ -10,12 +10,14 @@ import ViewSwitch from "./ViewSwitch";
 import { MessagesDisplay } from "./MessagesDisplay";
 import {messagesApi} from '../../utils';
 
+
 function mapStateToProps(state) {
   return {
     currentPage: state.messagesReducer.currentPage,
     userInfo: state.loginReducer.userInfo,
     inboxMessages: state.messagesReducer.inboxMessages,
     getMessageRequest: state.messagesReducer.getMessageRequest,
+    sentMessages: state.messagesReducer.sentMessages
   };
 }
 
@@ -29,8 +31,7 @@ function mapDispatchToProps(dispatch) {
 
 const Messages = (props) => {
   const classes = useStyles();
-  const {actions, userInfo, test} = props;
-  console.log(test)
+  const {actions, userInfo} = props;
 
   const displayPage = ()=> {
     switch (props.currentPage) {
@@ -40,8 +41,8 @@ const Messages = (props) => {
         }
         break;
       case "Sent":
-        messagesApi.createNewEmail(userInfo.email)
-        return "Currently in development";
+        return <MessagesDisplay messages={props.sentMessages} />
+        // return "Currently in development";
         break;
       case "Notifications":
         return "Currently in development";
@@ -52,6 +53,9 @@ const Messages = (props) => {
   }
   useEffect(()=>{
     actions.getInboxEmails(userInfo.contactId)
+    // messagesApi.getSentEmails(userInfo.email)
+    // .then(r=>console.log(r.data.value))
+    actions.getSentEmails(userInfo.email)
   },[])
 
   

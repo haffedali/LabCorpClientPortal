@@ -3,6 +3,7 @@ import {
   GET_EMAILS_STARTED,
   GET_EMAILS_FAILED,
   GET_INBOX_EMAILS_SUCCESS,
+  GET_SENT_EMAILS_SUCCESS
 } from "./actionTypes";
 
 export default function messagesReducer(
@@ -19,6 +20,12 @@ export default function messagesReducer(
         inboxMessages: action.inboxMessages,
         getMessageRequest: true,
       };
+
+    case GET_SENT_EMAILS_SUCCESS:
+      return {
+        ...state,
+        sentMessages: action.sentMessages,
+      }
     case GET_EMAILS_STARTED:
       return { ...state, getMessageRequest: "pending" };
     case GET_EMAILS_FAILED:

@@ -8,6 +8,7 @@ import { loginApi } from "../../utils";
 
 
 export const loginAttempt = (userInfo) => {
+  console.log("fired")
   return (dispatch) => {
     dispatch(_loginStarted());
 
