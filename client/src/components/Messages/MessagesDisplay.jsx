@@ -44,12 +44,11 @@ const MessagesDisplayItem = ({ item }) => {
   const classes = useStyles();
   const textContentPeek = messageContentStringTrim(item.textContent);
   const subjectText = messageSubjectStringTrim(item.subject)
-  console.log(item)
   return (
     <Paper key={item.subject} className={classes.displayItemContainer}>
       <ListItem >
         <Grid container direction="row" justify="space-between">
-          <Grid item xs={2} className={classes.displayItemFromSub}>
+          <Grid item xs={3} className={classes.displayItemFromSub}>
             {/* <ListItemText
               className={classes.textElement}
               primary={item.sender}
@@ -63,7 +62,7 @@ const MessagesDisplayItem = ({ item }) => {
             </Typography> */}
           </Grid>
           <Grid item xs={1}></Grid>
-          <Grid item xs={8}>
+          <Grid item xs={6}>
             <ExpansionPanel>
               <ExpansionPanelSummary
               expandIcon={<ExpandMoreIcon />}>
@@ -74,7 +73,7 @@ const MessagesDisplayItem = ({ item }) => {
               <ExpansionPanelDetails>{item.textContent}</ExpansionPanelDetails>
             </ExpansionPanel>
           </Grid>
-          <Grid item xs={1}>
+          <Grid item xs={2}>
             <Container className={classes.displayItemDate}>
               {/* <ListItemText primary={item.date} className={classes.senderText}/> */}
               <Typography className={classes.senderText}>

@@ -3,7 +3,11 @@ import {
   GET_EMAILS_STARTED,
   GET_INBOX_EMAILS_SUCCESS,
   GET_EMAILS_FAILED,
-  GET_SENT_EMAILS_SUCCESS
+  GET_SENT_EMAILS_SUCCESS,
+  SENT_EMAIL_STARTED,
+  SENT_EMAIL_FAILED,
+  SENT_EMAIL_SUCCESS,
+  UPDATE_EMAIL_OBJ
 } from "./actionTypes";
 import { messagesApi } from "../../utils";
 
@@ -36,12 +40,12 @@ export const getInboxEmails = (contactId) => {
             emailObject.textContent = description[0].textContent;
           }
           emailArray.push(emailObject);
-        })
+        });
         dispatch(_getInboxEmailsSuccess(emailArray));
       })
-      .catch((e)=>{
-          console.log(e);
-          dispatch(_getEmailsFailed)
+      .catch((e) => {
+        console.log(e);
+        dispatch(_getEmailsFailed);
       });
     // await messagesApi.getInboxEmails(emails)
   };
@@ -49,37 +53,49 @@ export const getInboxEmails = (contactId) => {
 
 export const getSentEmails = (email) => {
   return (dispatch) => {
-
     messagesApi
       .getSentEmails(email)
       .then((r) => {
         const emailArray = [];
         const emailResponseArray = r.data.value;
         emailResponseArray.forEach((email) => {
-          console.log(email)
           let emailObject = {};
           emailObject.subject = email.subject;
           emailObject.sender = email.ss_sentfrom;
           // Hard coded cause i messed up me dummy data
-          emailObject.date = '7/1/2020'
+          emailObject.date = "7/1/2020";
           // const el = document.createElement("div");
           // el.innerHTML = email.description;
           // const description = el.getElementsByTagName("pre");
           // if (description[0]) {
           //   emailObject.textContent = description[0].textContent;
           // }
-          emailObject.textContent = email.description
+          emailObject.textContent = email.description;
           emailArray.push(emailObject);
-        })
-        console.log(emailArray)
+        });
         dispatch(_getSentEmailsSuccess(emailArray));
       })
-      .catch((e)=>{
-          console.log(e);
+      .catch((e) => {
+        console.log(e);
       });
   };
-}
+};
 
+export const sendEmail = (emailObj) => {
+  return (dispatch) => {
+    dispatch(_sendEmailStarted);
+    messagesApi
+      .createNewEmail(emailObj)
+      .then((r) => console.log(r))
+      .catch((e) => console.log(e));
+  };
+};
+
+export const writeEmail = (emailObj) => {
+  return (dispatch) => {
+    dispatch(_updateEmailObj(emailObj))
+  }
+}
 const _switchPage = (page) => {
   return {
     type: SWITCH_PAGE,
@@ -100,15 +116,40 @@ const _getInboxEmailsSuccess = (emails) => {
   };
 };
 
-const _getEmailsFailed = ()=> {
-    return {
-        type: GET_EMAILS_FAILED
-    }
-}
+const _getEmailsFailed = () => {
+  return {
+    type: GET_EMAILS_FAILED,
+  };
+};
 
 const _getSentEmailsSuccess = (emails) => {
   return {
     type: GET_SENT_EMAILS_SUCCESS,
-    sentMessages: [...emails]
+    sentMessages: [...emails],
+  };
+};
+
+const _sendEmailStarted = () => {
+  return {
+    type: SENT_EMAIL_STARTED,
+  };
+};
+
+const _sendEmailFailed = () => {
+  return {
+    type: SENT_EMAIL_FAILED,
+  };
+};
+
+const _sendEmailSuccess = () => {
+  return {
+    type: SENT_EMAIL_SUCCESS,
+  };
+};
+
+const _updateEmailObj = (emailObj) => {
+  return {
+    type: UPDATE_EMAIL_OBJ,
+    emailObj: emailObj
   }
 }

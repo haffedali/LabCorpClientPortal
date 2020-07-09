@@ -8,9 +8,9 @@ import * as messagesActions from "../../services/Messages/actions";
 import { useStyles } from "./Messages.styles";
 import ViewSwitch from "./ViewSwitch";
 import { MessagesDisplay } from "./MessagesDisplay";
-import {messagesApi} from '../../utils';
-import CreateMessageButton from './CreateMessageButton'
-
+import WriteMessage from './WriteMessageView';
+import { messagesApi } from "../../utils";
+import ButtonSet from "./ButtonSet";
 
 function mapStateToProps(state) {
   return {
@@ -18,7 +18,7 @@ function mapStateToProps(state) {
     userInfo: state.loginReducer.userInfo,
     inboxMessages: state.messagesReducer.inboxMessages,
     getMessageRequest: state.messagesReducer.getMessageRequest,
-    sentMessages: state.messagesReducer.sentMessages
+    sentMessages: state.messagesReducer.sentMessages,
   };
 }
 
@@ -29,58 +29,67 @@ function mapDispatchToProps(dispatch) {
 }
 
 
-
 const Messages = (props) => {
   const classes = useStyles();
-  const {actions, userInfo} = props;
+  const { actions, userInfo } = props;
 
-  const displayPage = ()=> {
+  const displayPage = () => {
     switch (props.currentPage) {
       case "Inbox":
-        if (props.getMessageRequest === true && props.getMessageRequest !== "pending"){
+        if (
+          props.getMessageRequest === true &&
+          props.getMessageRequest !== "pending"
+        ) {
           return <MessagesDisplay messages={props.inboxMessages} />;
         }
         break;
       case "Sent":
-        return <MessagesDisplay messages={props.sentMessages} />
+        return <MessagesDisplay messages={props.sentMessages} />;
         // return "Currently in development";
         break;
-      case "Notifications":
-        return "Currently in development";
+      case "Create":
+        return <WriteMessage />
+        // return "Currently in development";
+
         break;
       default:
         return "woopsie, you shouldnt see this!";
     }
-  }
-  useEffect(()=>{
-    actions.getInboxEmails(userInfo.contactId)
+  };
+  useEffect(() => {
+    actions.getInboxEmails(userInfo.contactId);
     // messagesApi.getSentEmails(userInfo.email)
     // .then(r=>console.log(r.data.value))
-    actions.getSentEmails(userInfo.email)
-  },[])
+    actions.getSentEmails(userInfo.email);
+  }, []);
 
-  
   return (
     <Container className={classes.container}>
       <Paper>
+        <Grid
+          className={classes.gridContainer}
+          container
+          direction={"column"}
+          spacing={12}
+        >
+          <Grid item>
+            <ViewSwitch />
+          </Grid>
 
-
-      <Grid className={classes.gridContainer}container direction={"column"} spacing={12}>
-        <Grid item>
-          <ViewSwitch />
+          <Grid xs={12} item className={classes.displayContainer}>
+            <Grid container direction={"row"}>
+              <Grid item xs={10} className={classes.displayContainer}>
+                {displayPage(props.currentPage, props.inboxMessages)}
+              </Grid>
+              <Grid item className={classes.buttonContainer}>
+                <ButtonSet currentPage={props.currentPage}/>
+              </Grid>
+            </Grid>
+          </Grid>
         </Grid>
-        <Grid item className={classes.buttonContainer}>
-          <CreateMessageButton></CreateMessageButton>
-        </Grid>
-        <Grid xs={12} item className={classes.displayContainer}>
-          {displayPage(props.currentPage, props.inboxMessages)}
-        </Grid>
-      </Grid>
       </Paper>
     </Container>
   );
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Messages);
-
-

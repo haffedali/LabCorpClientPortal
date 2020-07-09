@@ -47,8 +47,8 @@ const ViewSwitch = (props) => {
           className={classes.tabs}
           indicatorColor={theme.MSG_TABS_INDACTOR}
         >
-          <Tab label="Inbox" className={classes.tab}/>
-          <Tab label="Sent" className={classes.tab}/>
+          <Tab label="Inbox" className={classes.tab} onClick={()=>console.log("Inbox")}/>
+          <Tab label="Sent" className={classes.tab} onClick={()=>console.log("Sent")}/>
         </Tabs>
       </AppBar>
     </div>

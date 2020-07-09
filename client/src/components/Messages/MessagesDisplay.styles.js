@@ -22,7 +22,11 @@ export const useStyles = makeStyles((theme) => ({
         maxHeight:'75vh',
         width:'100%',
         // backgroundColor: theme.DRAWER_BACKGROUNG,
-        overflow:'auto'
+        overflow:'auto',
+        '&::-webkit-scrollbar': {
+            width: '0px',
+            background: 'transparent'
+        }
     },
     displayItemFromSub: {
         // overflow:'hidden'
@@ -33,5 +37,5 @@ export const useStyles = makeStyles((theme) => ({
     senderText: {
         color: theme.MSG_TABS_TEXT,
         fontWeight: '700',
-    }
+    },
   }));
