@@ -65,7 +65,6 @@ const Checkout = (props) => {
   });
 
   useEffect(() => {
-    console.log(props.status.status)
     async function fetchConfig() {
       // Fetch config from our backend.
       const { publicKey, currency } = await fetch(

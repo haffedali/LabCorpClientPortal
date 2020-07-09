@@ -12,27 +12,13 @@ import graphqlClient from "./utils/graphqlClient";
 import { history } from './navigation';
 import { ThemeProvider } from "./theme/ThemeContext";
 
-// const DO_NOT_LOGIN = false;
+const DO_NOT_LOGIN = false;
 
 const store = configureStore();
 
-// runWithAdal(authContext, () => {
-//   ReactDOM.render((
-//     <Provider store={store}>
-//       <ApolloProvider client={graphqlClient}>
-//         <Router history={history}>
-//           <ThemeProvider>
-//             <App />
-//           </ThemeProvider>
-//         </Router>
-//       </ApolloProvider>
-//     </Provider>
-//   ), document.getElementById('root'));
-
-// }, DO_NOT_LOGIN);
-
-ReactDOM.render((
-  <Provider store={store}>
+runWithAdal(authContext, () => {
+  ReactDOM.render((
+    <Provider store={store}>
       <ApolloProvider client={graphqlClient}>
         <Router history={history}>
           <ThemeProvider>
@@ -41,4 +27,6 @@ ReactDOM.render((
         </Router>
       </ApolloProvider>
     </Provider>
-), document.getElementById('root'))
+  ), document.getElementById('root'));
+
+}, DO_NOT_LOGIN);
