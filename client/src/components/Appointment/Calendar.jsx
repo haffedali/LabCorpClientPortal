@@ -80,7 +80,7 @@ const CalendarView = (props) => {
 
         content = (
             <div>
-                <Paper className={classes.calendar}>
+                <Paper className={classes.calendar} elevation={10}>
                     <RadioGroup
                         aria-label="Views"
                         className={classes.radio}
@@ -93,6 +93,7 @@ const CalendarView = (props) => {
                         <FormControlLabel value="Day" control={<Radio />} label="Day" />
                     </RadioGroup>
                     <Scheduler
+                        elevation={20}
                         data={props.appData.appointments.map(makeData)}>
                         <ViewState currentViewName={viewName} />
                         <MonthView />

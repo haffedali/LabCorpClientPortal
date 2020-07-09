@@ -65,7 +65,7 @@ const DatePicker = (props) => {
                         spacing={3}
                     >
                         <Grid>
-                            <Paper className={classes.paper}>
+                            <Paper className={classes.paper} elevation={5}>
                                 <KeyboardDatePicker
                                     disableToolbar
                                     variant="inline"
@@ -86,7 +86,7 @@ const DatePicker = (props) => {
                         </Grid>
 
                         <Grid>
-                            <Paper className={classes.paper}>
+                            <Paper className={classes.paper} elevation={5}>
                                 <KeyboardTimePicker
                                     margin="normal"
                                     id="time-picker"
@@ -103,7 +103,7 @@ const DatePicker = (props) => {
                             </Paper>
                         </Grid>
                         <Grid>
-                            <Paper className={classes.paper}>
+                            <Paper className={classes.paper} elevation={5}>
                                 <KeyboardTimePicker
                                     margin="normal"
                                     id="End Time"
@@ -120,12 +120,12 @@ const DatePicker = (props) => {
                             </Paper>
                         </Grid>
                     <Grid>
-                        <Paper className={classes.paper}>
+                        <Paper className={classes.paper} elevation={5}>
                             <TextField id="standard-basic" label="Standard" />
                         </Paper>
                     </Grid>
                     <Grid>
-                        <Paper className={classes.paper}>
+                        <Paper className={classes.paper} elevation={5}>
                             <ScheduledAlert />
                         </Paper>
                     </Grid>

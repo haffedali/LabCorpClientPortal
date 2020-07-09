@@ -43,6 +43,7 @@ const light = createMuiTheme({
     PRIORITY_2: colors.AURORA[1],
     // Calendar
     CALENDAR_BACKGROUND: colors.SNOW_STORM[2],
+    CALENDAR_ROW: colors.SNOW_STORM[3],
     // Button Primary
     BTN_PRIMARY: colors.FROST[3],
     BTN_PRIMARY_TXT: colors.WHITE,
@@ -108,7 +109,8 @@ const dark = createMuiTheme({
     PRIORITY_1: colors.AURORA[0],
     PRIORITY_2: colors.AURORA[1],
     // Calendar
-    CALENDAR_BACKGROUND: colors.POLAR_NIGHT[0],
+    CALENDAR_BACKGROUND: colors.POLAR_NIGHT[2],
+    CALENDAR_ROW: colors.POLAR_NIGHT[3],
     // Button Primary
     BTN_PRIMARY: colors.FROST[3],
     BTN_PRIMARY_TXT: colors.WHITE,

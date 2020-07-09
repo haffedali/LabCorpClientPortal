@@ -14,7 +14,10 @@ export const useStyles = makeStyles((theme) => ({
         color: theme.DRAWER_TEXT
     },
     calendar: {
-        backgroundColor: theme.CALENDAR_BACKGROUND
+        backgroundColor: theme.CALENDAR_BACKGROUND,
+        '& .MuiTableRow-root': {
+            backgroundColor: theme.CALENDAR_ROW
+        }
     },
     radio: {
         display: 'block!important',
