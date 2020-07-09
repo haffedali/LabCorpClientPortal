@@ -9,6 +9,7 @@ export const appointmentsApi = {
    */
 
   query: (id) => {
+    let dateNow = new Date()
     const queryString = apiRoute + `contacts(${id})/Contact_Appointments?$select=subject,scheduledstart,scheduledend,ss_standing&$filter=ss_standing eq 2`;
     return adalApiFetch(axios, queryString, getConfig)
   },

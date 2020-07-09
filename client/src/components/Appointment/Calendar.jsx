@@ -36,7 +36,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 const makeData = appointment => ({
-    ...appointment,
     title: appointment.subject,
     startDate: appointment.scheduledstart,
     endDate: appointment.scheduledend,
@@ -81,7 +80,7 @@ const CalendarView = (props) => {
 
         content = (
             <div>
-                <Paper>
+                <Paper className={classes.calendar}>
                     <RadioGroup
                         aria-label="Views"
                         className={classes.radio}

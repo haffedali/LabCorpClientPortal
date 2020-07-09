@@ -56,7 +56,7 @@ export default function ScrollableTabsButtonForce() {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" color="default">
+      <AppBar className={classes.header} position="static" color="default">
         <Tabs
           className={classes.tab}
           value={value}
@@ -67,7 +67,7 @@ export default function ScrollableTabsButtonForce() {
           textColor="primary"
           aria-label="scrollable force tabs example"
         >
-          <Tab label="Calendar" icon={<TodayIcon />} {...a11yProps(0)} />
+          <Tab className={classes.button} label="Calendar" icon={<TodayIcon />} {...a11yProps(0)} />
           <Tab label="Schedule" icon={<ScheduleIcon />} {...a11yProps(1)} />
         </Tabs>
       </AppBar>
