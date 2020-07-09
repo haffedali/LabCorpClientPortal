@@ -1,15 +1,15 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
-  root: {
+  root: props => ({
     '& > *': {
-      // borderBottom: 'unset',
-      color: theme.PRIMARY,
+      color: props.status === 2 || props.datePriority === 1 ? theme.WHITE : theme.PRIMARY,
     },
+    backgroundColor: props.status === 0 ? props.datePriority === 1 ? theme.ROW_OVERDUE : '' : theme.ROW_PAID,
     '&:hover': {
-      backgroundColor: `${theme.BACKGROUND_001} !important`,
+      backgroundColor: props.status === 0 ? props.datePriority === 1 ? theme.ROW_OVERDUE_HOVER : `${theme.BACKGROUND_001} !important` : theme.ROW_PAID_HOVER,
     },
-  },
+  }),
   detailsRoot: {
     '& > *': {
       color: theme.PRIMARY,
@@ -17,7 +17,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   testTblRoot: {
     '& > *': {
-      color: `${theme.PRIMARY}`,
+      color: theme.PRIMARY,
     },
   },
   invDetailsDescCont: {
@@ -34,12 +34,12 @@ export const useStyles = makeStyles((theme) => ({
   },
   headerRow: {
     '& > th': {
-      border: '0px !important'
+      // border: '0px !important'
     },
   },
-  collapsedContainer: {
-    backgroundColor: theme.BACKGROUND_001,
-  },
+  collapsedContainer: props => ({
+    backgroundColor: props.status === 2 ? theme.DETAILS_PAID : props.datePriority === 1 ? theme.DETAILS_OVERDUE : theme.BACKGROUND_001,
+  }),
   detailsHeader: {
     marginBottom: '1em',
   },
@@ -49,28 +49,25 @@ export const useStyles = makeStyles((theme) => ({
     color: theme.PRIMARY,
     fontSize: '1.2em',
   },
-  arrowIcons: {
-    color: theme.HIGHLIGHT,
-  },
-  money: {
-    color: theme.MONEY,
+  arrowIcons: props => ({
+    color: props.status === 2 || props.datePriority === 1 ? theme.WHITE : theme.HIGHLIGHT,
+  }),
+  money: props => ({
+    color: props.status === 2 || props.datePriority === 1 ? theme.WHITE : `${theme.MONEY} !important`,
     fontWeight: 'bold'
-  },
+  }),
+  moneyDetails: props => ({
+    color: props.status === 2 ? theme.PAID : props.datePriority === 1 ? theme.OVERDUE : `${theme.MONEY} !important`,
+    fontWeight: 'bold'
+  }),
   invItemDivider: {
     backgroundColor: theme.TABLE_DIVIDER
   },
-  datePriority1: {
-    color: theme.PRIORITY_1,
-    fontWeight: 'bold'
-  },
-  datePriority2: {
-    color: theme.PRIORITY_2,
-  },
-  datePriority3: {
-    color: theme.PRIMARY,
-  },
   paymentCompleteIcon: {
-    color: theme.PAID
+    color: theme.PAID,
+    '& > path': {
+      fill: theme.WHITE
+    }
   },
   btnPrimary: {
     minWidth: '100px',
@@ -103,10 +100,34 @@ export const useStyles = makeStyles((theme) => ({
     padding: 0,
     fontSize: '0.875rem',
     fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
-    // fontWeight: 400,
     lineHeight: '1.43',
     letterSpacing: '0.01071em',
     textTransform: 'none',
     color: 'inherit',
   },
+  datePriority: props => {
+    switch(props.datePriority) {
+      case 0: {
+        return {
+          color: theme.WHITE,
+        }
+      }
+      case 1: {
+        return {
+          color: theme.WHITE,
+        }
+      }
+      case 2: {
+        return {
+          color: theme.PRIORITY_2,
+          fontWeight: 'bold',
+        }
+      }
+      default: {
+        return {
+          color: theme.PRIMARY,
+        }
+      }
+    }
+  },   
 }));

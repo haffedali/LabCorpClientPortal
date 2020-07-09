@@ -65,6 +65,7 @@ const Checkout = (props) => {
   });
 
   useEffect(() => {
+    console.log(props.status.status)
     async function fetchConfig() {
       // Fetch config from our backend.
       const { publicKey, currency } = await fetch(
@@ -114,7 +115,7 @@ const Checkout = (props) => {
       className={classes.btnSecondary}
     >
     {state.loading || !state.price
-      ? <p className={classes.btnPrimaryTxt}>Loading...</p>
+      ? <p className={classes.btnLoading}>Loading...</p>
       : <p className={classes.btnPrimaryTxt}>Pay {formatPrice({
         amount: state.price,
         currency: 'usd',

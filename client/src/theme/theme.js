@@ -33,13 +33,20 @@ const light = createMuiTheme({
     // Invoices
     DUE_DATE: colors.AURORA[1],
     PAID: colors.AURORA[3],
+    OVERDUE: colors.AURORA[0],
+    ROW_PAID: 'rgba(163, 190, 140, 0.8)',
+    ROW_PAID_HOVER: 'rgba(163, 190, 140, 1) !important',
+    ROW_OVERDUE: 'rgba(191, 97, 106, 0.8)',
+    ROW_OVERDUE_HOVER: 'rgba(191, 97, 106, 1) !important',
+    DETAILS_PAID: 'rgba(163, 190, 140, 0.2)',
+    DETAILS_OVERDUE: 'rgba(191, 97, 106, 0.3)',
     // Global
     PRIMARY: colors.PRIMARY_LIGHT,
     WHITE: colors.WHITE,
     HIGHLIGHT: colors.FROST[1],
     ERROR: colors.AURORA[0],
     // MONEY: colors.AURORA[3],
-    MONEY: colors.FROST[1],
+    MONEY: colors.FROST[3],
     PRIORITY_1: colors.AURORA[0],
     PRIORITY_2: colors.AURORA[1],
     // Button Primary
@@ -98,6 +105,12 @@ const dark = createMuiTheme({
     // Invoices
     DUE_DATE: colors.AURORA[2],
     PAID: colors.AURORA[3],
+    ROW_PAID: 'rgba(163, 190, 140, 0.3)',
+    ROW_PAID_HOVER: 'rgba(163, 190, 140, 0.5) !important',
+    ROW_OVERDUE: 'rgba(191, 97, 106, 0.3)',
+    ROW_OVERDUE_HOVER: 'rgba(191, 97, 106, 0.5) !important',
+    DETAILS_PAID: 'rgba(163, 190, 140, 0.1)',
+    DETAILS_OVERDUE: 'rgba(191, 97, 106, 0.1)',
     // Global
     PRIMARY: colors.PRIMARY_DARK,
     WHITE: colors.WHITE,

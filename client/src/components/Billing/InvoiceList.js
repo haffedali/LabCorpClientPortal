@@ -6,15 +6,17 @@ import { useSelector } from 'react-redux';
 import { useStyles } from './InvoiceList.styles';
 import { BasicTable } from '../';
 
-const getTableData = (data) => 
+const getTableData = (data) =>
   data.map((cols) => ({
-    invId: cols[0], 
-    name: cols[1], 
-    duedate: cols[2], 
-    totalamount: cols[3], 
-    description: cols[4], 
-    products: cols[5],
-    stripeid: cols[6],
+      invId: cols[0], 
+      name: cols[1], 
+      duedate: cols[2], 
+      totalamount: cols[3], 
+      description: cols[4], 
+      products: cols[5],
+      stripeid: cols[6],
+      statecode: cols[7],
+      statuscode: cols[8],
   }));
 
 const InvoiceList = (props) => {
@@ -25,7 +27,7 @@ const InvoiceList = (props) => {
 
   return (
     <div className={classes.root}>
-      <h3>Invoice History</h3>
+      <h2>Invoice History</h2>
       <BasicTable 
         rows={getTableData(invoices.map((obj) => 
           Object.keys(obj).map((key) => {

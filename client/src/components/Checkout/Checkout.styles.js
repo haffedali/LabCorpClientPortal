@@ -1,19 +1,19 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
-  btnSecondary: {
-    minWidth: '100px',
+  btnSecondary: props => ({
+    minWidth: '125px',
     padding: '5px 15px',
     backgroundColor: theme.BTN_SECONDARY,
     border: theme.BTN_SECONDARY_BORDER,
-    color: theme.BTN_SECONDARY_TXT,
+    color: props.status.status === 2 ? theme.BTN_SECONDARY_TXT : theme.BTN_SECONDARY_TXT,
     transition: 'all 0.3s ease',
     '&:hover': {
       backgroundColor: theme.BTN_SECONDARY_HOVER,
       border: theme.BTN_SECONDARY_BORDER_HOVER,
       color: theme.BTN_SECONDARY_TXT_HOVER
-    }
-  },
+    },
+  }),
   btnPrimaryTxt: {
     margin: 0,
     padding: 0,
@@ -24,4 +24,14 @@ export const useStyles = makeStyles((theme) => ({
     textTransform: 'none',
     color: 'inherit',
   },
+  btnLoading: {
+    margin: 0,
+    padding: 0,
+    fontSize: '0.875rem',
+    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+    lineHeight: '1.43',
+    letterSpacing: '0.01071em',
+    textTransform: 'none',
+    color: theme.HIGHLIGHT,
+  }
 }));

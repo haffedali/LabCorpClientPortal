@@ -14,29 +14,25 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 
 import { useStyles } from './BasicTable.styles';
-import { Divider, Button } from '@material-ui/core';
+import { Divider } from '@material-ui/core';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 
 import { Checkout } from '../'
 
-const paymentPriority = (classes, due) => {
-
-  if (due === null) {
-    return classes.datePriority3;
-  }
+const paymentPriority = (due, status) => {
+  if (!due) {
+    if (status !== 0) {
+      return 0;
+    } else return;
+  } 
+  
+  if (status !== 0) return 0;
 
   const [year, month, date] = due.split('-');
   const duedate = new Date(`${month}/${date}/${year}`);
   const diffDays = Math.ceil((duedate - Date.now()) / (1000 * 60 * 60 * 24)); 
-
-  if (diffDays <= 15) {
-    return classes.datePriority1;
-  } else if (diffDays <= 31) {
-    return classes.datePriority3;
-  } else {
-    return classes.datePriority3
-  }
-
+  
+  return diffDays <= 0 ? 1 : diffDays <= 15 ? 2 : 3;
 }
 
 const PAID = false;
@@ -44,7 +40,12 @@ const PAID = false;
 function Row(props) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
-  const classes = useStyles(props);
+  const styleProps = { 
+    ...props, 
+    status: row.statecode,
+    datePriority: paymentPriority(row.duedate, row.statecode)
+  };
+  const classes = useStyles(styleProps);
 
   return (
     <React.Fragment>
@@ -57,16 +58,17 @@ function Row(props) {
           {row.invId}
         </TableCell>
         <TableCell className={classes.name}>{row.name}</TableCell>
-        <TableCell align='center' className={paymentPriority(classes, row.duedate)}>{row.duedate || 'N/A'}</TableCell>
+        <TableCell align='center' className={classes.datePriority}>{row.duedate || 'N/A'}</TableCell>
         <TableCell align='center' className={classes.money}>${row.totalamount}</TableCell>
         <TableCell align='center' className={classes.paymentStatus}>
-          {PAID ? (
+          {row.statecode === 2 ? (
             <CheckCircleIcon className={classes.paymentCompleteIcon} />
           ) : (
             <Checkout 
               price={row.totalamount * 100} 
               name={row.name}
               stripeid={row.stripeid}
+              status={{status: row.statecode, reason: row.statuscode}}
             />
           ) }
         </TableCell>
@@ -79,7 +81,7 @@ function Row(props) {
 
       {/* DETAILS */}
       <TableRow className={classes.detailsRoot}>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0, border: 0, paddingLeft: 0 }} colSpan={6}>
+        <TableCell style={{ padding: 0, border: 0 }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit className={classes.collapsedContainer}>
             <Divider className={classes.invItemDivider} style={{marginBottom: '20px'}}/>
             <Box margin={1}>
@@ -99,7 +101,7 @@ function Row(props) {
                       <TableCell component="th" scope="row">
                         {productRow.productname}
                       </TableCell>
-                      <TableCell align="right" className={classes.money}>${productRow.priceperunit}</TableCell>
+                      <TableCell align="right" className={classes.moneyDetails}>${productRow.priceperunit}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>

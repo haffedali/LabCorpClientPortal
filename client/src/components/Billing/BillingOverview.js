@@ -14,7 +14,7 @@ const BillingOverview = (props) => {
       <Divider className={classes.divider} />
       <InvoiceList />
       <div>
-        <h3>Completed Payments</h3>
+        <h3></h3>
       </div>
     </div>
   );
