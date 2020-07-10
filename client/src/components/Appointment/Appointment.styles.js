@@ -15,6 +15,7 @@ export const useStyles = makeStyles((theme) => ({
     },
     calendar: {
         backgroundColor: theme.CALENDAR_BACKGROUND,
+        color: theme.DRAWER_TEXT,
         '& .MuiTableRow-root': {
             backgroundColor: theme.CALENDAR_ROW
         }
@@ -25,15 +26,18 @@ export const useStyles = makeStyles((theme) => ({
         justifyContent: 'center',
 
     },
-    paper: {
+    date: {
         backgroundColor: theme.CALENDAR_BACKGROUND,
-        margin: `${theme.spacing(0.5)}px auto`,
+        margin: `${theme.spacing(1)}px auto`,
         padding: theme.spacing(1),
         textAlign: 'center',
         color: theme.DRAWER_TEXT
     },
     grid: {
         padding: theme.spacing(2)
+    },
+    button: {
+        padding: theme.spacing(3)
     }
     /*       tab: {
             textAlign: "center"
