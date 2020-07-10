@@ -19,6 +19,7 @@ function mapStateToProps(state) {
     inboxMessages: state.messagesReducer.inboxMessages,
     getMessageRequest: state.messagesReducer.getMessageRequest,
     sentMessages: state.messagesReducer.sentMessages,
+    sentEmailStatus: state.messagesReducer.sentEmailStatus
   };
 }
 
@@ -32,6 +33,15 @@ function mapDispatchToProps(dispatch) {
 const Messages = (props) => {
   const classes = useStyles();
   const { actions, userInfo } = props;
+
+
+  useEffect(()=>{
+    if (props.sentEmailStatus !== 'pending' && props.sentEmailStatus !== 'empty' && props.sentEmailStatus){
+      actions.switchPage("Inbox")
+      actions.getInboxEmails(userInfo.contactId);
+      actions.getSentEmails(userInfo.email);
+    }
+  },[props.sentEmailStatus])
 
   const displayPage = () => {
     switch (props.currentPage) {
@@ -58,8 +68,6 @@ const Messages = (props) => {
   };
   useEffect(() => {
     actions.getInboxEmails(userInfo.contactId);
-    // messagesApi.getSentEmails(userInfo.email)
-    // .then(r=>console.log(r.data.value))
     actions.getSentEmails(userInfo.email);
   }, []);
 

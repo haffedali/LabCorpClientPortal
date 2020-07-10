@@ -9,13 +9,16 @@ import {useStyles} from './ButtonSet.styles'
 
 const ButtonSet = (props) => {
   const classes = useStyles();
-  const emailObj = useSelector(state => state.messagesReducer) 
+  const emailObj = useSelector(state => state.messagesReducer)
+  // const sentEmailStatus = useSelector(state => state.messagesReducer.sentEmailStatus) 
   const dispatch = useDispatch();
 
   const handleSendEmailClick = () => {
     dispatch(sendEmail(emailObj.emailObj));
     
   }
+
+
 
   if (props.currentPage !== "Create") {
     return (

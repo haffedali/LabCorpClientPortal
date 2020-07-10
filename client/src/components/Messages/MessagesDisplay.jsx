@@ -1,4 +1,6 @@
-import React from "react";
+import React, {useEffect} from "react";
+import { useSelector, useDispatch } from "react-redux";
+
 import {
   List,
   ListItem,
@@ -90,6 +92,11 @@ const MessagesDisplayItem = ({ item }) => {
 export const MessagesDisplay = (props) => {
   const classes = useStyles(props);
   const theme = useTheme();
+  const dispatch = useDispatch();
+
+  useEffect(()=>{
+    dispatch({type: 'SENT_EMAIL_STATUS_RESET'})
+  },[])
   return (
     <List className={classes.listContainer}>
       {props.messages.length ? (

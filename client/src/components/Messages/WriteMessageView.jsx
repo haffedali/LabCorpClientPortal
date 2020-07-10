@@ -26,6 +26,7 @@ const WriteMessageView = (props) => {
     dispatch({ type: "UPDATE_EMAIL_OBJ", emailObj: currentMessage });
   };
 
+  
   return (
     <Grid container direction={"column"}>
       <Grid item xs={2} className={classes.toInputContainer}>
@@ -34,6 +35,7 @@ const WriteMessageView = (props) => {
           name="recipient"
           className={classes.toInput}
           onChange={(e) => handleTextFieldChanges(e)}
+          value={currentMessage.recipient}
           startAdornment={
             <InputAdornment position="start">
               <AccountCircle />
@@ -47,6 +49,7 @@ const WriteMessageView = (props) => {
           name="subject"
           className={classes.toInput}
           onChange={(e) => handleTextFieldChanges(e)}
+          value={currentMessage.subject}
           startAdornment={
             <InputAdornment position="start">
               <Subject />
@@ -58,6 +61,7 @@ const WriteMessageView = (props) => {
         <TextField
           name="body"
           onChange={(e) => handleTextFieldChanges(e)}
+          value={currentMessage.body}
           className={classes.bodyTextField}
           multiline
           variant={"outlined"}

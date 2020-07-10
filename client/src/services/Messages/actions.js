@@ -7,7 +7,7 @@ import {
   SENT_EMAIL_STARTED,
   SENT_EMAIL_FAILED,
   SENT_EMAIL_SUCCESS,
-  UPDATE_EMAIL_OBJ
+  UPDATE_EMAIL_OBJ,
 } from "./actionTypes";
 import { messagesApi } from "../../utils";
 
@@ -83,19 +83,23 @@ export const getSentEmails = (email) => {
 
 export const sendEmail = (emailObj) => {
   return (dispatch) => {
-    dispatch(_sendEmailStarted);
+    dispatch(_sendEmailStarted());
     messagesApi
       .createNewEmail(emailObj)
-      .then((r) => console.log(r))
-      .catch((e) => console.log(e));
+      .then((r) => {
+        dispatch(_sendEmailSuccess());
+      })
+      .catch((e) => {
+        dispatch(_sendEmailFailed());
+      });
   };
 };
 
 export const writeEmail = (emailObj) => {
   return (dispatch) => {
-    dispatch(_updateEmailObj(emailObj))
-  }
-}
+    dispatch(_updateEmailObj(emailObj));
+  };
+};
 const _switchPage = (page) => {
   return {
     type: SWITCH_PAGE,
@@ -150,6 +154,6 @@ const _sendEmailSuccess = () => {
 const _updateEmailObj = (emailObj) => {
   return {
     type: UPDATE_EMAIL_OBJ,
-    emailObj: emailObj
-  }
-}
+    emailObj: emailObj,
+  };
+};

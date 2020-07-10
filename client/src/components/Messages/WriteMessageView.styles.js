@@ -10,7 +10,7 @@ export const useStyles = makeStyles((theme) => ({
     },
     subjectInput:{},
     bodyTextField:{
-        width: '80vw',
+        width: '65vw',
         padding: '.5vw',
     },
     container:{}

@@ -5,10 +5,17 @@ import { buildApiPost, buildApiCall } from "./helperFunctions";
 
 export const messagesApi = {
   getInboxEmails: (id) => {
-    const queryString =
-      apiRoute +
-      `contacts(${id})/Contact_Emails?$select=subject,sender,description,actualend`;
+    // const queryString =
+    //   apiRoute +
+    //   `contacts(${id})/Contact_Emails?$select=subject,sender,description,actualend`;
 
+    const queryObj = {
+      entity: "emails",
+      select: ["description", "actualend", "subject", "sender"],
+      filter: [{ field: "torecipients", value: "haffedmcnair@gmail.com" }],
+      orderBy: [{field: 'actualend', operator: 'desc'}]
+    } 
+    const queryString = buildApiCall(queryObj)
     return adalApiFetch(axios, queryString, getConfig);
   },
 
