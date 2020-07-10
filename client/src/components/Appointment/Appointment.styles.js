@@ -39,7 +39,4 @@ export const useStyles = makeStyles((theme) => ({
     button: {
         padding: theme.spacing(3)
     }
-    /*       tab: {
-            textAlign: "center"
-          } */
 }));
