@@ -1,6 +1,6 @@
 export const dateError = (selectedDate) => {
     if (selectedDate.startDate < new Date()) {
-        return "Date Must be after Today"   
+        return "Date Must be after Today"
     }
 
     if (selectedDate.startDate.getDay() === 0 || selectedDate.startDate.getDay() === 6) {
