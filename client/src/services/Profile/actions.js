@@ -6,7 +6,7 @@ import {
 
 
 export const updateAttempt = (userInfo) => {
-    let updateData = {
+    let updateUserInfo = {
         address = userInfo.address,
         city: userInfo.city,
         state: userInfo.state,
@@ -22,7 +22,7 @@ export const updateAttempt = (userInfo) => {
         headers: {
             Prefer: "odata.include-annotations=*",
         },
-        data: updateData,
+        data: updateUserInfo,
     };
     return (dispatch) => {
         // Make update api calls
@@ -35,13 +35,12 @@ export const updateAttempt = (userInfo) => {
         )  
             .then ((res) => {
                 dispatch(_updateProfileSuccess(res));
-                dispatch(readProfile());
+                // dispatch(readProfile());
             })
             .catch ((error) => {
                 console.log(error);
                 dispatch(_updateProfileFailed(error));
             });
-
     };
 };
 

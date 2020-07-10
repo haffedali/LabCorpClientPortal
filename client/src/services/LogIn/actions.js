@@ -45,7 +45,7 @@ const _loginSuccess = (userInfo) => {
         city: userInfo.address1_city,
         state: userInfo.address1_stateorprovince,
         phone: userInfo.mobilephone,
-        zipCode: userInfo.postalcode,
+        zipCode: userInfo.address1_postalcode,
         email: userInfo.emailaddress1,
         insurancePlan: userInfo.ss_contact_ss_insuranceplan_Patient[0].ss_name
       },

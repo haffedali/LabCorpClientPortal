@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector, useDispatch } from "react-redux";
 import { useStyles } from './ProfileForm.styles';
 import {TextField, Button} from '@material-ui/core';
 
@@ -12,13 +13,9 @@ function mapStateToProps(state) {
   }
 
 const handleInfoChange = (e) => {
-  setButtonDisable(false);
   const { name, value } = e.target;
-  setTextValues({ 
-    ...textValues,
-    [name]: value,
-    ["contactId"]: info.pData.value[0]["contactId"],
-  });
+  setCurrentUserInfo({ ...userInfo, [name]: value });
+    dispatch ({ type: "UPDATE_SUCCESS", userInfo });
 };
 
 function FormFields(props) {
@@ -73,7 +70,6 @@ function FormFields(props) {
         />
         <TextField
             className={classes.fieldBox}
-            // error
             id="contactAddrZip"
             label="ZIP Code"
             defaultValue= {props.userInfo.zipCode}
@@ -116,11 +112,11 @@ function FormFields(props) {
         /> */}
         <Button
           className={classes.button}
-          disable={buttonDisabled}
+          // disable={buttonDisabled}
           variant="filled"
           onClick={() => {
-            dispatchEvent(profileActionc.updateProfile(textValues));
-            setButtonDisable(true);
+            dispatchEvent(updateAttempt(userInfo));
+            // setButtonDisable(true);
           }} >
               Update Information
         </Button>
