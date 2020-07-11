@@ -20,6 +20,7 @@ services:
     volumes: 
       - ./users-service:/opt/app
   users-service-db:
+    command: --disable-partition-engine-check
     environment: 
       - MYSQL_ROOT_PASSWORD=password
       - MYSQL_DATABASE=db

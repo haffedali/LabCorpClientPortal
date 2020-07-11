@@ -17,6 +17,8 @@ const getTableData = (data) =>
       stripeid: cols[6],
       statecode: cols[7],
       statuscode: cols[8],
+      productid: cols[9],
+      invoiceid: cols[10]
   }));
 
 const InvoiceList = (props) => {

@@ -45,25 +45,16 @@ app.get('/checkout-session', async (req, res) => {
 app.post('/create-checkout-session', async (req, res) => {
   const domainURL = process.env.DOMAIN;
 
-  const { quantity, price, name, stripeid, locale } = req.body;
+  const { quantity, price, name, stripeid, productid, invoiceid, locale } = req.body;
 
   const sessionObj = {
     payment_method_types: process.env.PAYMENT_METHODS.split(', '),
     mode: 'payment',
     locale: locale,
-    line_items: [
-      {
-        price_data: {
-          currency: 'usd',
-          product_data: {
-            name: name,
-          },
-          unit_amount: price,
-        },
-        quantity: quantity
-      },
-    ],
-    // ?session_id={CHECKOUT_SESSION_ID} means the redirect will have the session ID set as a query param
+    line_items: [],
+    metadata: {
+      invoiceid: invoiceid,
+    },
     success_url: `${domainURL}/success?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${domainURL}/canceled`,
   };
@@ -71,6 +62,30 @@ app.post('/create-checkout-session', async (req, res) => {
   // Connect payment to stripe customer if one exists
   if (stripeid) {
     sessionObj.customer = stripeid;
+  }
+
+  if (productid) {
+    const product_price = await stripe.prices.create({
+        unit_amount: price,
+        currency: 'usd',
+        product: productid,
+      });
+
+    sessionObj.line_items.push({
+      price: product_price.id,
+      quantity: quantity
+    });
+  } else {
+    sessionObj.line_items.push({
+      price_data: {
+        currency: 'usd',
+        product_data: {
+          name: name,
+        },
+        unit_amount: price,
+      },
+      quantity: quantity
+    })
   }
   
   // Create new Checkout Session for the order

@@ -1,4 +1,11 @@
-import { GRAB_INVOICES_SUCCESFUL, GRAB_INVOICES_FAILURE, GRAB_INVOICES_PENDING} from './actionTypes';
+import { 
+    GRAB_INVOICES_SUCCESFUL, 
+    GRAB_INVOICES_FAILURE, 
+    GRAB_INVOICES_PENDING,
+    UPDATE_INVOICE_PENDING,
+    UPDATE_INVOICE_SUCCESS,    
+    UPDATE_INVOICE_FAILED
+} from './actionTypes';
 import { invoiceApi } from "../../utils";
 import axios from "axios";
 
@@ -14,6 +21,16 @@ export const grabInvoices = (customerid) => {
             dispatch(_grabInvoicesFailed(error));
         });
     };
+}
+
+export const updateInvoice = (invoiceid) => {
+    return dispatch => {
+        return invoiceApi.patchInvoice(invoiceid).then(res => {
+            dispatch(_updateInvoiceSuccess());
+        }).catch(err => {
+            dispatch(_updateInvoiceFailed(err));
+        })
+    }
 }
 
 // Helper function
@@ -39,6 +56,8 @@ const _grabInvoicesSuccess = (invoiceList) => {
             stripeid: obj.customerid_contact.ss_stripeid,
             statecode: obj.statecode,
             statuscode: obj.statuscode,
+            productid: obj.ss_stripeproductid,
+            invoiceid: obj.invoiceid
         }))
     };
 }
@@ -54,4 +73,22 @@ const _grabInvoicesStarted = () => {
     return {
         type: GRAB_INVOICES_PENDING
     };
+}
+
+export const _updateInvoiceStarted = () => {
+    return {
+        type: UPDATE_INVOICE_PENDING
+    };
+}
+
+const _updateInvoiceSuccess = () => {
+    return {
+        type: UPDATE_INVOICE_SUCCESS
+    }
+}
+
+const _updateInvoiceFailed = () => {
+    return {
+        type: UPDATE_INVOICE_FAILED
+    }
 }

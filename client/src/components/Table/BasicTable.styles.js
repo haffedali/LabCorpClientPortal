@@ -3,7 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
   root: props => ({
     '& > *': {
-      color: props.status === 2 || props.datePriority === 1 ? theme.WHITE : theme.PRIMARY,
+      color: props.status === 2 ? theme.ROW_TXT_PAID : props.datePriority === 1 ? theme.ROW_TXT_OVERDUE : theme.PRIMARY,
+      fontWeight: props.status === 2 ? 'bold' : props.datePriority === 1 ? 'bold' : '',
     },
     backgroundColor: props.status === 0 ? props.datePriority === 1 ? theme.ROW_OVERDUE : '' : theme.ROW_PAID,
     '&:hover': {
@@ -20,17 +21,17 @@ export const useStyles = makeStyles((theme) => ({
       color: theme.PRIMARY,
     },
   },
-  invDetailsDescCont: {
+  invDetailsDescCont: props => ({
     paddingTop: '20px',
     paddingBottom: '20px',
-    color: theme.HIGHLIGHT,
-  },
+    color: props.status === 2 ? theme.ROW_DESC_PAID : props.datePriority === 1 ? theme.ROW_DESC_OVERDUE : theme.HIGHLIGHT,
+  }),
   invoiceTableContainer: {
     backgroundColor: theme.BILLING_BACKGROUND,
     boxShadow: 'none',
   },
   firstcol: {
-    paddingLeft: '0px'
+    // paddingLeft: '0px'
   },
   headerRow: {
     '& > th': {
@@ -50,12 +51,11 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: '1.2em',
   },
   arrowIcons: props => ({
-    color: props.status === 2 || props.datePriority === 1 ? theme.WHITE : theme.HIGHLIGHT,
+    color: props.status === 2 ? theme.EXPAND_PAID : props.datePriority === 1 ? theme.EXPAND_OVERDUE : theme.HIGHLIGHT,
   }),
-  money: props => ({
-    color: props.status === 2 || props.datePriority === 1 ? theme.WHITE : `${theme.MONEY} !important`,
-    fontWeight: 'bold'
-  }),
+  expandBtn: {
+    cursor: 'pointer'
+  },
   moneyDetails: props => ({
     color: props.status === 2 ? theme.PAID : props.datePriority === 1 ? theme.OVERDUE : `${theme.MONEY} !important`,
     fontWeight: 'bold'
@@ -64,9 +64,9 @@ export const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.TABLE_DIVIDER
   },
   paymentCompleteIcon: {
-    color: theme.PAID,
+    color: theme.WHITE,
     '& > path': {
-      fill: theme.WHITE
+      fill: theme.PAID
     }
   },
   btnPrimary: {
@@ -109,18 +109,12 @@ export const useStyles = makeStyles((theme) => ({
     switch(props.datePriority) {
       case 0: {
         return {
-          color: theme.WHITE,
+          color: theme.ROW_TXT_PAID,
         }
       }
       case 1: {
         return {
-          color: theme.WHITE,
-        }
-      }
-      case 2: {
-        return {
-          color: theme.PRIORITY_2,
-          fontWeight: 'bold',
+          color: theme.ROW_TXT_OVERDUE,
         }
       }
       default: {

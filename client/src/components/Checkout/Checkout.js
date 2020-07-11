@@ -3,7 +3,9 @@ import { loadStripe } from '@stripe/stripe-js';
 import { Button } from '@material-ui/core';
 import { useStyles } from './Checkout.styles';
 
-const fetchCheckoutSession = async ({ quantity, price, name, stripeid }) => {
+import { useSelector } from 'react-redux';
+
+const fetchCheckoutSession = async ({ quantity, price, name, stripeid, productid, invoiceid }) => {
   return fetch('/create-checkout-session', {
     method: 'POST',
     headers: {
@@ -13,7 +15,9 @@ const fetchCheckoutSession = async ({ quantity, price, name, stripeid }) => {
       quantity,
       price,
       name,
-      stripeid
+      stripeid,
+      productid,
+      invoiceid
     }),
   }).then((res) => res.json());
 };
@@ -91,6 +95,8 @@ const Checkout = (props) => {
       price: state.price,
       name: props.name,
       stripeid: props.stripeid,
+      productid: props.productid,
+      invoiceid: props.invoiceid
     });
     // When the customer clicks on the button, redirect them to Checkout.
     const { error } = await state.stripe.redirectToCheckout({

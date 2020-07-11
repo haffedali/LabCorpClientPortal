@@ -40,10 +40,11 @@ const PAID = false;
 function Row(props) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
+  const datePriority = paymentPriority(row.duedate, row.statecode);
   const styleProps = { 
     ...props, 
     status: row.statecode,
-    datePriority: paymentPriority(row.duedate, row.statecode)
+    datePriority: datePriority,
   };
   const classes = useStyles(styleProps);
 
@@ -68,12 +69,15 @@ function Row(props) {
               price={row.totalamount * 100} 
               name={row.name}
               stripeid={row.stripeid}
+              productid={row.productid}
               status={{status: row.statecode, reason: row.statuscode}}
+              priority={datePriority}
+              invoiceid={row.invoiceid}
             />
           ) }
         </TableCell>
         <TableCell align="right">
-          <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
+          <IconButton className={classes.expandBtn} aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
             {open ? <KeyboardArrowUpIcon className={classes.arrowIcons}/> : <KeyboardArrowDownIcon className={classes.arrowIcons}/>}
           </IconButton>
         </TableCell>
@@ -107,7 +111,12 @@ function Row(props) {
                 </TableBody>
               </Table>
               <div className={classes.invDetailsDescCont}>
-                <p>*{row.description}</p>
+                <p>
+                  { row.statecode === 0 ? 
+                    '*Please submit a payment on or before the due date to avoid additional fees.' :
+                    '*Invoice paid. No further action necessary.'
+                  }
+                  </p>
               </div>
             </Box>
             <Divider className={classes.invItemDivider}/>
