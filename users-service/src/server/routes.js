@@ -37,6 +37,39 @@ const setupRoutes = app => {
       return next(e);
     }
   });
+  app.post("/updatepassword", async (req, res, next) => {
+    if (!req.body.email || !req.body.password) {
+      return next(new Error("Invalid username or password!"));
+    }
+
+    try {
+      const user = await User.findOne({ attributes: {}, where: { email: req.body.email } });
+
+      if (!user) return next(new Error("Invalid email!"));
+
+      // if (!passwordCompareSync(req.body.password, user.passwordHash)) {
+      //   return next(new Error("Incorrect password!"));
+      // }
+
+      const updateUser = await user.update({
+        passwordHash: hashPassword(req.body.password)
+      })
+
+      const expiresAt = addHours(new Date(), USER_SESSION_EXPIRY_HOURS);
+
+      const sessionToken = generateUUID();
+
+      const userSession = await UserSession.create({
+        expiresAt,
+        id: sessionToken,
+        userId: user.id
+      });
+
+      return res.json(userSession);
+    } catch (e) {
+      return next(e);
+    }
+  });
 
   app.delete("/sessions/:sessionId", async (req, res, next) => {
     try {
@@ -79,6 +112,19 @@ const setupRoutes = app => {
       });
 
       return res.json(newUser);
+    } catch (e) {
+      return next(e);
+    }
+  });
+  app.patch("/users/:userId", async (req, res, next) => {
+    try {
+      const user = await User.findByPk(req.params.userId);
+
+      if (!user) return next(new Error("Invalid user ID"));
+
+      const updatedUser = await user.set('passwordHash', hashPassword(req.body.password));
+
+      return res.json(updatedUser);
     } catch (e) {
       return next(e);
     }

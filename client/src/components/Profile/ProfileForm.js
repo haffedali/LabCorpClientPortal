@@ -1,25 +1,69 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useStyles } from './ProfileForm.styles';
 import { TextField } from '@material-ui/core';
 
 import { useSelector, useDispatch } from "react-redux";
+// import { updateAttempt } from '../../services/Profile/actions';
+
+import { useMutation } from "@apollo/react-hooks";
+import gql from "graphql-tag"
+import { useForm } from "react-hook-form";
+import { setSession } from '../../services/Session/actions';
 import { loginAttempt } from '../../services/LogIn/actions';
 
+const mutation = gql`
+  mutation($email: String!, $password: String!) {
+    updateUserPassword(email: $email, password: $password) {
+      id
+      user {
+        contactId
+        email
+        id
+        firstName
+        lastName
+      }
+    }
+  }
+`;
+
 function FormFields(props) {
-  const classes = useStyles(props);
   const dispatch = useDispatch();
 
+    const classes = useStyles(props);
+    const {
+        formState: { isSubmitting },
+        handleSubmit,
+        register
+      } = useForm();
 
-  const userInfo = useSelector(state => state.session.user);
 
-  const insurancePlan = useSelector(state => state.loginReducer.userInfo ? state.loginReducer.userInfo.insurancePlan : '')
+      const {
+        firstName, 
+        lastName,
+        email,
+      } = useSelector(state => state.session.user)
 
-    useEffect(() => {
-        dispatch(loginAttempt(userInfo.contactId));
-    }, []);
+    const userInfo = useSelector(state => state.loginReducer.userInfo);
+    const sessionUser = useSelector(state => state.session.user)
+
+    const [updateUserPassword] = useMutation(mutation);
+
+    const onSubmit = handleSubmit(async ({ email, password }) => {
+        console.log(email, password, firstName)
+        try {
+          const {
+            data: { updateUserPassword: createdSession }
+          } = await updateUserPassword({ variables: { email, password } });
+          
+          dispatch(setSession(createdSession));
+          dispatch(loginAttempt(createdSession.user.contactId));
+        } catch (e) {
+          console.log(e.message);
+        }
+      });
 
   return (
-    <form className={classes.root} noValidate autoComplete="off">
+    <form onSubmit={onSubmit} className={classes.root} noValidate autoComplete="off">
       <div>
         <h2> User Profile </h2>
         <h3> Edit General Information </h3>
@@ -27,7 +71,7 @@ function FormFields(props) {
             className={classes.fieldBox}
             id="filled-required"
             label="Full Name"
-            defaultValue= {userInfo.firstName + " " + userInfo.lastName}
+            defaultValue= {firstName + " " + lastName}
             InputProps={{ readOnly: true, }}
             variant="filled"
         />
@@ -35,7 +79,7 @@ function FormFields(props) {
             className={classes.fieldBox}
             id="filled-insurance-number"
             label="Insurance Plan"
-            defaultValue={insurancePlan || null}
+            defaultValue={userInfo.insurancePlan || null}
             InputProps={{ readOnly: true, }}
             variant="filled"
         />
@@ -82,9 +126,11 @@ function FormFields(props) {
         />
         <TextField
             className={classes.fieldBox}
-            id="filled-email"
+            inputRef={register}
+            id="email"
             label="Email"
-            defaultValue= {userInfo.email}
+            name="email"
+            defaultValue={sessionUser.email}
             InputProps={{ readOnly: true, }}
             variant="filled"
         />
@@ -97,15 +143,16 @@ function FormFields(props) {
             InputProps={{ readOnly: true, }}
             variant="filled"
         />
-        {/* <TextField
+        <TextField
             className={classes.fieldBox}
-            id="filled-password-input"
+            id="password"
             label="Password"
             type="password"
-            defaultValue= {userInfo.contactId}
-            //autoComplete="current-password"
+            name="password"
+            inputRef={register}
             variant="filled"
-        /> */}
+        />
+        <button type="submit">Update Password</button>
       </div>
     </form>
   );
