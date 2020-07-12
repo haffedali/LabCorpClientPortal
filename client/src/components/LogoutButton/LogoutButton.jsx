@@ -10,19 +10,14 @@ import { useStyles } from "./LogoutButton.styles";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutAttempt } from '../../services/LogIn/actions';
 import { useMutation } from "@apollo/react-hooks";
-import gql from "graphql-tag";
 import { clearSession } from "../../services/Session/actions";
 
-const mutation = gql`
-  mutation($sessionId: ID!) {
-    deleteUserSession(sessionId: $sessionId)
-  }
-`;
+import { deleteSession } from '../../utils/mutations';
 
 const LogoutButton = (props) => {
   const classes = useStyles(props);
 
-  const [deleteUserSession] = useMutation(mutation);
+  const [ deleteUserSession ] = useMutation(deleteSession);
   const dispatch = useDispatch();
   const session = useSelector(state => state.session);
 

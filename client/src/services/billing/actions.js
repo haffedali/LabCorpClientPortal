@@ -7,7 +7,6 @@ import {
     UPDATE_INVOICE_FAILED
 } from './actionTypes';
 import { invoiceApi } from "../../utils";
-import axios from "axios";
 
 export const grabInvoices = (customerid) => {
     return dispatch => {

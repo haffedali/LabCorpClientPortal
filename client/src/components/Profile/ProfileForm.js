@@ -6,25 +6,11 @@ import { useSelector, useDispatch } from "react-redux";
 // import { updateAttempt } from '../../services/Profile/actions';
 
 import { useMutation } from "@apollo/react-hooks";
-import gql from "graphql-tag"
 import { useForm } from "react-hook-form";
 import { setSession } from '../../services/Session/actions';
 import { loginAttempt } from '../../services/LogIn/actions';
 
-const mutation = gql`
-  mutation($email: String!, $password: String!) {
-    updateUserPassword(email: $email, password: $password) {
-      id
-      user {
-        contactId
-        email
-        id
-        firstName
-        lastName
-      }
-    }
-  }
-`;
+import { updatePassword } from '../../utils/mutations';
 
 function FormFields(props) {
   const dispatch = useDispatch();
@@ -46,7 +32,7 @@ function FormFields(props) {
     const userInfo = useSelector(state => state.loginReducer.userInfo);
     const sessionUser = useSelector(state => state.session.user)
 
-    const [updateUserPassword] = useMutation(mutation);
+    const [ updateUserPassword ] = useMutation(updatePassword);
 
     const onSubmit = handleSubmit(async ({ email, password }) => {
         console.log(email, password, firstName)

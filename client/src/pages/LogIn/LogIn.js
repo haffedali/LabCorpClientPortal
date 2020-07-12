@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useTheme } from '../../theme/ThemeContext';
 import { useMutation } from "@apollo/react-hooks";
-import gql from "graphql-tag"
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { setSession } from '../../services/Session/actions';
@@ -12,20 +11,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import logo from '../../assets/img/logo.png';
 import { useStyles } from './LogIn.styles';
 
-const mutation = gql`
-  mutation($email: String!, $password: String!) {
-    createUserSession(email: $email, password: $password) {
-      id
-      user {
-        contactId
-        email
-        id
-        firstName
-        lastName
-      }
-    }
-  }
-`;
+import { createSession } from '../../utils/mutations';
 
 const LogIn = ({ onChangeToSignUp: pushChangeToSignUp }, props) => {
   const classes = useStyles(props);
@@ -40,7 +26,7 @@ const LogIn = ({ onChangeToSignUp: pushChangeToSignUp }, props) => {
     handleSubmit,
     register
   } = useForm();
-  const [createUserSession] = useMutation(mutation);
+  const [createUserSession] = useMutation(createSession);
 
   const onSubmit = handleSubmit(async ({ email, password }) => {
     try {
