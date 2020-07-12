@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from "react-redux";
+import React, { useState } from 'react';
 import { useStyles } from './ProfileForm.styles';
 import * as profileActions from '../../services/Profile/actions';
 import {TextField, Button} from '@material-ui/core';
@@ -22,7 +21,6 @@ function mapDispatchToProps(dispatch) {
 const ProfileForm = (props) => {
   const [profileInfo, setCurrentUserInfo] = useState({
     phone: props.userInfo.phone,
-
   });
 
   const handleInfoChange = (e) => {
@@ -109,19 +107,17 @@ return (
         />
         <Button
           className={classes.button}
-          // disable={buttonDisabled}
           variant="filled"
-          onClick={() => 
-            // handleInfoChange(
-            //   profileInfo.address, 
-            //   profileInfo.city, 
-            //   profileInfo.state, 
-            //   profileInfo.zipCode, 
-            //   profileInfo.phone )
-            dispatchEvent(profileActions.updateProfile(props.userInfo))
-          } >
+          // onClick={() => 
+          //   dispatchEvent(profileActions.updateProfile(props.userInfo))
+          // } 
+          onClick={(e) => {
+            e.preventDefault()
+            props.actions.updateProfile(profileInfo)
+          }}>
               Update Information
         </Button>
+        
         <h3> Your Login Credentials </h3>
         <TextField
             className={classes.fieldBox}
