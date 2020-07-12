@@ -96,6 +96,21 @@ app.post('/create-checkout-session', async (req, res) => {
   // For full details see https://stripe.com/docs/api/checkout/sessions/create
   const session = await stripe.checkout.sessions.create(sessionObj);
 
+    
+  const accountSid = 'AC485144e8173eef38b20fa54d64aba535';
+  const authToken = 'bb868abbf69ab4bf2ecfd5694a06a655';
+  const client = require('twilio')(accountSid, authToken);
+  try {
+    client.messages.create({
+        body: `${price} - ${name}`,
+        from: '+12015845088',
+        to: '+8182810894'
+      })
+      .then(message => console.log(message.sid));
+  } catch (e) {
+    console.log(e)
+  }
+
   res.send({
     sessionId: session.id,
   });
