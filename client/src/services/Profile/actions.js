@@ -7,18 +7,11 @@ import updateConfigGenerator from "../../utils/APIHeaders";
 import { profileApi } from "../../utils/profileApi";
 
 
-export const updateProfile = (userInfo) => {
-    let updateUserInfo = {
-        address: userInfo.address,
-        city: userInfo.city,
-        state: userInfo.state,
-        zipCode: userInfo.zipCode,
-        phone: userInfo.phone,
-    };
+export const updateProfile = (userInfo, contactId) => {
     return (dispatch) => {
         // Make update api calls
         dispatch(_updateProfileStarted());
-        return profileApi.patchProfileUpdate(userInfo).then((res) => {
+        return profileApi.patchProfileUpdate(userInfo, contactId).then((res) => {
                 dispatch(_updateProfileSuccess(res));
             })
             .catch ((error) => {

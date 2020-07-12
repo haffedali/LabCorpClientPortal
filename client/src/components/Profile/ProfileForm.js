@@ -20,16 +20,16 @@ function mapDispatchToProps(dispatch) {
 
 const ProfileForm = (props) => {
   const [profileInfo, setCurrentUserInfo] = useState({
-    phone: props.userInfo.phone,
+    firstname: props.userInfo.firstName,
   });
 
   const handleInfoChange = (e) => {
     const { name, value } = e.target;
     setCurrentUserInfo({ ...profileInfo, [name]: value });
+    console.log(profileInfo.firstName)
   };
 
   const classes = useStyles(props);
-  const [value, setValue] = React.useState(0);
   
   return (
       <form className={classes.root} noValidate autoComplete="off">
@@ -39,9 +39,12 @@ const ProfileForm = (props) => {
           <TextField
               className={classes.fieldBox}
               id="contactFullName"
-              label="Full Name"
-              defaultValue= {props.userInfo.firstName + " " + props.userInfo.lastName}
-              InputProps={{ readOnly: true, }}
+              label="First Name"
+              name="firstname"
+              onChange={(e) => handleInfoChange(e)}
+              // defaultValue= {props.userInfo.firstName + " " + props.userInfo.lastName}
+              defaultValue={props.userInfo.firstName}
+              // InputProps={{ readOnly: true, }}
               variant="filled"
           />
           <TextField
@@ -99,7 +102,7 @@ const ProfileForm = (props) => {
               label="Phone Number"
               defaultValue= {props.userInfo.phone}
               // InputProps={{ readOnly: true, }}
-              onChange={(e) => handleInfoChange(e)}
+              // onChange={(e) => handleInfoChange(e)}
               variant="filled"
           />
           <TextField
@@ -116,7 +119,7 @@ const ProfileForm = (props) => {
             variant="filled"
             onClick={(e) => {
               e.preventDefault()
-              props.actions.updateProfile(profileInfo)
+              props.actions.updateProfile(profileInfo, props.userInfo.contactId)
             }}
           >
                 Update Information
