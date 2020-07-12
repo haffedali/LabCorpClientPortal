@@ -60,7 +60,6 @@ return (
             name="address"
             label="Street Address"
             defaultValue= {props.userInfo.address}
-            // InputProps={{ readOnly: true, }}
             onChange={(e) => handleInfoChange(e)}
             variant="filled"
         />
@@ -70,7 +69,6 @@ return (
             name="city"
             label="City"
             defaultValue= {props.userInfo.city}
-            // InputProps={{ readOnly: true, }}
             onChange={(e) => handleInfoChange(e)}
             variant="filled"
         />
@@ -80,7 +78,6 @@ return (
             name="state"
             label="State"
             defaultValue= {props.userInfo.state}
-            // InputProps={{ readOnly: true, }}
             onChange={(e) => handleInfoChange(e)}
             variant="filled"
         />
@@ -90,7 +87,6 @@ return (
             name="zipCode"
             label="ZIP Code"
             defaultValue= {props.userInfo.zipCode}
-            // InputProps={{ readOnly: true, }}
             onChange={(e) => handleInfoChange(e)}
             variant="filled"
         />
@@ -100,7 +96,6 @@ return (
             name= "phone"
             label="Phone Number"
             defaultValue= {props.userInfo.phone}
-            // InputProps={{ readOnly: true, }}
             onChange={(e) => handleInfoChange(e)}
             variant="filled"
         />
@@ -116,15 +111,15 @@ return (
           className={classes.button}
           // disable={buttonDisabled}
           variant="filled"
-          onClick={() => {
+          onClick={() => 
             // handleInfoChange(
             //   profileInfo.address, 
             //   profileInfo.city, 
             //   profileInfo.state, 
             //   profileInfo.zipCode, 
             //   profileInfo.phone )
-            dispatchEvent(profileActions.updateProfile(props.userInfo));
-          }} >
+            dispatchEvent(profileActions.updateProfile(props.userInfo))
+          } >
               Update Information
         </Button>
         <h3> Your Login Credentials </h3>
@@ -136,7 +131,7 @@ return (
             InputProps={{ readOnly: true, }}
             variant="filled"
         />
-        {/* <TextField
+        <TextField
             className={classes.fieldBox}
             id="filled-password-input"
             label="Password"
@@ -144,8 +139,14 @@ return (
             defaultValue= {props.userInfo.contactId}
             //autoComplete="current-password"
             variant="filled"
-        /> */}
-        <button type="submit">Update Password</button>
+        />
+        <Button
+          className={classes.button}
+          // disable={buttonDisabled}
+          variant="filled"
+          type="submit" >
+              Update Password
+        </Button>
       </div>
     </form>
   );
