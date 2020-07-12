@@ -61,7 +61,7 @@ const LogIn = (props) => {
               justify="center"
             >
               <Grid item className={classes.logoContainer}>
-                <img src={logo} height="75rem" width="75rem" />
+                <img src={logo} height="75rem" width="85rem" />
               </Grid>
 
               <TextField
@@ -78,6 +78,7 @@ const LogIn = (props) => {
                 variant="outlined"
                 label="ID number"
                 name="ID number"
+                //type="password"
                 onChange={(e) => handleTextFieldChanges(e)}
               />
               <Button
