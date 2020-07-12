@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { useStyles } from './ProfileForm.styles';
+import * as profileActions from '../../services/Profile/actions';
 import {TextField, Button} from '@material-ui/core';
 
 import { connect } from "react-redux";
@@ -12,17 +13,27 @@ function mapStateToProps(state) {
     };
   }
 
-const handleInfoChange = (e) => {
-  const { name, value } = e.target;
-  setCurrentUserInfo({ ...userInfo, [name]: value });
-    dispatch ({ type: "UPDATE_SUCCESS", userInfo });
-};
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(profileActions, dispatch),
+  };
+}
 
-function FormFields(props) {
+const ProfileForm = (props) => {
+  const [profileInfo, setCurrentUserInfo] = useState({
+    phone: props.userInfo.phone,
+
+  });
+
+  const handleInfoChange = (e) => {
+    const { name, value } = e.target;
+    setCurrentUserInfo({ ...profileInfo, [name]: value });
+  };
+
   const classes = useStyles(props);
   const [value, setValue] = React.useState(0);
 
-  return (
+return (
     <form className={classes.root} noValidate autoComplete="off">
       <div>
         <h2> User Profile </h2>
@@ -33,7 +44,6 @@ function FormFields(props) {
             label="Full Name"
             defaultValue= {props.userInfo.firstName + " " + props.userInfo.lastName}
             InputProps={{ readOnly: true, }}
-            onChange={(e) => handleInfoChange(e)}
             variant="filled"
         />
         <TextField
@@ -47,41 +57,51 @@ function FormFields(props) {
         <TextField
             className={classes.fieldBox}
             id="contactAddrStreet"
+            name="address"
             label="Street Address"
             defaultValue= {props.userInfo.address}
-            InputProps={{ readOnly: true, }}
+            // InputProps={{ readOnly: true, }}
+            onChange={(e) => handleInfoChange(e)}
             variant="filled"
         />
         <TextField
             className={classes.fieldBox}
             id="contactAddrCity"
+            name="city"
             label="City"
             defaultValue= {props.userInfo.city}
-            InputProps={{ readOnly: true, }}
+            // InputProps={{ readOnly: true, }}
+            onChange={(e) => handleInfoChange(e)}
             variant="filled"
         />
         <TextField
             className={classes.fieldBox}
             id="contactAddrState"
+            name="state"
             label="State"
             defaultValue= {props.userInfo.state}
-            InputProps={{ readOnly: true, }}
+            // InputProps={{ readOnly: true, }}
+            onChange={(e) => handleInfoChange(e)}
             variant="filled"
         />
         <TextField
             className={classes.fieldBox}
             id="contactAddrZip"
+            name="zipCode"
             label="ZIP Code"
             defaultValue= {props.userInfo.zipCode}
-            InputProps={{ readOnly: true, }}
+            // InputProps={{ readOnly: true, }}
+            onChange={(e) => handleInfoChange(e)}
             variant="filled"
         />
         <TextField
             className={classes.fieldBox}
             id="contactPhone"
+            name= "phone"
             label="Phone Number"
             defaultValue= {props.userInfo.phone}
-            InputProps={{ readOnly: true, }}
+            // InputProps={{ readOnly: true, }}
+            onChange={(e) => handleInfoChange(e)}
             variant="filled"
         />
         <TextField
@@ -92,6 +112,21 @@ function FormFields(props) {
             InputProps={{ readOnly: true, }}
             variant="filled"
         />
+        <Button
+          className={classes.button}
+          // disable={buttonDisabled}
+          variant="filled"
+          onClick={() => {
+            // handleInfoChange(
+            //   profileInfo.address, 
+            //   profileInfo.city, 
+            //   profileInfo.state, 
+            //   profileInfo.zipCode, 
+            //   profileInfo.phone )
+            dispatchEvent(profileActions.updateProfile(props.userInfo));
+          }} >
+              Update Information
+        </Button>
         <h3> Your Login Credentials </h3>
         <TextField
             className={classes.fieldBox}
@@ -110,19 +145,9 @@ function FormFields(props) {
             //autoComplete="current-password"
             variant="filled"
         /> */}
-        <Button
-          className={classes.button}
-          // disable={buttonDisabled}
-          variant="filled"
-          onClick={() => {
-            dispatchEvent(updateAttempt(userInfo));
-            // setButtonDisable(true);
-          }} >
-              Update Information
-        </Button>
+        <button type="submit">Update Password</button>
       </div>
     </form>
   );
-}
-
-export default connect(mapStateToProps, {})(FormFields);
+};
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileForm);
