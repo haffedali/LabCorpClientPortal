@@ -21,12 +21,13 @@ function mapDispatchToProps(dispatch) {
 const ProfileForm = (props) => {
   const [profileInfo, setCurrentUserInfo] = useState({
     firstname: props.userInfo.firstName,
+    address1_city: props.userInfo.city,
   });
 
   const handleInfoChange = (e) => {
     const { name, value } = e.target;
     setCurrentUserInfo({ ...profileInfo, [name]: value });
-    console.log(profileInfo.firstname)
+    console.log(profileInfo)
   };
 
   const classes = useStyles(props);
@@ -42,9 +43,8 @@ const ProfileForm = (props) => {
               label="Full Name"
               name="firstname"
               onChange={(e) => handleInfoChange(e)}
-              // defaultValue= {props.userInfo.firstName + " " + props.userInfo.lastName}
               defaultValue={props.userInfo.firstName}
-              // InputProps={{ readOnly: true, }}
+              // defaultValue= {props.userInfo.firstName + " " + props.userInfo.lastName}
               variant="filled"
           />
           <TextField
@@ -60,8 +60,8 @@ const ProfileForm = (props) => {
               id="contactAddrStreet"
               name="address"
               label="Street Address"
-              defaultValue= {props.userInfo.address}
               onChange={(e) => handleInfoChange(e)}
+              defaultValue= {props.userInfo.address}
               variant="filled"
           />
           <TextField
@@ -78,8 +78,8 @@ const ProfileForm = (props) => {
               id="contactAddrState"
               name="state"
               label="State"
-              defaultValue= {props.userInfo.state}
               onChange={(e) => handleInfoChange(e)}
+              defaultValue= {props.userInfo.state}
               variant="filled"
           />
           <TextField
@@ -87,17 +87,17 @@ const ProfileForm = (props) => {
               id="contactAddrZip"
               name="zipCode"
               label="ZIP Code"
-              defaultValue= {props.userInfo.zipCode}
               onChange={(e) => handleInfoChange(e)}
+              defaultValue= {props.userInfo.zipCode}
               variant="filled"
           />
           <TextField
               className={classes.fieldBox}
               id="contactPhone"
-              name= "phone"
+              name="phone"
               label="Phone Number"
-              defaultValue= {props.userInfo.phone}
               onChange={(e) => handleInfoChange(e)}
+              defaultValue= {props.userInfo.phone}
               variant="filled"
           />
           <TextField
