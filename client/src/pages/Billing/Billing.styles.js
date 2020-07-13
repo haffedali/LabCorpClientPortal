@@ -20,7 +20,7 @@ export const useStyles = makeStyles((theme) => ({
     height: '100ch',
     display: 'flex',
     justifyContent: 'center',
-    paddingTop: '30ch'
+    paddingTop: '30ch',
   },
   spinner: {
     color: theme.HIGHLIGHT,

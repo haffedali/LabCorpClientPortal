@@ -58,12 +58,11 @@ function Row(props) {
         className={classes.root}
       >
         <TableCell component="th" scope="row" className={classes.firstcol}>
-{row.invId}
-            
+          {row.invId}
         </TableCell>
         <TableCell className={classes.name}>
           {row.receipt_url ? (
-            <Tooltip title='View Receipt' placement="left-start">
+            <Tooltip title='View Receipt'>
               <a href={row.receipt_url} target='_blank' className={classes.receiptLink}>{row.name}</a>
             </Tooltip>
           ) : row.name}

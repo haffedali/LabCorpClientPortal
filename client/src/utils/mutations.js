@@ -38,3 +38,15 @@ export const deleteSession = gql`
     deleteUserSession(sessionId: $sessionId)
   }
 `;
+
+export const createUser = gql`
+  mutation($contactId: String!, $firstName: String!, $lastName: String!, $email: String!, $password: String!) {
+    createUser(contactId: $contactId, firstName: $firstName, lastName: $lastName, email: $email, password: $password) {
+      contactId
+      firstName
+      lastName
+      email
+      password
+    }
+  }
+`;

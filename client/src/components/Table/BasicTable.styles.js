@@ -148,9 +148,10 @@ export const useStyles = makeStyles((theme) => ({
   },
   receiptLink: {
     color: theme.HIGHLIGHT,
-    transition: 'all 0.2s ease',
-    paddingBottom: '3px',
+    transition: 'all 0.3s ease',
+    textDecoration: 'none',
     '&:hover': {
+      textDecoration: 'underline'
     }
   }
 }));

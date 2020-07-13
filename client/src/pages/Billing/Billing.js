@@ -6,7 +6,8 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import { useStyles } from './Billing.styles';
 import { 
     BillingOverview, 
-    Checkout, 
+    Checkout,
+    Help,
     InnerSideBar,
     InvoiceTabContent,
     PaymentTabContent,
@@ -27,9 +28,8 @@ const Billing = (props) => {
         0: <BillingOverview />,
         1: <InvoiceTabContent />,
         2: <PaymentTabContent changeTab={(page) => setBillingPage(page)} />,
-        3: <h2>Help</h2>,
+        3: <Help />,
         4: <TermsAndConditions />,
-        // 5: <Checkout price={50000} />
     }
 
     useEffect(() => {
