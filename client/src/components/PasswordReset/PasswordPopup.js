@@ -5,7 +5,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-export default function AlertDialog() {
+export default function PasswordDialog() {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -48,7 +48,7 @@ export default function AlertDialog() {
             id="loginPasswordNew"
             label="New password"
             type="password"
-            defaultValue= {props.userInfo.ss_patientid}
+            defaultValue= "User creates new password"
             variant="outlined"
             size="small"
             fullWidth
@@ -63,7 +63,7 @@ export default function AlertDialog() {
             id="loginPasswordConfirm"
             label="Confirm password"
             type="password"
-            defaultValue= {props.userInfo.ss_patientid}
+            defaultValue= "Make sure the pw match"
             variant="outlined"
             size="small"
             fullWidth
