@@ -1,7 +1,7 @@
 import axios from "axios";
 import { adalApiFetch } from "../adalConfig";
 import { getConfig } from "./APIHeaders";
-import {buildApiCall} from './helperFunctions'
+import {buildApiCall} from './helperFunctions';
 
 export const loginApi = {
   /**
