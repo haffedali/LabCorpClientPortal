@@ -2,7 +2,6 @@ import React from 'react';
 import { useStyles } from './ProfileForm.styles';
 import {TextField, Button} from '@material-ui/core';
 
-
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
@@ -64,7 +63,7 @@ function FormFields(props) {
         />
         <TextField
             className={classes.fieldBox}
-            error
+            // error
             id="filled-number-zip"
             label="ZIP Code"
             defaultValue= {props.userInfo.zipCode}
@@ -87,31 +86,6 @@ function FormFields(props) {
             InputProps={{ readOnly: true, }}
             variant="filled"
         />
-        {/* <h3> Insurance Information </h3>
-        <TextField
-            className={classes.fieldBox}
-            id="filled-insurance-number"
-            label="Insurance Name"
-            variant="filled"
-        />
-        <TextField
-            className={classes.fieldBox}
-            id="filled-insurance-number"
-            label="Insurance Plan"
-            variant="filled"
-        />
-        <TextField
-            className={classes.fieldBox}
-            id="filled-insurance-number"
-            label="Policy Number"
-            variant="filled"
-        />
-        <TextField
-            className={classes.fieldBox}
-            id="filled-insurance-number"
-            label="Group Number"
-            variant="filled"
-        /> */}
         <h3> Your Login Credentials </h3>
         <TextField
             className={classes.fieldBox}
