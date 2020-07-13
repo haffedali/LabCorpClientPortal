@@ -1,6 +1,7 @@
 import Header from './Appointment/Header';
 import AvatarBtn from './Avatar/AvatarBtn';
 import Calendar from './Appointment/Calendar';
+import Profile from './Profile/Profile';
 import ProfileForm from './Profile/ProfileForm';
 import DatePicker from './Appointment/Schedule'
 import SideBar from './SideBar/SideBar';
@@ -40,6 +41,7 @@ export {
     LogoutButton,
     Messages,
     PaymentTabContent,
+    Profile,
     ProfileForm,
     Results,
     SideBar,

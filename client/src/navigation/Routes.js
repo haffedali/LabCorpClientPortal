@@ -14,7 +14,8 @@ import {
     Checkout,
     Results,
     Success,
-    Messages
+    Messages,
+    Profile
 } from "../components"
 
 const Routes = () => 

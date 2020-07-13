@@ -1,147 +1,148 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useStyles } from './ProfileForm.styles';
-import { TextField } from '@material-ui/core';
+import * as profileActions from '../../services/Profile/actions';
+import {TextField, Button} from '@material-ui/core';
 
 import { useSelector, useDispatch } from "react-redux";
-// import { updateAttempt } from '../../services/Profile/actions';
 
 import { useMutation } from "@apollo/react-hooks";
 import { useForm } from "react-hook-form";
 import { setSession } from '../../services/Session/actions';
 import { loginAttempt } from '../../services/LogIn/actions';
 
-import { updatePassword } from '../../utils/mutations';
-
-function FormFields(props) {
-  const dispatch = useDispatch();
-
-    const classes = useStyles(props);
-    const {
-        formState: { isSubmitting },
-        handleSubmit,
-        register
-      } = useForm();
-
-
-      const {
-        firstName, 
-        lastName,
-        email,
-      } = useSelector(state => state.session.user)
-
-    const userInfo = useSelector(state => state.loginReducer.userInfo);
-    const sessionUser = useSelector(state => state.session.user)
-
-    const [ updateUserPassword ] = useMutation(updatePassword);
-
-    const onSubmit = handleSubmit(async ({ email, password }) => {
-        console.log(email, password, firstName)
-        try {
-          const {
-            data: { updateUserPassword: createdSession }
-          } = await updateUserPassword({ variables: { email, password } });
-          
-          dispatch(setSession(createdSession));
-          dispatch(loginAttempt(createdSession.user.contactId));
-        } catch (e) {
-          console.log(e.message);
-        }
-      });
-
-  return (
-    <form onSubmit={onSubmit} className={classes.root} noValidate autoComplete="off">
-      <div>
-        <h2> User Profile </h2>
-        <h3> Edit General Information </h3>
-        <TextField
-            className={classes.fieldBox}
-            id="filled-required"
-            label="Full Name"
-            defaultValue= {firstName + " " + lastName}
-            InputProps={{ readOnly: true, }}
-            variant="filled"
-        />
-        <TextField
-            className={classes.fieldBox}
-            id="filled-insurance-number"
-            label="Insurance Plan"
-            defaultValue={userInfo.insurancePlan || null}
-            InputProps={{ readOnly: true, }}
-            variant="filled"
-        />
-        <TextField
-            className={classes.fieldBox}
-            id="filled-address"
-            label="Street Address"
-            defaultValue= {userInfo.address}
-            InputProps={{ readOnly: true, }}
-            variant="filled"
-        />
-        <TextField
-            className={classes.fieldBox}
-            id="filled-city"
-            label="City"
-            defaultValue= {userInfo.city}
-            InputProps={{ readOnly: true, }}
-            variant="filled"
-        />
-        <TextField
-            className={classes.fieldBox}
-            id="filled-state"
-            label="State"
-            defaultValue= {userInfo.state}
-            InputProps={{ readOnly: true, }}
-            variant="filled"
-        />
-        <TextField
-            className={classes.fieldBox}
-            // error
-            id="filled-number-zip"
-            label="ZIP Code"
-            defaultValue= {userInfo.zipCode}
-            InputProps={{ readOnly: true, }}
-            variant="filled"
-        />
-        <TextField
-            className={classes.fieldBox}
-            id="filled-phone"
-            label="Phone Number"
-            defaultValue= {userInfo.phone}
-            InputProps={{ readOnly: true, }}
-            variant="filled"
-        />
-        <TextField
-            className={classes.fieldBox}
-            inputRef={register}
-            id="email"
-            label="Email"
-            name="email"
-            defaultValue={sessionUser.email}
-            InputProps={{ readOnly: true, }}
-            variant="filled"
-        />
-        <h3> Your Login Credentials </h3>
-        <TextField
-            className={classes.fieldBox}
-            id="filled-read-only-input"
-            label="Username"
-            defaultValue={userInfo.firstName + "." + userInfo.lastName}
-            InputProps={{ readOnly: true, }}
-            variant="filled"
-        />
-        <TextField
-            className={classes.fieldBox}
-            id="password"
-            label="Password"
-            type="password"
-            name="password"
-            inputRef={register}
-            variant="filled"
-        />
-        <button type="submit">Update Password</button>
-      </div>
-    </form>
-  );
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(profileActions, dispatch),
+  };
 }
 
-export default FormFields;
+const ProfileForm = (props) => {
+  const [profileInfo, setCurrentUserInfo] = useState({
+    firstname: props.userInfo.firstName,
+    address1_city: props.userInfo.city,
+  });
+
+  const handleInfoChange = (e) => {
+    const { name, value } = e.target;
+    setCurrentUserInfo({ ...profileInfo, [name]: value });
+    console.log(profileInfo)
+  };
+
+  const classes = useStyles(props);
+  
+  return (
+      <form className={classes.root} noValidate autoComplete="off">
+        <div>
+          <h2> User Profile </h2>
+          <h3> Edit General Information </h3>
+          <TextField
+              className={classes.fieldBox}
+              id="contactFullName"
+              label="Full Name"
+              name="firstname"
+              onChange={(e) => handleInfoChange(e)}
+              defaultValue={props.userInfo.firstName}
+              // defaultValue= {props.userInfo.firstName + " " + props.userInfo.lastName}
+              variant="filled"
+          />
+          <TextField
+              className={classes.fieldBox}
+              id="contactInsNum"
+              label="Insurance Plan"
+              defaultValue= {props.userInfo.insurancePlan}
+              InputProps={{ readOnly: true, }}
+              variant="filled"
+          />
+          <TextField
+              className={classes.fieldBox}
+              id="contactAddrStreet"
+              name="address"
+              label="Street Address"
+              onChange={(e) => handleInfoChange(e)}
+              defaultValue= {props.userInfo.address}
+              variant="filled"
+          />
+          <TextField
+              className={classes.fieldBox}
+              id="contactAddrCity"
+              name="city"
+              label="City"
+              onChange={(e) => handleInfoChange(e)}
+              defaultValue= {props.userInfo.city}
+              variant="filled"
+          />
+          <TextField
+              className={classes.fieldBox}
+              id="contactAddrState"
+              name="state"
+              label="State"
+              onChange={(e) => handleInfoChange(e)}
+              defaultValue= {props.userInfo.state}
+              variant="filled"
+          />
+          <TextField
+              className={classes.fieldBox}
+              id="contactAddrZip"
+              name="zipCode"
+              label="ZIP Code"
+              onChange={(e) => handleInfoChange(e)}
+              defaultValue= {props.userInfo.zipCode}
+              variant="filled"
+          />
+          <TextField
+              className={classes.fieldBox}
+              id="contactPhone"
+              name="phone"
+              label="Phone Number"
+              onChange={(e) => handleInfoChange(e)}
+              defaultValue= {props.userInfo.phone}
+              variant="filled"
+          />
+          <TextField
+              className={classes.fieldBox}
+              id="contactEmail"
+              label="Email"
+              defaultValue= {props.userInfo.email}
+              InputProps={{ readOnly: true, }}
+              variant="filled"
+          />
+          <Button
+            className={classes.button}
+            variant="filled"
+            onClick={(e) => {
+              e.preventDefault()
+              props.actions.updateProfile(profileInfo, props.userInfo.contactId)
+            }}
+          > Update Information
+          </Button>
+
+          <h3> Your Login Credentials </h3>
+          <TextField
+              className={classes.fieldBox}
+              id="contactLoginUsername"
+              label="Username"
+              defaultValue={props.userInfo.firstName + "." + props.userInfo.lastName}
+              InputProps={{ readOnly: true, }}
+              variant="filled"
+          />
+          <TextField
+              className={classes.fieldBox}
+              id="filled-password-input"
+              name="password"
+              label="Password"
+              type="password"
+              defaultValue= {props.userInfo.userPassword}
+              //autoComplete="current-password"
+              variant="filled"
+          />
+          <Button 
+          className={classes.button}
+          variant="filled"
+          type="submit" 
+          > Update Password
+          </Button>
+        </div>
+      </form>
+    );
+};
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileForm);
