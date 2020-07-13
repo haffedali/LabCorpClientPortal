@@ -50,11 +50,13 @@ function ScheduledAlert(props) {
   }
 
   const handleSubmit = () => {
+    let regardingobjectid = 'regardingobjectid@odata.bind';
     let appDate = {}
     appDate.scheduledstart = new Date(`${props.date.date} ${start}`).toISOString();
     appDate.scheduledend = new Date(`${props.date.date} ${end}`).toISOString();
-    /* appDate.regardingobjectid = props.contact.contactId;  */
-    appDate.subject = `Request Test for ${props.contact.firstName} ${props.contact.lastName}`;
+    /* appDate.regardingobjectid = `/appointments(${props.contact.contactId})`; */
+    appDate.description = props.date.subject;
+    appDate.subject = `Request for ${props.contact.firstName} ${props.contact.lastName}`;
     appDate.ss_standing = 1;
 
     actions.createAppointment(appDate);

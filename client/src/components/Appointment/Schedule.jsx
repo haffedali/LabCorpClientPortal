@@ -38,6 +38,13 @@ const DatePicker = (props) => {
         subject: ''
     });
 
+    const handleTextFieldChange = (e) => {
+        const { name, value } = e.target;
+        setSelectedDate({ ...selectedDate, [name]: value })
+        actions.getSubject(value)
+
+    }
+
 
     const handleDateChange = (name, value) => {
         setSelectedDate({
@@ -54,9 +61,6 @@ const DatePicker = (props) => {
             console.log(selectedDate)
             actions.getEnd(value)
         }
-        if (name === 'subject') {
-            console.log(value)
-        }
     };
     let content = '';
 
@@ -64,36 +68,36 @@ const DatePicker = (props) => {
         content = (
             <Container className={classes.schedule} justify='center'>
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                    <Grid
+                    <Paper
                         className={classes.date}
                         container justify="space-around"
                         direction="column"
+                        justify="center"
                         spacing={3}
                     >
-                        <Grid justify="space-around">
-                            <Grid xs={6}>
-                                {/* <Paper className={classes.paper} elevation={5}> */}
-                                <KeyboardDatePicker
-                                    disableToolbar
-                                    variant="inline"
-                                    format="MM/dd/yyyy"
-                                    margin="normal"
-                                    id="date-picker-inline"
-                                    label="Date"
-                                    name="startDate"
-                                    value={selectedDate.startDate}
-                                    onChange={(date) => handleDateChange('startDate', date)}
-                                    error={dateError(selectedDate)}
-                                    helperText={dateError(selectedDate) ? dateError(selectedDate) : ' '}
-                                    KeyboardButtonProps={{
-                                        'aria-label': 'change date',
-                                    }}
-                                />
-                            </Grid>
-                            {/* </Paper> */}
-
+                        <Grid>
                             {/* <Paper className={classes.paper} elevation={5}> */}
-                            <Grid xs={6}>
+                            <KeyboardDatePicker
+                                disableToolbar
+                                variant="inline"
+                                format="MM/dd/yyyy"
+                                margin="normal"
+                                id="date-picker-inline"
+                                label="Date"
+                                name="startDate"
+                                value={selectedDate.startDate}
+                                onChange={(date) => handleDateChange('startDate', date)}
+                                error={dateError(selectedDate)}
+                                helperText={dateError(selectedDate) ? dateError(selectedDate) : ' '}
+                                KeyboardButtonProps={{
+                                    'aria-label': 'change date',
+                                }}
+                            />
+                            {/* </Paper> */}
+                        </Grid>
+
+                        <Grid>
+                            {/* <Paper className={classes.paper} elevation={5}> */}
                             <KeyboardTimePicker
                                 margin="normal"
                                 id="time-picker"
@@ -107,7 +111,6 @@ const DatePicker = (props) => {
                                     'aria-label': 'change time',
                                 }}
                             />
-                            </Grid>
                             {/* </Paper> */}
                         </Grid>
                         <Grid>
@@ -126,25 +129,27 @@ const DatePicker = (props) => {
                                 }}
                             />
                             {/* </Paper> */}
+                        </Grid>
+                        <Grid>
                             {/* <Paper className={classes.paper} elevation={5}> */}
                             <TextField
                                 id="standard-basic"
                                 label="Subject"
                                 name="subject"
                                 value={selectedDate.subject}
-                                onChange={() => handleDateChange('subject', selectedDate.subject)}
+                                onChange={(e) => handleTextFieldChange(e)}
 
                             />
                             {/* </Paper> */}
                         </Grid>
                         <Grid>
                             {/* <Paper className={classes.paper} elevation={5}> */}
-                            <div className={classes.button}>
+                            <div>
                                 <ScheduledAlert />
                             </div>
                             {/* </Paper> */}
                         </Grid>
-                    </Grid>
+                    </Paper>
                 </MuiPickersUtilsProvider>
             </Container>
         );

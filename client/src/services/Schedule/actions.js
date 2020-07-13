@@ -1,4 +1,4 @@
-import { GET_DATE, GET_START_TIME, GET_END_TIME, SEND_DATE_PENDING, SEND_DATE_SUCCESS, SEND_DATE_FAILED } from './actionTypes'
+import { GET_DATE, GET_START_TIME, GET_END_TIME, SEND_DATE_PENDING, SEND_DATE_SUCCESS, SEND_DATE_FAILED, GET_SUBJECT } from './actionTypes'
 import { appointmentsApi } from '../../utils'
 
 export const getDate = (date) => {
@@ -25,6 +25,12 @@ export const getEnd = (time) => {
         const t = time;
         const newTime = t.toLocaleTimeString();
         dispatch(_getEndTime(newTime))
+    }
+}
+
+export const getSubject = (subject) => {
+    return (dispatch) => {
+        dispatch(_getSubject(subject))
     }
 }
 
@@ -65,6 +71,13 @@ const _getEndTime = (time) => {
     return {
         type: GET_END_TIME,
         data: time
+    }
+}
+
+const _getSubject = (subject) => {
+    return {
+        type: GET_SUBJECT,
+        data: subject
     }
 }
 
