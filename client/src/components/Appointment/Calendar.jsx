@@ -93,7 +93,6 @@ const CalendarView = (props) => {
                         <FormControlLabel value="Day" control={<Radio />} label="Day" />
                     </RadioGroup>
                     <Scheduler
-                        elevation={20}
                         data={props.appData.appointments.map(makeData)}>
                         <ViewState currentViewName={viewName} />
                         <MonthView />
