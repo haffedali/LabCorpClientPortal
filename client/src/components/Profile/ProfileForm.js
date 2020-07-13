@@ -26,7 +26,7 @@ const ProfileForm = (props) => {
   const handleInfoChange = (e) => {
     const { name, value } = e.target;
     setCurrentUserInfo({ ...profileInfo, [name]: value });
-    console.log(profileInfo.firstName)
+    console.log(profileInfo.firstname)
   };
 
   const classes = useStyles(props);
@@ -39,7 +39,7 @@ const ProfileForm = (props) => {
           <TextField
               className={classes.fieldBox}
               id="contactFullName"
-              label="First Name"
+              label="Full Name"
               name="firstname"
               onChange={(e) => handleInfoChange(e)}
               // defaultValue= {props.userInfo.firstName + " " + props.userInfo.lastName}
@@ -61,7 +61,6 @@ const ProfileForm = (props) => {
               name="address"
               label="Street Address"
               defaultValue= {props.userInfo.address}
-              // InputProps={{ readOnly: true, }}
               onChange={(e) => handleInfoChange(e)}
               variant="filled"
           />
@@ -70,9 +69,8 @@ const ProfileForm = (props) => {
               id="contactAddrCity"
               name="city"
               label="City"
-              defaultValue= {props.userInfo.city}
-              // InputProps={{ readOnly: true, }}
               onChange={(e) => handleInfoChange(e)}
+              defaultValue= {props.userInfo.city}
               variant="filled"
           />
           <TextField
@@ -81,7 +79,6 @@ const ProfileForm = (props) => {
               name="state"
               label="State"
               defaultValue= {props.userInfo.state}
-              // InputProps={{ readOnly: true, }}
               onChange={(e) => handleInfoChange(e)}
               variant="filled"
           />
@@ -91,7 +88,6 @@ const ProfileForm = (props) => {
               name="zipCode"
               label="ZIP Code"
               defaultValue= {props.userInfo.zipCode}
-              // InputProps={{ readOnly: true, }}
               onChange={(e) => handleInfoChange(e)}
               variant="filled"
           />
@@ -101,8 +97,7 @@ const ProfileForm = (props) => {
               name= "phone"
               label="Phone Number"
               defaultValue= {props.userInfo.phone}
-              // InputProps={{ readOnly: true, }}
-              // onChange={(e) => handleInfoChange(e)}
+              onChange={(e) => handleInfoChange(e)}
               variant="filled"
           />
           <TextField
@@ -115,15 +110,14 @@ const ProfileForm = (props) => {
           />
           <Button
             className={classes.button}
-            // disable={buttonDisabled}
             variant="filled"
             onClick={(e) => {
               e.preventDefault()
               props.actions.updateProfile(profileInfo, props.userInfo.contactId)
             }}
-          >
-                Update Information
+          > Update Information
           </Button>
+
           <h3> Your Login Credentials </h3>
           <TextField
               className={classes.fieldBox}
@@ -133,16 +127,22 @@ const ProfileForm = (props) => {
               InputProps={{ readOnly: true, }}
               variant="filled"
           />
-          {/* <TextField
+          <TextField
               className={classes.fieldBox}
               id="filled-password-input"
+              name="password"
               label="Password"
               type="password"
-              defaultValue= {props.userInfo.contactId}
+              defaultValue= {props.userInfo.userPassword}
               //autoComplete="current-password"
               variant="filled"
-          /> */}
-          <button type="submit">Update Password</button>
+          />
+          <Button 
+          className={classes.button}
+          variant="filled"
+          type="submit" 
+          > Update Password
+          </Button>
         </div>
       </form>
     );
