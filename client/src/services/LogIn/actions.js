@@ -44,9 +44,10 @@ const _loginSuccess = (userInfo) => {
         address: userInfo.address1_line1,
         city: userInfo.address1_city,
         state: userInfo.address1_stateorprovince,
-        phone: userInfo.mobilephone,
         zipCode: userInfo.address1_postalcode,
+        phone: userInfo.mobilephone,
         email: userInfo.emailaddress1,
+        userPassword: userInfo.ss_patientid,
         insurancePlan: userInfo.ss_contact_ss_insuranceplan_Patient[0].ss_name
       },
   }

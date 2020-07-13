@@ -1,13 +1,19 @@
 import {UPDATE_FAILED, UPDATE_PENDING, UPDATE_SUCCESS} from './actionTypes';
+import { updateObject } from '../utils'
 
-export default function profileUpdateReducer(state = {}, action){
+
+const initialState = { updating: false }
+
+export default function profileUpdateReducer(state = initialState, action){
     switch (action){
         case UPDATE_PENDING: 
-            return {...state, updateStatus: "pending"}
+            return updateObject( state, { updating: false });
         case UPDATE_SUCCESS:
-            return {...state, updateStatus: true}
+            return updateObject( state, { updating: false });
         case UPDATE_FAILED:
-            return {...state, updateStatus: false}
+            return updateObject( state, {
+                requestFailed: true,
+                updating: false })
         default:
             return state
     }

@@ -61,7 +61,11 @@ const LogIn = (props) => {
               justify="center"
             >
               <Grid item className={classes.logoContainer}>
+<<<<<<< HEAD
                 <img src={logo} height="75rem" width="85rem" />
+=======
+                <img src={logo} height="75rem" width="95rem" />
+>>>>>>> master
               </Grid>
 
               <TextField

@@ -1,4 +1,5 @@
-api-gateway/
-client-app/
-payments-service/
-users-service/
+**/api-gateway
+**/client-app
+**/payments-service
+**/users-service
+**/stripe-service

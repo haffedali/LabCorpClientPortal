@@ -1,6 +1,7 @@
 import Header from './Appointment/Header';
 import AvatarBtn from './Avatar/AvatarBtn';
 import Calendar from './Appointment/Calendar';
+import Profile from './Profile/Profile';
 import ProfileForm from './Profile/ProfileForm';
 import DatePicker from './Appointment/Schedule'
 import SideBar from './SideBar/SideBar';
@@ -15,18 +16,19 @@ import BillingOverview from './Billing/BillingOverview';
 import Checkout from './Checkout/Checkout';
 
 export {
+    AvatarBtn,
     BasicTable,
     BillingOverview,
-    Checkout,
-    Header,
-    AvatarBtn,
-    DatePicker,
-    ProfileForm,
     Calendar,
-    SideBar,
+    Checkout,
     CollapsibleTable,
-    LogoutButton,
+    DatePicker,
+    Header,
     InnerSideBar,
+    LogoutButton,
+    Messages,
+    Profile,
+    ProfileForm,
     Results,
-    Messages
+    SideBar,
 }
