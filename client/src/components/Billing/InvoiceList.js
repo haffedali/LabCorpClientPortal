@@ -44,7 +44,6 @@ const getTableData = (data) =>
 const InvoiceList = (props) => {
   const classes = useStyles(props);
   
-  // Retrieve data from state
   const invoices = useSelector(state => state.invoiceReducer.invoices);
 
   return (

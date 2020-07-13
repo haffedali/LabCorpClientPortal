@@ -14,12 +14,13 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 
 import { useStyles } from './BasicTable.styles';
-import { Divider } from '@material-ui/core';
+import { Divider, Tooltip } from '@material-ui/core';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 
 import { Checkout } from '../'
 
 import TableSortLabel from '@material-ui/core/TableSortLabel';
+import TablePagination from '@material-ui/core/TablePagination';
 
 
 const paymentPriority = (due, status) => {
@@ -57,9 +58,16 @@ function Row(props) {
         className={classes.root}
       >
         <TableCell component="th" scope="row" className={classes.firstcol}>
-          {row.invId}
+{row.invId}
+            
         </TableCell>
-        <TableCell className={classes.name}>{row.name}</TableCell>
+        <TableCell className={classes.name}>
+          {row.receipt_url ? (
+            <Tooltip title='View Receipt' placement="left-start">
+              <a href={row.receipt_url} target='_blank' className={classes.receiptLink}>{row.name}</a>
+            </Tooltip>
+          ) : row.name}
+          </TableCell>
         <TableCell align='center' className={classes.datePriority}>
           {datePriority === 1 ? 
             `${row.duedate} (Overdue)` : 
@@ -217,10 +225,22 @@ export default function BasicTable(props) {
   const [order, setOrder] = useState('desc');
   const [orderBy, setOrderBy] = useState('paymentStatus');
 
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
+  };
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
   };
 
   return (
@@ -234,6 +254,7 @@ export default function BasicTable(props) {
         />
         <TableBody>
           {stableSort(rows, getComparator(order, orderBy))
+          .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
           .map((row) => {
             return (
               <Row key={row.name} row={row} />
@@ -241,26 +262,16 @@ export default function BasicTable(props) {
           })}
         </TableBody>
       </Table>
+      <TablePagination
+          rowsPerPageOptions={[5, 10, 25]}
+          component="div"
+          count={rows.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onChangePage={handleChangePage}
+          onChangeRowsPerPage={handleChangeRowsPerPage}
+          className={classes.paginationComponent}
+        />
     </TableContainer>
   );
 }
-
-
-/*
-
-<TableHead>
-  <TableRow className={classes.headerRow}>
-    <TableCell className={classes.firstcol}><h3 className={classes.headerCol}>ID</h3></TableCell>
-    <TableCell><h3 className={classes.headerCol}>Name</h3></TableCell>
-    <TableCell align='center'><h3 className={classes.headerCol}>Due Date</h3></TableCell>
-    <TableCell align='center'><h3 className={classes.headerCol}>Amount</h3></TableCell>
-    <TableCell align='center'><h3 className={classes.headerCol}>Status</h3></TableCell>
-    <TableCell align='right' />
-  </TableRow>
-</TableHead>
-<TableBody>
-  {rows.map((row) => (
-    <Row key={row.name} row={row} />
-  ))}
-</TableBody>
-*/

@@ -139,5 +139,18 @@ export const useStyles = makeStyles((theme) => ({
     '& > svg': {
       color: `${theme.HIGHLIGHT} !important`
     }
+  },
+  paginationComponent: {
+    color: theme.PRIMARY,
+    '& > div div svg': {
+      color: theme.PRIMARY
+    }
+  },
+  receiptLink: {
+    color: theme.HIGHLIGHT,
+    transition: 'all 0.2s ease',
+    paddingBottom: '3px',
+    '&:hover': {
+    }
   }
 }));

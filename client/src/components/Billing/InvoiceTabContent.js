@@ -10,10 +10,8 @@ const InvoiceTabContent = (props) => {
   const classes = useStyles(props);
   return (
     <div>
-      <h2>Invoices</h2>
-      <h3>...</h3>
-      <Divider className={classes.divider} />
       <InvoiceList />
+      <Divider className={classes.divider} />
     </div>
     
   );
