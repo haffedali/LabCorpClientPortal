@@ -6,6 +6,24 @@ import { useSelector } from 'react-redux';
 import { useStyles } from './InvoiceList.styles';
 import { BasicTable } from '../';
 
+
+const paymentStatus = (due, status) => {
+  if (!due) {
+    if (status !== 0) {
+      return 0;
+    } else return;
+  } 
+  
+  if (status !== 0) return 0;
+
+  const [year, month, date] = due.split('-');
+  const duedate = new Date(`${month}/${date}/${year}`);
+  const diffDays = Math.ceil((duedate - Date.now()) / (1000 * 60 * 60 * 24)); 
+  
+  return diffDays < 0 ? 2 : 1;
+}
+
+
 const getTableData = (data) =>
   data.map((cols) => ({
       invId: cols[0], 
@@ -18,7 +36,9 @@ const getTableData = (data) =>
       statecode: cols[7],
       statuscode: cols[8],
       productid: cols[9],
-      invoiceid: cols[10]
+      invoiceid: cols[10],
+      paymentStatus: paymentStatus(cols[2], cols[7]),
+      receipt_url: cols[11],
   }));
 
 const InvoiceList = (props) => {

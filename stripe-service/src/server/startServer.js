@@ -38,7 +38,13 @@ app.get('/config', async (req, res) => {
 // Fetch the Checkout Session to display the JSON result on the success page
 app.get('/checkout-session', async (req, res) => {
   const { sessionId } = req.query;
-  const session = await stripe.checkout.sessions.retrieve(sessionId);
+  const session = await stripe.checkout.sessions.retrieve(sessionId).then((res_two) => {
+    return stripe.paymentIntents.retrieve(res_two.payment_intent).then((res_three) => {
+      res_two.metadata.receipt_url = res_three.charges.data[0].receipt_url
+      console.log(res_two)
+      return res_two
+    })
+  })
   res.send(session);
 });
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Box from '@material-ui/core/Box';
 import Collapse from '@material-ui/core/Collapse';
 import IconButton from '@material-ui/core/IconButton';
@@ -19,6 +19,9 @@ import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 
 import { Checkout } from '../'
 
+import TableSortLabel from '@material-ui/core/TableSortLabel';
+
+
 const paymentPriority = (due, status) => {
   if (!due) {
     if (status !== 0) {
@@ -34,8 +37,6 @@ const paymentPriority = (due, status) => {
   
   return diffDays <= 0 ? 1 : diffDays <= 15 ? 2 : 3;
 }
-
-const PAID = false;
 
 function Row(props) {
   const { row } = props;
@@ -59,11 +60,16 @@ function Row(props) {
           {row.invId}
         </TableCell>
         <TableCell className={classes.name}>{row.name}</TableCell>
-        <TableCell align='center' className={classes.datePriority}>{row.duedate || 'N/A'}</TableCell>
+        <TableCell align='center' className={classes.datePriority}>
+          {datePriority === 1 ? 
+            `${row.duedate} (Overdue)` : 
+            datePriority === 0 ? `${row.duedate} (PAID)` : 
+            row.duedate}
+        </TableCell>
         <TableCell align='center' className={classes.money}>${row.totalamount}</TableCell>
-        <TableCell align='center' className={classes.paymentStatus}>
+        <TableCell align='center' className={classes.paymentStatus} id={`${row.stripeid}-${row.paymentStatus}`}>
           {row.statecode === 2 ? (
-            <CheckCircleIcon className={classes.paymentCompleteIcon} />
+            <a href={row.receipt_url}><CheckCircleIcon className={classes.paymentCompleteIcon} /></a>
           ) : (
             <Checkout 
               price={row.totalamount * 100} 
@@ -128,29 +134,133 @@ function Row(props) {
   );
 }
 
+/* -------------------------------------------------- */
+const sortableCells = [
+  { id: 'invId', align: '', label: 'ID' },
+  { id: 'name', align: '', label: 'Name' },
+  { id: 'duedate', align: 'center', label: 'Due Date' },
+  { id: 'totalamount', align: 'center', label: 'Amount' },
+  { id: 'paymentStatus', align: 'center', label: 'Status' },
+];
+
+function SortableTableHead(props) {
+  const { classes, order, orderBy, onRequestSort } = props;
+  const createSortHandler = (property) => (event) => {
+    onRequestSort(event, property);
+  };
+
+  return (
+    <TableHead>
+      <TableRow className={classes.headerRow}>
+        {sortableCells.map((cell) => (
+          <TableCell 
+            align={cell.align}
+            sortDirection={orderBy === cell.id ? order : false}
+          >
+            <TableSortLabel
+              active={orderBy === cell.id}
+              direction={orderBy === cell.id ? order : 'asc'}
+              onClick={createSortHandler(cell.id)}
+              className={classes.sortArrow}
+            >
+              <h3 className={classes.headerCol}>
+                {cell.label}
+                {orderBy === cell.id ? (
+                  <span className={classes.visuallyHidden}>
+                    {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
+                  </span>
+                ) : null
+                }
+              </h3>
+            </TableSortLabel>
+          </TableCell>
+        ))}
+        {/* <TableCell align='center'>
+          <h3 className={classes.headerCol}>Status</h3>
+        </TableCell> */}
+        <TableCell align='right' />
+        </TableRow>
+      </TableHead>
+  );
+}
+/* -------------------------------------------------- */
+function descendingComparator(a, b, orderBy) {
+  if (b[orderBy] < a[orderBy]) {
+    return -1;
+  }
+  if (b[orderBy] > a[orderBy]) {
+    return 1;
+  }
+  return 0;
+}
+
+function getComparator(order, orderBy) {
+  return order === 'desc'
+    ? (a, b) => descendingComparator(a, b, orderBy)
+    : (a, b) => -descendingComparator(a, b, orderBy);
+}
+
+function stableSort(array, comparator) {
+  const stabilizedThis = array.map((el, index) => [el, index]);
+  stabilizedThis.sort((a, b) => {
+    const order = comparator(a[0], b[0]);
+    if (order !== 0) return order;
+    return a[1] - b[1];
+  });
+  return stabilizedThis.map((el) => el[0]);
+}
+
 export default function BasicTable(props) {
   const { rows } = props;
   const classes = useStyles(props);
 
+  const [order, setOrder] = useState('desc');
+  const [orderBy, setOrderBy] = useState('paymentStatus');
+
+  const handleRequestSort = (event, property) => {
+    const isAsc = orderBy === property && order === 'asc';
+    setOrder(isAsc ? 'desc' : 'asc');
+    setOrderBy(property);
+  };
+
   return (
     <TableContainer component={Paper} className={classes.invoiceTableContainer}>
       <Table aria-label="collapsible table">
-        <TableHead>
-          <TableRow className={classes.headerRow}>
-            <TableCell className={classes.firstcol}><h3 className={classes.headerCol}>ID</h3></TableCell>
-            <TableCell><h3 className={classes.headerCol}>Name</h3></TableCell>
-            <TableCell align='center'><h3 className={classes.headerCol}>Due Date</h3></TableCell>
-            <TableCell align='center'><h3 className={classes.headerCol}>Amount</h3></TableCell>
-            <TableCell align='center'><h3 className={classes.headerCol}>Status</h3></TableCell>
-            <TableCell align='right' />
-          </TableRow>
-        </TableHead>
+        <SortableTableHead 
+          classes={classes}
+          order={order}
+          orderBy={orderBy}
+          onRequestSort={handleRequestSort}
+        />
         <TableBody>
-          {rows.map((row) => (
-            <Row key={row.name} row={row} />
-          ))}
+          {stableSort(rows, getComparator(order, orderBy))
+          .map((row) => {
+            return (
+              <Row key={row.name} row={row} />
+            );
+          })}
         </TableBody>
       </Table>
     </TableContainer>
   );
 }
+
+
+/*
+
+<TableHead>
+  <TableRow className={classes.headerRow}>
+    <TableCell className={classes.firstcol}><h3 className={classes.headerCol}>ID</h3></TableCell>
+    <TableCell><h3 className={classes.headerCol}>Name</h3></TableCell>
+    <TableCell align='center'><h3 className={classes.headerCol}>Due Date</h3></TableCell>
+    <TableCell align='center'><h3 className={classes.headerCol}>Amount</h3></TableCell>
+    <TableCell align='center'><h3 className={classes.headerCol}>Status</h3></TableCell>
+    <TableCell align='right' />
+  </TableRow>
+</TableHead>
+<TableBody>
+  {rows.map((row) => (
+    <Row key={row.name} row={row} />
+  ))}
+</TableBody>
+*/

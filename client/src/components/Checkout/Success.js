@@ -11,6 +11,7 @@ const Success = () => {
   const [session, setSession] = useState({});
   const location = useLocation();
   const sessionId = location.search.replace('?session_id=', '');
+  const [receipt_url, setUrl] = useState('#')
 
   const updating = useSelector(state => state.invoiceReducer.updating)
 
@@ -22,7 +23,9 @@ const Success = () => {
         await fetch('/checkout-session?sessionId=' + sessionId).then((res) => {
           return res.json()
         }).then((res) => {
-          dispatch(updateInvoice(res.metadata.invoiceid));
+          dispatch(updateInvoice(res.metadata));
+          setUrl(res.metadata.receipt_url)
+          return res
         })
       );
     }
@@ -37,6 +40,9 @@ const Success = () => {
         </div>) :
         <div>
           <h1>Done</h1>
+          <div>
+            <a href={receipt_url}>Receipt</a>
+          </div>
           <Link to='/billing'>Back to Billing</Link>
         </div>
       }

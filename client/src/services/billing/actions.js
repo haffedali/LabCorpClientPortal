@@ -22,9 +22,9 @@ export const grabInvoices = (customerid) => {
     };
 }
 
-export const updateInvoice = (invoiceid) => {
+export const updateInvoice = (metadata) => {
     return dispatch => {
-        return invoiceApi.patchInvoice(invoiceid).then(res => {
+        return invoiceApi.patchInvoice(metadata).then(res => {
             dispatch(_updateInvoiceSuccess());
         }).catch(err => {
             dispatch(_updateInvoiceFailed(err));
@@ -56,7 +56,8 @@ const _grabInvoicesSuccess = (invoiceList) => {
             statecode: obj.statecode,
             statuscode: obj.statuscode,
             productid: obj.ss_stripeproductid,
-            invoiceid: obj.invoiceid
+            invoiceid: obj.invoiceid,
+            receipt_url: obj.ss_receipt_url,
         }))
     };
 }
