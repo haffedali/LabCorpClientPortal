@@ -22,7 +22,6 @@ import { Checkout } from '../'
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import TablePagination from '@material-ui/core/TablePagination';
 
-
 const paymentPriority = (due, status) => {
   if (!due) {
     if (status !== 0) {
@@ -70,8 +69,8 @@ function Row(props) {
         <TableCell align='center' className={classes.datePriority}>
           {datePriority === 1 ? 
             `${row.duedate} (Overdue)` : 
-            datePriority === 0 ? `${row.duedate} (PAID)` : 
-            row.duedate}
+            datePriority === 0 ? `${row.duedate || "N/A"} (PAID)` : 
+            row.duedate || 'N/A'}
         </TableCell>
         <TableCell align='center' className={classes.money}>${row.totalamount}</TableCell>
         <TableCell align='center' className={classes.paymentStatus} id={`${row.stripeid}-${row.paymentStatus}`}>
@@ -141,7 +140,6 @@ function Row(props) {
   );
 }
 
-/* -------------------------------------------------- */
 const sortableCells = [
   { id: 'invId', align: '', label: 'ID' },
   { id: 'name', align: '', label: 'Name' },
@@ -182,15 +180,11 @@ function SortableTableHead(props) {
             </TableSortLabel>
           </TableCell>
         ))}
-        {/* <TableCell align='center'>
-          <h3 className={classes.headerCol}>Status</h3>
-        </TableCell> */}
         <TableCell align='right' />
         </TableRow>
       </TableHead>
   );
 }
-/* -------------------------------------------------- */
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
     return -1;
