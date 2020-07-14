@@ -66,7 +66,7 @@ const DatePicker = (props) => {
 
     if (!props.request) {
         alert = (
-            <h2>Hello</h2>
+            <h2>Request Date and Time For Testing</h2>
         )
     }
 

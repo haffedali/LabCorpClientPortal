@@ -51,13 +51,12 @@ function ScheduledAlert(props) {
   }
 
   const handleSubmit = () => {
-    let regardingobjectid = 'regardingobjectid@odata.bind';
     let appDate = {}
     appDate.scheduledstart = new Date(`${props.date.date} ${start}`).toISOString();
     appDate.scheduledend = new Date(`${props.date.date} ${end}`).toISOString();
-    /* appDate.regardingobjectid = `/appointments(${props.contact.contactId})`; */
-    appDate.description = props.date.subject;
-    appDate.subject = `Request for ${props.contact.firstName} ${props.contact.lastName}`;
+    appDate['regardingobjectid_contact@odata.bind'] = `/contacts(${props.contact.contactId})`;
+    appDate.description = `${props.contact.firstName} ${props.contact.lastName} is requesting ${props.date.subject}`;
+    appDate.subject = props.date.subject;
     appDate.ss_standing = 1;
 
     actions.createAppointment(appDate);
@@ -73,8 +72,7 @@ function ScheduledAlert(props) {
 
   return (
     <div>
-      <Button variant="outlined" color="primary" className="button" onClick={handleClickOpen}
-      disabled={ dateError(date.date) ? true : false }>
+      <Button variant="outlined" color="primary" className="button" onClick={handleClickOpen}>
         Confirm Date Request
       </Button>
       <Dialog
