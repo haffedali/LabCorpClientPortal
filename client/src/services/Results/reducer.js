@@ -10,17 +10,11 @@ export default function resultsReducer(state = {}, action){
     return (str.toLowerCase().indexOf(q) > -1)
   }
   function matchedRows(rows=[], search="") {
-    return rows.filter((row) => {
-      const searchable = []
-      searchable.push(row.name)
-      searchable.push(row.date)
-      row.items.forEach((i) => {
-        searchable.push(i["item"])
-        searchable.push(i["unit"])
-        searchable.push(i["numericValue"])
-       })
-      return searchable.some(v => isFound(v, search))
-    })
+    return rows.filter(row => isFound(row.name, search) || isFound(row.date, search))
+    //   const searchable = [row.name, row.date]
+    //   row.items.forEach(item => searchable.push(item.item, item.unit, item.numericValue))
+    //   return searchable.some(v => isFound(v, search))
+    // })
   }
 
   switch (action.type){
