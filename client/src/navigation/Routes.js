@@ -5,9 +5,8 @@ import {
     Appointment,
     Billing,
     Home,
-    Profile,
     Register
-} from '../pages'
+} from '../pages';
 
 import {
     Canceled,
@@ -16,7 +15,7 @@ import {
     Success,
     Messages,
     Profile
-} from "../components"
+} from "../components";
 
 const Routes = () => 
     <Switch>

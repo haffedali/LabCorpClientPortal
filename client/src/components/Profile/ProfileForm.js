@@ -3,12 +3,14 @@ import { useStyles } from './ProfileForm.styles';
 import * as profileActions from '../../services/Profile/actions';
 import {TextField, Button} from '@material-ui/core';
 
-import { useSelector, useDispatch } from "react-redux";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
-import { useMutation } from "@apollo/react-hooks";
-import { useForm } from "react-hook-form";
-import { setSession } from '../../services/Session/actions';
-import { loginAttempt } from '../../services/LogIn/actions';
+function mapStateToProps(state) {
+    return {
+      userInfo: state.loginReducer.userInfo,
+    };
+  }
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -65,7 +67,7 @@ const ProfileForm = (props) => {
           <TextField
               className={classes.fieldBox}
               id="contactAddrCity"
-              name="city"
+              name="address1_city"
               label="City"
               onChange={(e) => handleInfoChange(e)}
               defaultValue= {props.userInfo.city}
