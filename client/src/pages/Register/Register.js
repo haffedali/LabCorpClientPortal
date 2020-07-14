@@ -1,52 +1,32 @@
-import React, { useState, useEffect } from "react";
-import { useTheme } from '../../theme/ThemeContext';
-import { useMutation } from "@apollo/react-hooks";
-import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
-import { setSession } from '../../services/Session/actions';
-import { loginAttempt } from '../../services/LogIn/actions';
-
 import { Container, Grid, Paper, TextField, Button } from "@material-ui/core";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import logo from '../../assets/img/logo.png';
+
+import { useMutation } from "@apollo/react-hooks";
+import React from "react";
+import {useForm} from "react-hook-form";
 import { useStyles } from './Register.styles';
-import { useLocation } from 'react-router-dom';
 
-import { createUser } from '../../utils/mutations';
+import { createUserMutation } from '../../utils/mutations';
 
-const Register = ({ onChangeToLogin: pushChangeToLogin }, props) => {
+const Register = (props) => {
   const classes = useStyles(props);
-  const theme = useTheme();
-  const location = useLocation();
-  const contactId = location.search.replace('?contactId=', '');
+  const { onChangeToLogin: pushChangeToLogin, contactId } = props;
 
-  const [authError, setAuthError] = useState();
-
-  const dispatch = useDispatch();
   const {
     formState: { isSubmitting },
     handleSubmit,
-    register
+    register,
+    reset
   } = useForm();
   
-  const [createNewUser] = useMutation(createUser);
+  const [createUser] = useMutation(createUserMutation);
 
   const onSubmit = handleSubmit(async ({ contactId, firstName, lastName, email, password }) => {
-    try {
-      console.log(contactId, firstName, lastName, email, password)
-      const {
-        data: { createNewUser: newUser }
-      } = await createNewUser({ variables: { contactId, firstName, lastName, email, password } });
-      
-    } catch (e) {
-      console.log(e.message);
-      setAuthError(e.message.split(':')[1]);
-    }
+    await createUser({ variables: { contactId, firstName, lastName, email, password } });
+    reset();
+    pushChangeToLogin();
   });
-
-  useEffect(() => {
-    theme.restoreDefaultTheme();
-  }, []);
 
   return (
     <div className={classes.root}>
@@ -64,26 +44,15 @@ const Register = ({ onChangeToLogin: pushChangeToLogin }, props) => {
               <Grid item className={classes.logoContainer}>
                 <img src={logo} height="75rem" width="75rem" />
               </Grid>
-              <div className={classes.authError}>{authError}</div>
                 <TextField
                   className={classes.logInInput}
                   id="contactId"
                   variant="outlined"
-                  label="Contact ID"
+                  label="Registration Key"
                   name="contactId"
                   inputRef={register}
-                  disabled={true}
-                  defaultValue={contactId}
-                />
-                <TextField
-                  className={classes.logInInput}
-                  id="email"
-                  variant="outlined"
-                  label="Email"
-                  name="email"
-                  type="email"
-                  inputRef={register}
-                  disabled={isSubmitting}
+                  disabled={contactId || false}
+                  defaultValue={contactId || ''}
                 />
                 <TextField
                   className={classes.logInInput}
@@ -105,6 +74,16 @@ const Register = ({ onChangeToLogin: pushChangeToLogin }, props) => {
                 />
                 <TextField
                   className={classes.logInInput}
+                  id="email"
+                  variant="outlined"
+                  label="Email"
+                  name="email"
+                  type="email"
+                  inputRef={register}
+                  disabled={isSubmitting}
+                />
+                <TextField
+                  className={classes.logInInput}
                   id="password"
                   variant="outlined"
                   label="Password"
@@ -113,6 +92,15 @@ const Register = ({ onChangeToLogin: pushChangeToLogin }, props) => {
                   inputRef={register}
                   disabled={isSubmitting}
                 />
+                <TextField 
+                  className={classes.logInInput}
+                  id="confirmPassword"
+                  variant="outlined"
+                  label="Confirm Password"
+                  name="confirmPassword"
+                  type="password"
+                  inputRed={register}
+                />
                 <Button
                   className={classes.logInButton}
                   variant="contained"
@@ -120,7 +108,7 @@ const Register = ({ onChangeToLogin: pushChangeToLogin }, props) => {
                   disabled={isSubmitting}
                   type="submit"
                 >
-                  Log in
+                  Register
                 </Button>
             </Grid>
           </Paper>

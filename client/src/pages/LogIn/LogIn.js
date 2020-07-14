@@ -13,10 +13,11 @@ import { useStyles } from './LogIn.styles';
 
 import { createSession } from '../../utils/mutations';
 
-const LogIn = ({ onChangeToSignUp: pushChangeToSignUp }, props) => {
+const LogIn = (props) => {
   const classes = useStyles(props);
   const theme = useTheme();
 
+  const { onChangeToSignUp: pushChangeToSignUp } = props;
 
   const [authError, setAuthError] = useState();
 

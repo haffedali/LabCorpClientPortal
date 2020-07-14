@@ -51,4 +51,34 @@ export const useStyles = makeStyles((theme) => ({
     minHeight: '3vw',
     paddingTop: '10px'
   },
+
+  // Temp
+  msLabel: {
+    display: 'block',
+    ':not(:first-child)': {
+      marginTop: '0.75rem'
+    }
+  },
+  msLabelText: {
+    display: 'block',
+    fontSize: '0.9rem',
+    marginBottom: '0.25rem',
+  },
+  msSignUpButton: {
+    display: 'inline-block',
+    marginTop: '0.5rem',
+  },
+  msOrSignUp: {
+    fontSize: '0.9rem',
+  },
+  msTextInput: props => ({
+    border: `1px solid ${props => props.theme.veryLightGrey}`,
+    boxSizing: 'border-box',
+    display: 'block',
+    fontSize: '0.9rem',
+    padding: '0.25rem',
+    width: '100%'
+  })
+
+
 }));
