@@ -5,12 +5,12 @@ import {
     Appointment,
     Billing,
     Home,
-    Profile,
 } from '../pages'
 
 import {
     Results,
-    Messages
+    Messages,
+    Profile,
 } from "../components"
 
 const Routes = () => 
