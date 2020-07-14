@@ -21,7 +21,11 @@ function mapDispatchToProps(dispatch) {
 const ProfileForm = (props) => {
   const [profileInfo, setCurrentUserInfo] = useState({
     firstname: props.userInfo.firstName,
+    address1_line1: props.userInfo.address,
     address1_city: props.userInfo.city,
+    address1_stateorprovince: props.userInfo.state,
+    address1_postalcode: props.userInfo.zipCode,
+    mobilephone: props.userInfo.phone,
   });
 
   const handleInfoChange = (e) => {
@@ -41,10 +45,9 @@ const ProfileForm = (props) => {
               className={classes.fieldBox}
               id="contactFullName"
               label="Full Name"
-              name="firstname"
-              onChange={(e) => handleInfoChange(e)}
-              defaultValue={props.userInfo.firstName}
-              // defaultValue= {props.userInfo.firstName + " " + props.userInfo.lastName}
+              name="fullname"
+              defaultValue= {props.userInfo.firstName + " " + props.userInfo.lastName}
+              InputProps={{ readOnly: true, }}
               variant="filled"
           />
           <TextField
@@ -58,7 +61,7 @@ const ProfileForm = (props) => {
           <TextField
               className={classes.fieldBox}
               id="contactAddrStreet"
-              name="address"
+              name="address1_line1"
               label="Street Address"
               onChange={(e) => handleInfoChange(e)}
               defaultValue= {props.userInfo.address}
@@ -67,7 +70,7 @@ const ProfileForm = (props) => {
           <TextField
               className={classes.fieldBox}
               id="contactAddrCity"
-              name="city"
+              name="address1_city"
               label="City"
               onChange={(e) => handleInfoChange(e)}
               defaultValue= {props.userInfo.city}
@@ -76,7 +79,7 @@ const ProfileForm = (props) => {
           <TextField
               className={classes.fieldBox}
               id="contactAddrState"
-              name="state"
+              name="address1_stateorprovince"
               label="State"
               onChange={(e) => handleInfoChange(e)}
               defaultValue= {props.userInfo.state}
@@ -85,7 +88,7 @@ const ProfileForm = (props) => {
           <TextField
               className={classes.fieldBox}
               id="contactAddrZip"
-              name="zipCode"
+              name="address1_postalcode"
               label="ZIP Code"
               onChange={(e) => handleInfoChange(e)}
               defaultValue= {props.userInfo.zipCode}
@@ -94,7 +97,7 @@ const ProfileForm = (props) => {
           <TextField
               className={classes.fieldBox}
               id="contactPhone"
-              name="phone"
+              name="mobilephone"
               label="Phone Number"
               onChange={(e) => handleInfoChange(e)}
               defaultValue= {props.userInfo.phone}
@@ -127,7 +130,7 @@ const ProfileForm = (props) => {
               InputProps={{ readOnly: true, }}
               variant="filled"
           />
-          <TextField
+          {/* <TextField
               className={classes.fieldBox}
               id="filled-password-input"
               name="password"
@@ -142,7 +145,7 @@ const ProfileForm = (props) => {
           variant="filled"
           type="submit" 
           > Update Password
-          </Button>
+          </Button> */}
         </div>
       </form>
     );
