@@ -25,7 +25,7 @@ const light = createMuiTheme({
     MSG_TABS_TEXT: colors.PRIMARY_LIGHT,
     MSG_TABS_TABINDICATOR: colors.POLAR_NIGHT[2],
     // ProfileForm
-    PROFILE_CONTAINER_FILL: colors.WHITE,
+    PROFILE_BOX_FILL: colors.WHITE,
     PROFILE_TEXT: colors.PRIMARY_LIGHT,
     PROFILE_BOX_INDICATOR: colors.POLAR_NIGHT[2],
     // TABLE_DIVIDER
@@ -89,8 +89,8 @@ const dark = createMuiTheme({
     MSG_TABS_TEXT: colors.SNOW_STORM[2],
     MSG_TABS_TABINDICATOR: colors.SNOW_STORM[0],
     // ProfileForm
-    PROFILE_BOX_FILL: colors.POLAR_NIGHT[3],
-    PROFILE_TEXT: colors.SNOW_STORM[2],
+    PROFILE_BOX_FILL: colors.POLAR_NIGHT[2],
+    PROFILE_TEXT: colors.SNOW_STORM[0],
     PROFILE_BOX_INDICATOR: colors.SNOW_STORM[0],
     // TABLE_DIVIDER
     TABLE_DIVIDER: colors.FROST[1],
