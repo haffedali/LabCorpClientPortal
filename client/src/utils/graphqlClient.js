@@ -2,13 +2,15 @@ import { ApolloClient } from "apollo-client";
 import { HttpLink } from "apollo-link-http";
 import { InMemoryCache } from "apollo-cache-inmemory";
 
+import { services_uri } from './services_uri';
+
 export const cache = new InMemoryCache();
 
 const client = new ApolloClient({
   cache,
   link: new HttpLink({
     credentials: "include",
-    uri: process.env.REACT_APP_SERVICES_URI + "/graphql"
+    uri: services_uri,
   })
 });
 

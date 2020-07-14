@@ -58,9 +58,7 @@
     "noauth": "REACT_APP_NOAUTH=true npm start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "dockerp": "docker build -t client:prod .",
-    "client:prod": "docker run -p 3000:80 client:prod"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
