@@ -10,7 +10,6 @@ export const dateError = (selectedDate) => {
 
 export const startTimeError = (selectedDate) => {
     if (selectedDate.startTime.getHours() < 8) {
-        console.log(selectedDate.startTime.getMinutes())
         return "Time must be After 8:00 AM"
     }
     if (selectedDate.startTime.getHours() > 16) {
