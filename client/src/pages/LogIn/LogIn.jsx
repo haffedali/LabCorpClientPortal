@@ -78,6 +78,7 @@ const LogIn = (props) => {
                 variant="outlined"
                 label="ID number"
                 name="ID number"
+                type="password"
                 onChange={(e) => handleTextFieldChanges(e)}
               />
               <Button

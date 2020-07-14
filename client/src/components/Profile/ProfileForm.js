@@ -112,9 +112,8 @@ const ProfileForm = (props) => {
               variant="filled"
           />
           <Button
-            className={classes.fieldBox}
+            className={classes.button}
             variant="contained"
-            margineLeft="60%"
             onClick={(e) => {
               e.preventDefault()
               props.actions.updateProfile(profileInfo, props.userInfo.contactId)
@@ -143,7 +142,7 @@ const ProfileForm = (props) => {
           />
           <Button 
           className={classes.button}
-          variant="filled"
+          variant="contained"
           type="submit" 
           > Update Password
           </Button> */}
