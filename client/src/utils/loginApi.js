@@ -4,6 +4,7 @@ import { getConfig } from "./APIHeaders";
 import {buildApiCall} from './helperFunctions';
 
 export const loginApi = {
+  
   /**
    * @param string firstname
    * @param string lastname

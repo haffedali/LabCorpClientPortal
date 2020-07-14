@@ -50,16 +50,14 @@ const Messages = (props) => {
           props.getMessageRequest === true &&
           props.getMessageRequest !== "pending"
         ) {
-          return <MessagesDisplay messages={props.inboxMessages} />;
+          return <MessagesDisplay messages={props.inboxMessages} inbox />;
         }
         break;
       case "Sent":
         return <MessagesDisplay messages={props.sentMessages} />;
-        // return "Currently in development";
         break;
       case "Create":
         return <WriteMessage />
-        // return "Currently in development";
 
         break;
       default:

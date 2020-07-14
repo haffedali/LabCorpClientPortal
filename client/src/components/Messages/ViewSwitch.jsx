@@ -29,7 +29,6 @@ const ViewSwitch = (props) => {
 
   const handleChange = (event, newValue) => {
     const {actions} = props;
-    console.log(event.target)
     const page = event.target.innerHTML;
     setValue(newValue);
     actions.switchPage(page);

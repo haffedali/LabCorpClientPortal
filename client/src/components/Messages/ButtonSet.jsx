@@ -10,7 +10,6 @@ import {useStyles} from './ButtonSet.styles'
 const ButtonSet = (props) => {
   const classes = useStyles();
   const emailObj = useSelector(state => state.messagesReducer)
-  // const sentEmailStatus = useSelector(state => state.messagesReducer.sentEmailStatus) 
   const dispatch = useDispatch();
 
   const handleSendEmailClick = () => {
@@ -38,7 +37,6 @@ const ButtonSet = (props) => {
             className={classes.button}
             variant="contained"
             color="primary"
-            // onClick={() => console.log(emailObj.emailObj)}
             onClick={()=> handleSendEmailClick()}
           >
             <Email />

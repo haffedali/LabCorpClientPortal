@@ -5,9 +5,6 @@ import { buildApiPost, buildApiCall } from "./helperFunctions";
 
 export const messagesApi = {
   getInboxEmails: (id) => {
-    // const queryString =
-    //   apiRoute +
-    //   `contacts(${id})/Contact_Emails?$select=subject,sender,description,actualend`;
 
     const queryObj = {
       entity: "emails",
@@ -22,8 +19,9 @@ export const messagesApi = {
   getSentEmails: (userEmail) => {
     const queryObj = {
       entity: "emails",
-      select: ["description", "actualend", "subject", "ss_sentfrom"],
+      select: ["description", "actualend", "subject", "ss_sentfrom", "ss_recipient"],
       filter: [{ field: "ss_sentfrom", value: userEmail }],
+      orderBy: [{field: 'actualend', operator: 'desc'}]
     };
     const queryString = buildApiCall(queryObj);
 
@@ -31,12 +29,15 @@ export const messagesApi = {
   },
 
   createNewEmail: ({ ss_sentfrom, subject, body, recipient }) => {
-    console.log(ss_sentfrom)
+    var now = new Date();
+    var utc = new Date(now.getTime() + now.getTimezoneOffset());
+
     const data = {
       ss_sentfrom: ss_sentfrom,
       subject: subject,
       description: body,
-      torecipients: recipient,
+      ss_recipient: recipient,
+      actualend: utc
     };
     const postConfig = postConfigGenerator(data);
     const postString = buildApiPost("emails");

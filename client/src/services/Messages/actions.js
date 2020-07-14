@@ -62,14 +62,17 @@ export const getSentEmails = (email) => {
           let emailObject = {};
           emailObject.subject = email.subject;
           emailObject.sender = email.ss_sentfrom;
-          // Hard coded cause i messed up me dummy data
-          emailObject.date = "7/1/2020";
-          // const el = document.createElement("div");
-          // el.innerHTML = email.description;
-          // const description = el.getElementsByTagName("pre");
-          // if (description[0]) {
-          //   emailObject.textContent = description[0].textContent;
-          // }
+          if (email.ss_recipient) {
+            emailObject.recipient = email.ss_recipient;
+          } else {
+            emailObject.recipient = "wilbobaggins@smoothstack.com";
+          }
+          if (!email.actualend) {
+            emailObject.date = "7/1/2020";
+          } else {
+            emailObject.date =
+              email["actualend@OData.Community.Display.V1.FormattedValue"];
+          }
           emailObject.textContent = email.description;
           emailArray.push(emailObject);
         });
