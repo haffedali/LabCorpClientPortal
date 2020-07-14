@@ -12,8 +12,7 @@ import * as resultsActions from "../../services/Results/actions";
 function mapStateToProps(state) {
   return {
     search: state.resultsReducer.search,
-    data: state.resultsReducer.ajaxData,
-    rows: state.resultsReducer.matchedRows,
+    rows: state.resultsReducer.rows,
     contactId: state.loginReducer.userInfo.contactId,
   };
 }
@@ -25,7 +24,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 const Results = (props) => {
-  const { actions, search="", rows=[], data, contactId } = props;
+  const { actions, search="", rows=[], contactId } = props;
   const dispatchSearch = (str) => {
     actions.changeSearch(str);
   };
@@ -40,11 +39,6 @@ const Results = (props) => {
       <Typography component="h1" variant="h3">
         Test Results
       </Typography>
-      {/* TODO
-        I should wait until I have notifications before i need refresh button.
-        And I should put it inside the table. I think I should switch to MaterialTable at that point. 
-        <Button onClick={()=>dispatchLoad()}>Refresh</Button> 
-      */}
       <TextField 
         id="search"
         label="Search tests"
@@ -52,7 +46,7 @@ const Results = (props) => {
         onChange={(e) => dispatchSearch(e.target.value.toLowerCase())}
         defaultValue={search}
         />
-      <CollapsibleTable className="minWidth: 650" rows={rows} ></CollapsibleTable>
+      <CollapsibleTable className="collapsibleTable" rows={rows} ></CollapsibleTable>
     </div>
   )
 }
