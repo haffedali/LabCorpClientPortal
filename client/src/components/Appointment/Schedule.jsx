@@ -14,6 +14,7 @@ import { dateError, startTimeError, endTimeError } from '../../utils/dateValidat
 import TextField from '@material-ui/core/TextField';
 import { AlertTitle, Alert } from '@material-ui/lab';
 import { useStyles } from "./Appointment.styles"
+import { Fade } from '@material-ui/core'
 
 function mapStateToProps(state) {
     return {
@@ -45,7 +46,6 @@ const DatePicker = (props) => {
 
     }
 
-
     const handleDateChange = (name, value) => {
         setSelectedDate({
             ...selectedDate,
@@ -58,108 +58,115 @@ const DatePicker = (props) => {
             actions.getStart(value)
         }
         if (name === 'endTime') {
-            console.log(selectedDate)
             actions.getEnd(value)
         }
     };
-    let content = '';
+
+    let alert = '';
 
     if (!props.request) {
-        content = (
-            <Container className={classes.schedule} justify='center'>
-                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                    <Paper
-                        className={classes.date}
-                        container justify="space-around"
-                        direction="column"
-                        justify="center"
-                        spacing={3}
-                    >
-                        <Grid>
-                            {/* <Paper className={classes.paper} elevation={5}> */}
-                            <KeyboardDatePicker
-                                disableToolbar
-                                variant="inline"
-                                format="MM/dd/yyyy"
-                                margin="normal"
-                                id="date-picker-inline"
-                                label="Date"
-                                name="startDate"
-                                value={selectedDate.startDate}
-                                onChange={(date) => handleDateChange('startDate', date)}
-                                error={dateError(selectedDate)}
-                                helperText={dateError(selectedDate) ? dateError(selectedDate) : ' '}
-                                KeyboardButtonProps={{
-                                    'aria-label': 'change date',
-                                }}
-                            />
-                            {/* </Paper> */}
-                        </Grid>
-
-                        <Grid>
-                            {/* <Paper className={classes.paper} elevation={5}> */}
-                            <KeyboardTimePicker
-                                margin="normal"
-                                id="time-picker"
-                                label="Start Time Range"
-                                name="startTime"
-                                value={selectedDate.startTime}
-                                onChange={(date) => handleDateChange('startTime', date)}
-                                error={startTimeError(selectedDate)}
-                                helperText={startTimeError(selectedDate)}
-                                KeyboardButtonProps={{
-                                    'aria-label': 'change time',
-                                }}
-                            />
-                            {/* </Paper> */}
-                        </Grid>
-                        <Grid>
-                            {/* <Paper className={classes.paper} elevation={5}> */}
-                            <KeyboardTimePicker
-                                margin="normal"
-                                id="End Time"
-                                label="End Time Range"
-                                name="endTime"
-                                value={selectedDate.endTime}
-                                onChange={(date) => handleDateChange('endTime', date)}
-                                error={endTimeError(selectedDate)}
-                                helperText={endTimeError(selectedDate)}
-                                KeyboardButtonProps={{
-                                    'aria-label': 'change time',
-                                }}
-                            />
-                            {/* </Paper> */}
-                        </Grid>
-                        <Grid>
-                            {/* <Paper className={classes.paper} elevation={5}> */}
-                            <TextField
-                                id="standard-basic"
-                                label="Subject"
-                                name="subject"
-                                value={selectedDate.subject}
-                                onChange={(e) => handleTextFieldChange(e)}
-
-                            />
-                            {/* </Paper> */}
-                        </Grid>
-                        <Grid>
-                            {/* <Paper className={classes.paper} elevation={5}> */}
-                            <div>
-                                <ScheduledAlert />
-                            </div>
-                            {/* </Paper> */}
-                        </Grid>
-                    </Paper>
-                </MuiPickersUtilsProvider>
-            </Container>
-        );
+        alert = (
+            <h2>Hello</h2>
+        )
     }
 
     if (props.request && props.request === 'Pending') {
-        content = (
-            <Alert severity="info">Pending Request</Alert>
+        alert = (
+                <Alert severity="info">Pending Request</Alert>
         );
     }
+
+    if (props.request && props.request === 'Success') {
+        alert = (
+                <Alert severity="success">You've Successfully Submitted A Request</Alert>
+        )
+    }
+
+    if (props.request && props.request === 'Failed') {
+        alert = (
+            <Alert severity="error">Failed to make request please Email labtest@labcorp.com for test request</Alert>
+        )
+    }
+    return (
+        <Container className={classes.schedule} justify='center'>
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                <Paper
+                    className={classes.date}
+                    container justify="space-around"
+                    direction="column"
+                    justify="center"
+                    spacing={3}
+                >
+                    <div>
+                        {alert}
+                    </div>
+                    <Grid>
+                        <KeyboardDatePicker
+                            disableToolbar
+                            variant="inline"
+                            format="MM/dd/yyyy"
+                            margin="normal"
+                            id="date-picker-inline"
+                            label="Date"
+                            name="startDate"
+                            value={selectedDate.startDate}
+                            onChange={(date) => handleDateChange('startDate', date)}
+                            error={dateError(selectedDate)}
+                            helperText={dateError(selectedDate) ? dateError(selectedDate) : ' '}
+                            KeyboardButtonProps={{
+                                'aria-label': 'change date',
+                            }}
+                        />
+                    </Grid>
+                    <Grid>
+                        <KeyboardTimePicker
+                            margin="normal"
+                            id="time-picker"
+                            label="Start Time Range"
+                            name="startTime"
+                            value={selectedDate.startTime}
+                            onChange={(date) => handleDateChange('startTime', date)}
+                            error={startTimeError(selectedDate)}
+                            helperText={startTimeError(selectedDate)}
+                            KeyboardButtonProps={{
+                                'aria-label': 'change time',
+                            }}
+                        />
+                    </Grid>
+                    <Grid>
+                        <KeyboardTimePicker
+                            margin="normal"
+                            id="End Time"
+                            label="End Time Range"
+                            name="endTime"
+                            value={selectedDate.endTime}
+                            onChange={(date) => handleDateChange('endTime', date)}
+                            error={endTimeError(selectedDate)}
+                            helperText={endTimeError(selectedDate)}
+                            KeyboardButtonProps={{
+                                'aria-label': 'change time',
+                            }}
+                        />
+                    </Grid>
+                    <Grid>
+                        <TextField
+                            id="standard-basic"
+                            label="Subject"
+                            name="subject"
+                            value={selectedDate.subject}
+                            onChange={(e) => handleTextFieldChange(e)}
+
+                        />
+                    </Grid>
+                    <Grid>
+                        <div className={classes.date}>
+                            <ScheduledAlert />
+                        </div>
+                    </Grid>
+                </Paper>
+            </MuiPickersUtilsProvider>
+        </Container>
+    );
 
     /*     if (props.request && props.request === 'Success') {
             content = (
@@ -216,11 +223,7 @@ const DatePicker = (props) => {
                 </Container>
             )
         } */
-    return (
-        <div>
-            {content}
-        </div>
-    );
+
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DatePicker)

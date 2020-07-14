@@ -9,6 +9,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { AlertTitle, Alert } from '@material-ui/lab';
+import { dateError, startTimeError, endTimeError } from '../../utils/dateValidation'
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -72,7 +73,8 @@ function ScheduledAlert(props) {
 
   return (
     <div>
-      <Button variant="outlined" color="primary" className="button" onClick={handleClickOpen}>
+      <Button variant="outlined" color="primary" className="button" onClick={handleClickOpen}
+      disabled={ dateError(date.date) ? true : false }>
         Confirm Date Request
       </Button>
       <Dialog
@@ -107,18 +109,3 @@ function ScheduledAlert(props) {
 
 export default connect(mapStateToProps, mapDispatchToProps)(ScheduledAlert)
 
-{/* <Dialog>
-open={open}
-onClose={handleClose}
-aria-labelledby="alert-dialog-title"
-aria-describedby="alert-dialog-description"
-<DialogTitle id="alert-dialog-title">{"Please select Date and Time Range"}</DialogTitle>
-<DialogContentText id="alert-dialog-description">
-  Please Select
-  </DialogContentText>
-<DialogActions>
-  <Button onClick={handleClose} color="primary" autoFocus>
-    Agree
-  </Button>
-</DialogActions>
-</Dialog> */}
