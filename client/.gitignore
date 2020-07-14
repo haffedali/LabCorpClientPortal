@@ -12,6 +12,7 @@ generate-react-cli.json
 
 # production
 /build
+/server
 
 # misc
 .DS_Store
@@ -20,6 +21,7 @@ generate-react-cli.json
 .env.development
 .env.development.local
 .env.test.local
+.env.production
 .env.production.local
 
 npm-debug.log*
