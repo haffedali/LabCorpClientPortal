@@ -23,7 +23,6 @@ const paymentStatus = (due, status) => {
   return diffDays < 0 ? 2 : 1;
 }
 
-
 const getTableData = (data) =>
   data.map((cols) => ({
       invId: cols[0], 
@@ -48,7 +47,7 @@ const InvoiceList = (props) => {
 
   return (
     <div className={classes.root}>
-      <h2>Invoice History</h2>
+      <h2>{props.listTitle}</h2>
       <BasicTable 
         rows={getTableData(invoices.map((obj) => 
           Object.keys(obj).map((key) => {

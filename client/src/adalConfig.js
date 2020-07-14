@@ -7,7 +7,7 @@ export const adalConfig = {
     api: 'https://sswilbobraggins.crm.dynamics.com/',
   },
   cacheLocation: 'localStorage',
-  redirectUri: process.env.ADAL_REDIRECT_URI
+  redirectUri: process.env.ADAL_REDIRECT_URI || 'http://localhost:3000'
 };
  
 export const authContext = new AuthenticationContext(adalConfig);
