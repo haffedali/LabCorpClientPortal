@@ -1,0 +1,36 @@
+version: "3"
+services: 
+  api-gateway:
+    build: "./api-gateway"
+    depends_on: 
+      - users-service
+    ports:
+      - 7000:7000
+    volumes: 
+      - ./api-gateway:/opt/app 
+
+  users-service:
+    build: "./users-service"
+    depends_on: 
+      - users-service-db
+    environment: 
+      - DB_URI=mysql://root:password@users-service-db/db?charset=UTF8
+    ports:
+      - 7100:7100
+    volumes: 
+      - ./users-service:/opt/app
+  users-service-db:
+    command: --disable-partition-engine-check
+    environment: 
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=db
+    image: mysql:5.7.20
+    ports:
+      - 0.0.0.0:7200:3306
+
+  stripe-service:
+    build: "./stripe-service"
+    ports:
+      - 7102:7102
+    volumes: 
+      - ./stripe-service:/opt/app
