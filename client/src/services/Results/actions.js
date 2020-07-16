@@ -1,9 +1,10 @@
 import {testResultsApi} from '../../utils/testResultsApi'
-
-export const SEARCH = "SEARCH";
-export const LOAD_PENDING = "LOAD_PENDING";
-export const LOAD_SUCCESS = "LOAD_SUCCESS";
-export const LOAD_FAIL = "LOAD_FAIL";
+import { 
+  SEARCH,
+  LOAD_PENDING,
+  LOAD_SUCCESS,
+  LOAD_FAIL,
+} from './actionTypes';
 
 export const changeSearch = (searchString) => {
   return (dispatch) => {
@@ -19,7 +20,6 @@ export const loadData = (id) => {
         dispatch(_load_success(res));
       })
       .catch((error) => {
-        console.log(error);
         dispatch(_load_fail(error));
       });
   }
