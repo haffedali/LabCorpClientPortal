@@ -37,7 +37,7 @@ const getTableData = (data) =>
       productid: cols[9],
       invoiceid: cols[10],
       paymentStatus: paymentStatus(cols[2], cols[7]),
-      receipt_url: cols[11],
+      receipt_url: cols[11]
   }));
 
 const InvoiceList = (props) => {

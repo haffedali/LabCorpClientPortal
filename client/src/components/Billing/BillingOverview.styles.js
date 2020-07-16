@@ -26,10 +26,23 @@ export const useStyles = makeStyles((theme) => ({
   billingInfoCont: {
     display: 'flex',
     justifyContent: 'flex-start',
-    color: theme.PRIMARY
+    color: theme.PRIMARY,
+    marginBottom: '15px'
   },
   patientName: {
     color: theme.HIGHLIGHT,
     paddingLeft: '4px'
-  }
+  },
+  stripeBilling: {
+    padding: '5px 15px',
+    backgroundColor: theme.BTN_SECONDARY,
+    border: `solid 1px ${theme.PRIMARY}`,
+    color: theme.PRIMARY,
+    transition: 'all 0.3s ease',
+    '&:hover': {
+      backgroundColor: theme.BTN_SECONDARY_HOVER,
+      border: theme.BTN_SECONDARY_BORDER_HOVER,
+      color: theme.BTN_SECONDARY_TXT_HOVER
+    },
+  },
 }));

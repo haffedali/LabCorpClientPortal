@@ -48,6 +48,21 @@ app.get('/checkout-session', async (req, res) => {
   res.send(session);
 });
 
+/* ----------------- */
+app.post('/create-customer-portal-session', async (req, res) => {
+  const domainURL = process.env.DOMAIN;
+
+  const stripeid = req.url.split('?')[1].split('=')[1];
+
+  const cps = await stripe.billingPortal.sessions.create({
+    customer: stripeid,
+    return_url: `${domainURL}/Billing`,
+  })
+
+  res.redirect(cps["url"])
+});
+/* ----------------- */
+
 app.post('/create-checkout-session', async (req, res) => {
   const domainURL = process.env.DOMAIN;
 
