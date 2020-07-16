@@ -13,6 +13,7 @@ export const useStyles = makeStyles((theme) => ({
 
     },
     button: {
+        backgroundColor: theme.DRAWER_TEXT,
         margin: '1vw'
     }
   }));

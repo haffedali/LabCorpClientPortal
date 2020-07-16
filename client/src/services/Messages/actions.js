@@ -26,7 +26,6 @@ export const getInboxEmails = (contactId) => {
         const emailArray = [];
         const emailResponseArray = r.data.value;
         emailResponseArray.forEach((email) => {
-          // console.log(email)
           let emailObject = {};
           emailObject.subject = email.subject;
           emailObject.sender = email.sender;
@@ -38,6 +37,12 @@ export const getInboxEmails = (contactId) => {
           const description = el.getElementsByTagName("pre");
           if (description[0]) {
             emailObject.textContent = description[0].textContent;
+          }
+          if (!emailObject.textContent){
+            const el2 = document.createElement("div");
+            el2.innerHTML = email.description;
+            emailObject.textContent = el2.textContent
+
           }
           emailArray.push(emailObject);
         });

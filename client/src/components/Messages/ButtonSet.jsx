@@ -8,7 +8,7 @@ import { Email } from "@material-ui/icons";
 import { useStyles } from "./ButtonSet.styles";
 
 const ButtonSet = (props) => {
-  const classes = useStyles();
+  const classes = useStyles(props);
   const emailObj = useSelector((state) => state.messagesReducer);
   const dispatch = useDispatch();
 

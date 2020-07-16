@@ -23,6 +23,4 @@ export const loginApi = {
 
     return adalApiFetch(axios, queryString, getConfig);
   },
-
-
 };
