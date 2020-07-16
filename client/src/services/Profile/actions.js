@@ -15,20 +15,26 @@ export const updateProfile = (userInfo, contactId) => {
                 dispatch(_updateProfileSuccess(res));
             })
             .catch ((error) => {
-                console.log(error);
+                // console.log(error);
                 dispatch(_updateProfileFailed(error));
             });
     };
 };
 
 const _updateProfileStarted = () => {
-    return { type: UPDATE_PENDING, }
+    return {
+        type: UPDATE_PENDING,
+    }
 };
 
 const _updateProfileSuccess = (res) => {
-    return { type: UPDATE_SUCCESS, }
+    return {
+        type: UPDATE_SUCCESS,
+    }
 };
 
 const _updateProfileFailed = (error) => {
-    return { type: UPDATE_FAILED, }
+    return {
+        type: UPDATE_FAILED,
+    }
 };

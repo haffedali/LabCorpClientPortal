@@ -6,9 +6,6 @@ export const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(2),
         width: '50ch',
       },
-      '& .MuiFormLabel-root': {
-        color: theme.PROFILE_TEXT,
-      },
       '& .MuiFormLabel-root.Mui-focused': {
           color: theme.DRAWER_TEXT_ACTIVE,
       },
@@ -20,11 +17,5 @@ export const useStyles = makeStyles((theme) => ({
         backgroundColor: theme.PROFILE_BOX_FILL,
         '& > div': {color: `${theme.PRIMARY} !important`},
     },
-    button: {
-      justifyContent: 'center',
-      marginLeft: '35%',
-      backgroundColor: theme.PROFILE_BOX_FILL,
-      color: theme.DRAWER_TEXT,
-    }
 
   }));

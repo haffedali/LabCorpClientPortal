@@ -1,2 +1,2 @@
-export const services_uri=process.env.REACT_APP_SERVICES_URI + '/graphql';
-export const adalRedirectUri='http://localhost:3000';
+export const services_uri='https://600c30a9f713.ngrok.io/graphql';
+export const adalRedirectUri='https://azlccpafswa.azurewebsites.net/';
