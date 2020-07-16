@@ -47,10 +47,6 @@ const setupRoutes = app => {
 
       if (!user) return next(new Error("Invalid email!"));
 
-      // if (!passwordCompareSync(req.body.password, user.passwordHash)) {
-      //   return next(new Error("Incorrect password!"));
-      // }
-
       const updateUser = await user.update({
         passwordHash: hashPassword(req.body.password)
       })
