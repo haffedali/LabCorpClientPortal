@@ -1,4 +1,4 @@
-import { GET_DATE, SEND_DATE, GET_START_TIME, GET_END_TIME, GET_SUBJECT, SEND_DATE_PENDING, SEND_DATE_SUCCESS, SEND_DATE_FAILED } from './actionTypes'
+import { GET_DATE, SEND_DATE, GET_START_TIME, GET_END_TIME, GET_SUBJECT, SEND_DATE_PENDING, SEND_DATE_SUCCESS, SEND_DATE_FAILED, ALERT_CLOSED } from './actionTypes'
 
 export default function scheduleReducer(state = {}, action) {
     switch (action.type) {
@@ -16,6 +16,8 @@ export default function scheduleReducer(state = {}, action) {
             return { ...state, request: 'Success' }
         case SEND_DATE_FAILED:
             return { ...state, request: 'Failed'}
+        case ALERT_CLOSED:
+            return { ...state, alertOpen: false }
         default:
             return state
 

@@ -16,8 +16,6 @@ export const getData = (id) => {
             .then((res) => {
                 const appData = res.data.value;
                     dispatch(_getAppointments(appData))
-                    console.log(appData);
-                
             })
             .catch((error) => {
                 console.log(error);

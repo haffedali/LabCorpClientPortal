@@ -12,13 +12,14 @@ import { Container, Grid, Paper } from '@material-ui/core';
 import ScheduledAlert from './ScheduledAlert';
 import { dateError, startTimeError, endTimeError } from '../../utils/dateValidation'
 import TextField from '@material-ui/core/TextField';
-import { AlertTitle, Alert } from '@material-ui/lab';
+import { Alert } from '@material-ui/lab';
 import { useStyles } from "./Appointment.styles"
-import { Fade } from '@material-ui/core'
+
 
 function mapStateToProps(state) {
     return {
-        request: state.scheduleReducer.request
+        request: state.scheduleReducer.request,
+        alert: state.scheduleReducer
     }
 }
 function mapDispatchToProps(dispatch) {
@@ -79,6 +80,12 @@ const DatePicker = (props) => {
     if (props.request && props.request === 'Success') {
         alert = (
                 <Alert severity="success">You've Successfully Submitted A Request</Alert>
+        )
+    }
+
+    if (props.alert.alertOpen === false ) {
+        alert = (
+            <h2>Request Date and Time For Testing</h2>
         )
     }
 
@@ -167,63 +174,6 @@ const DatePicker = (props) => {
             </MuiPickersUtilsProvider>
         </Container>
     );
-
-    /*     if (props.request && props.request === 'Success') {
-            content = (
-                <Container>
-                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                        <Grid container justify="space-around">
-                            <KeyboardDatePicker
-                                disableToolbar
-                                variant="inline"
-                                format="MM/dd/yyyy"
-                                margin="normal"
-                                id="date-picker-inline"
-                                label="Date"
-                                name="startDate"
-                                value={selectedDate.startDate}
-                                onChange={(date) => handleDateChange('startDate', date)}
-                                error={dateError(selectedDate)}
-                                helperText={dateError(selectedDate)}
-                                KeyboardButtonProps={{
-                                    'aria-label': 'change date',
-                                }}
-                            />
-                            <KeyboardTimePicker
-                                margin="normal"
-                                id="time-picker"
-                                label="Start Time Range"
-                                name="startTime"
-                                value={selectedDate.startTime}
-                                onChange={(date) => handleDateChange('startTime', date)}
-                                error={startTimeError(selectedDate)}
-                                helperText={startTimeError(selectedDate)}
-                                KeyboardButtonProps={{
-                                    'aria-label': 'change time',
-                                }}
-                            />
-                            <KeyboardTimePicker
-                                margin="normal"
-                                id="End Time"
-                                label="End Time Range"
-                                name="endTime"
-                                value={selectedDate.endTime}
-                                onChange={(date) => handleDateChange('endTime', date)}
-                                error={endTimeError(selectedDate)}
-                                helperText={endTimeError(selectedDate)}
-                                KeyboardButtonProps={{
-                                    'aria-label': 'change time',
-                                }}
-                            />
-                            <TextField id="standard-basic" label="Standard" />
-                            <ScheduledAlert />
-                        </Grid>
-                    </MuiPickersUtilsProvider>
-                    <Alert severity="success">You've Successfully Submitted A Request</Alert>
-                </Container>
-            )
-        } */
-
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DatePicker)

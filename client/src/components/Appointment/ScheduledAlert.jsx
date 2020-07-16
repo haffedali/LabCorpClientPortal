@@ -61,6 +61,9 @@ function ScheduledAlert(props) {
 
     actions.createAppointment(appDate);
     setOpen(false);
+    setTimeout(() => {
+      actions.hideAlert()
+    }, 5000)
   }
   const handleClickOpen = () => {
     setOpen(true);

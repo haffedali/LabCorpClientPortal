@@ -1,4 +1,4 @@
-import { GET_DATE, GET_START_TIME, GET_END_TIME, SEND_DATE_PENDING, SEND_DATE_SUCCESS, SEND_DATE_FAILED, GET_SUBJECT } from './actionTypes'
+import { GET_DATE, GET_START_TIME, GET_END_TIME, SEND_DATE_PENDING, SEND_DATE_SUCCESS, SEND_DATE_FAILED, GET_SUBJECT, ALERT_CLOSED } from './actionTypes'
 import { appointmentsApi } from '../../utils'
 
 export const getDate = (date) => {
@@ -47,11 +47,21 @@ export const createAppointment = (date) => {
                 console.log(error);
                 dispatch(_createAppointmentFailed(error))
             })
-
-
-
     }
 }
+
+export const hideAlert = () => {
+    return (dispatch) => {
+        dispatch(_hideAlert())
+    }
+}
+
+const _hideAlert = () => {
+    return {
+        type: ALERT_CLOSED,
+    }
+}
+
 const _getDate = (date) => {
     return {
         type: GET_DATE,

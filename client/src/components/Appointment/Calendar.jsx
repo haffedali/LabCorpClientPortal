@@ -21,6 +21,9 @@ import {
 import * as calendarActions from "../../services/Calendar/actions"
 import { useStyles } from "./Appointment.styles"
 
+// Grab Current View for Calendar(Month, Week, Day)
+// Fetch Calendar Appointments with contactID
+// appData for mapping appointments and checking request
 function mapStateToProps(state) {
     return {
         currentView: state.calendarReducer.currentView,
@@ -35,24 +38,27 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
+//Mapping appointment Data for Material-Ui calendar
 const makeData = appointment => ({
     title: appointment.subject,
     startDate: appointment.scheduledstart,
     endDate: appointment.scheduledend,
 });
 
+
 const CalendarView = (props) => {
     const classes = useStyles(props);
     const { actions } = props;
 
     const [viewName, setViewName] = React.useState("Month");
-    const viewChange = (e, index) => {
-        setViewName(index);
-        actions.switchView(index);
+
+    const viewChange = (e, value) => {
+        setViewName(value);
+        actions.switchView(value);
     };
 
-    const fetchData = async () => {
-        await (actions.getData(props.contactId));
+    const fetchData = () => {
+        actions.getData(props.contactId);
     };
 
     const [data, setData] = useState([]);
@@ -72,12 +78,6 @@ const CalendarView = (props) => {
     }
 
     if (props.appData && props.appData.requestSucessful) {
-        const apps = props.appData.appointments;
-
-        const data = props.appData.appointment;
-        const formattedData = data
-            ? data.map(makeData) : [];
-
         content = (
             <div>
                 <Paper className={classes.calendar} elevation={10}>
