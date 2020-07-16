@@ -1,2 +1,2 @@
-export const services_uri='http://localhost:7000/graphql';
-export const adalRedirectUri='http://localhost:3000';
+export const services_uri='https://0640fe5840ba.ngrok.io/graphql';
+export const adalRedirectUri='https://azlccpafswa.azurewebsites.net/';
