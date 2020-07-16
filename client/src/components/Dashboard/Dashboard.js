@@ -9,7 +9,6 @@ const Dashboard = () => {
   const session = useSelector(state => state.session);
   const location = useLocation();
   const contactId = location.search.replace('?contactId=', '');
-  console.log('Dashboard Contact ID!!!: ', contactId)
   const [ isSigningUp, setIsSigningUp ] = useState(contactId ? true : false);
 
   if (session) return <SideBar />;
