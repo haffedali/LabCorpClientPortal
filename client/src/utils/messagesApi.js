@@ -1,31 +1,46 @@
 import axios from "axios";
 import { adalApiFetch } from "../adalConfig";
 import { getConfig, apiRoute, postConfigGenerator } from "./APIHeaders";
-import {buildApiPost} from './helperFunctions';
-
+import { buildApiPost, buildApiCall } from "./helperFunctions";
 
 export const messagesApi = {
   getInboxEmails: (id) => {
-    const queryString =
-      apiRoute +
-      `contacts(${id})/Contact_Emails?$select=subject,sender,description,actualend`;
-    return adalApiFetch(axios, queryString, getConfig)
+
+    const queryObj = {
+      entity: "emails",
+      select: ["description", "actualend", "subject", "sender"],
+      filter: [{ field: "torecipients", value: "haffedmcnair@gmail.com" }],
+      orderBy: [{field: 'actualend', operator: 'desc'}]
+    } 
+    const queryString = buildApiCall(queryObj)
+    return adalApiFetch(axios, queryString, getConfig);
   },
 
-  createNewEmail: (email) =>{
+  getSentEmails: (userEmail) => {
+    const queryObj = {
+      entity: "emails",
+      select: ["description", "actualend", "subject", "ss_sentfrom", "ss_recipient"],
+      filter: [{ field: "ss_sentfrom", value: userEmail }],
+      orderBy: [{field: 'actualend', operator: 'desc'}]
+    };
+    const queryString = buildApiCall(queryObj);
+
+    return adalApiFetch(axios, queryString, getConfig);
+  },
+
+  createNewEmail: ({ ss_sentfrom, subject, body, recipient }) => {
+    var now = new Date();
+    var utc = new Date(now.getTime() + now.getTimezoneOffset());
+
     const data = {
-      sender: "PokemonMan@gmail.com",
-      subject: "Hi, I'm paul mach 2",
-      description: "When I was young I was petrified, but now I've grown and I'm still petrified. Maybe this is because I've never been outside of my house before, but as spongebob says, 'Indoooooooooooooooors'"
-    }
+      ss_sentfrom: ss_sentfrom,
+      subject: subject,
+      description: body,
+      ss_recipient: recipient,
+      actualend: utc
+    };
     const postConfig = postConfigGenerator(data);
     const postString = buildApiPost("emails");
-    adalApiFetch(axios, postString, postConfig)
-    .then((r)=>{
-      console.log(r)
-    })
-    .catch((e)=>console.log(e))
-  }
-
-
+    return adalApiFetch(axios, postString, postConfig);
+  },
 };

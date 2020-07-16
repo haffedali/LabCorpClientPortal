@@ -43,21 +43,44 @@ const camelToDynamicsValueMatrix = (camelCaseValue) => {
  * @param {string} obj.id - Id of the entity you are searching for 
  * @param {string} obj.relatedEntity - Relationship name of related entity you want to return
  * @param {string[]} obj.relatedSelect - Array of fields you want returned from related entity
- * 
+ * @param {object[]} obj.orderBy - Array of what you would like to order by -- {field: string, operator: string}
  * -NOTE-
  * filter object should be shaped as follows
  * {field: string, value :string}
+ * 
+ * Select is required as of now
  */
-export const buildApiCall = ({entity, select, filter, id, relatedEntity, relatedSelect})=>{
+export const buildApiCall = ({entity, select, filter, id, relatedEntity, relatedSelect, orderBy})=>{
     let string = apiRoute + entity;
     if (id){
         string += `(${id})/`
+    }else{
+        string += '/'
     }
     if (select){
         string += buildSelectString(select)
+        if (filter || orderBy){
+            string += '&'
+        }
+    }
+    if (orderBy){
+        string += buildOrderByString(orderBy);
+        if (filter) {
+            string += '&'
+        }
     }
     if (filter){
-        string += buildFilterString(filter)
+        if (select){
+            string += buildFilterString(filter)
+            if (relatedEntity){
+                string += '&'
+            }
+        }else{
+            string += buildFilterNoSelect(filter)
+            if (relatedEntity){
+                string += '&'
+            }
+        }
     }
     if (relatedEntity){
         string += buildRelatedString(relatedEntity, relatedSelect)
@@ -74,13 +97,28 @@ export const buildApiCall = ({entity, select, filter, id, relatedEntity, related
 
 const buildFilterString = (filterArray) => {
     let first = true
-    let string = `&$filter=`
+    let string = `$filter=`
     filterArray.forEach((filterItem)=>{
         if (!first){
             string += ' and '
         }
         string += `contains(${filterItem.field}, '${filterItem.value}')`
         first = false
+    })
+    return string
+}
+
+/**
+ * @param {object[]} filterArray - Array of filter
+ * In the array the object should looks like 
+ * {field: string, value: string}
+ * Field being the field to filter on, value being what you are looking for
+ */
+const buildFilterNoSelect = (filterArray) => {
+    let first = true;
+    let string = `$filter=`
+    filterArray.forEach((filterItem) => {
+        string += `${filterItem.field}%20eq%${filterItem.value}`
     })
     return string
 }
@@ -115,7 +153,7 @@ const buildSelectString = (selectArray, isRelatedSelect) => {
  * @param {string[]} relatedSelect 
  */
 const buildRelatedString = (relatedEntity, relatedSelect) => {
-    let string = '&$expand=';
+    let string = '$expand=';
     string += relatedEntity;
     if (relatedSelect){
         string += `(${buildSelectString(relatedSelect, true)})`
@@ -123,13 +161,37 @@ const buildRelatedString = (relatedEntity, relatedSelect) => {
     return string
 }
 
-
+/**
+ * 
+ * @param {object[]} orderByArray - Array of fields you would like to order by
+ * -NOTE-
+ *  {field: string, operator: string}
+ */
+const buildOrderByString = (orderByArray) => {
+    let string = '$orderby='
+    let first = true
+    orderByArray.forEach((criteria)=>{
+        if (first){
+            first = false
+            string += criteria.field
+        }
+        else{
+            string += `,${criteria.field}`;
+        }
+        string += ` ${criteria.operator}`
+    })
+    return string
+}
 /**
  * 
  * @param {string} entityName - Entity of record you wish to create
  */
 export const buildApiPost = (entityName) => {
     return apiRoute + entityName
+}
+
+export const buildApiCallRelatedEntity = (queryObj) =>{
+    
 }
 
 

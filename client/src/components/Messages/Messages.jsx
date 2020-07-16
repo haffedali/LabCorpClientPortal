@@ -8,7 +8,9 @@ import * as messagesActions from "../../services/Messages/actions";
 import { useStyles } from "./Messages.styles";
 import ViewSwitch from "./ViewSwitch";
 import { MessagesDisplay } from "./MessagesDisplay";
-import {messagesApi} from '../../utils';
+import WriteMessage from './WriteMessageView';
+import { messagesApi } from "../../utils";
+import ButtonSet from "./ButtonSet";
 
 function mapStateToProps(state) {
   return {
@@ -16,6 +18,8 @@ function mapStateToProps(state) {
     userInfo: state.loginReducer.userInfo,
     inboxMessages: state.messagesReducer.inboxMessages,
     getMessageRequest: state.messagesReducer.getMessageRequest,
+    sentMessages: state.messagesReducer.sentMessages,
+    sentEmailStatus: state.messagesReducer.sentEmailStatus
   };
 }
 
@@ -26,49 +30,72 @@ function mapDispatchToProps(dispatch) {
 }
 
 
-
 const Messages = (props) => {
   const classes = useStyles();
-  const {actions, userInfo, test} = props;
-  console.log(test)
+  const { actions, userInfo } = props;
 
-  const displayPage = ()=> {
+
+  useEffect(()=>{
+    if (props.sentEmailStatus !== 'pending' && props.sentEmailStatus !== 'empty' && props.sentEmailStatus){
+      actions.switchPage("Inbox")
+      actions.getInboxEmails(userInfo.contactId);
+      actions.getSentEmails(userInfo.email);
+    }
+  },[props.sentEmailStatus])
+
+  const displayPage = () => {
     switch (props.currentPage) {
       case "Inbox":
-        if (props.getMessageRequest === true && props.getMessageRequest !== "pending"){
-          return <MessagesDisplay messages={props.inboxMessages} />;
+        if (
+          props.getMessageRequest === true &&
+          props.getMessageRequest !== "pending"
+        ) {
+          return <MessagesDisplay messages={props.inboxMessages} inbox />;
         }
         break;
       case "Sent":
-        messagesApi.createNewEmail(userInfo.email)
-        return "Currently in development";
+        return <MessagesDisplay messages={props.sentMessages} />;
         break;
-      case "Notifications":
-        return "Currently in development";
+      case "Create":
+        return <WriteMessage />
+
         break;
       default:
         return "woopsie, you shouldnt see this!";
     }
-  }
-  useEffect(()=>{
-    actions.getInboxEmails(userInfo.contactId)
-  },[])
+  };
+  useEffect(() => {
+    actions.getInboxEmails(userInfo.contactId);
+    actions.getSentEmails(userInfo.email);
+  }, []);
 
-  
   return (
     <Container className={classes.container}>
-      <Grid container direction={"column"} spacing={12}>
-        <Grid item>
-          <ViewSwitch />
+      <Paper>
+        <Grid
+          className={classes.gridContainer}
+          container
+          direction={"column"}
+          spacing={12}
+        >
+          <Grid item>
+            <ViewSwitch />
+          </Grid>
+
+          <Grid xs={12} item className={classes.displayContainer}>
+            <Grid container direction={"row"}>
+              <Grid item xs={10} className={classes.displayContainer}>
+                {displayPage(props.currentPage, props.inboxMessages)}
+              </Grid>
+              <Grid item className={classes.buttonContainer}>
+                <ButtonSet currentPage={props.currentPage}/>
+              </Grid>
+            </Grid>
+          </Grid>
         </Grid>
-        <Grid xs={12} item className={classes.displayContainer}>
-          {displayPage(props.currentPage, props.inboxMessages)}
-        </Grid>
-      </Grid>
+      </Paper>
     </Container>
   );
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Messages);
-
-

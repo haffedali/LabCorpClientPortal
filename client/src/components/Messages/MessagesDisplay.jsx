@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
 import {
   List,
   ListItem,
@@ -11,10 +13,9 @@ import {
   ExpansionPanelDetails,
   Typography,
 } from "@material-ui/core";
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { useStyles } from "./MessagesDisplay.styles";
 import { useTheme } from "../../theme/ThemeContext";
-
 
 const messageContentStringTrim = (string) => {
   if (string) {
@@ -27,68 +28,76 @@ const messageContentStringTrim = (string) => {
 
 const messageSubjectStringTrim = (string) => {
   let endpoint = 0;
-  for (let i=1;i<string.length-3;i++){
-    if (string[i] === "R" && string[i-1] === "C" && string[i+1] === "M" && string[i+2] === ":"){
-      endpoint = i-1
+  for (let i = 1; i < string.length - 3; i++) {
+    if (
+      string[i] === "R" &&
+      string[i - 1] === "C" &&
+      string[i + 1] === "M" &&
+      string[i + 2] === ":"
+    ) {
+      endpoint = i - 1;
     }
   }
-  return string.slice(0,endpoint)
-}
+  if (endpoint > 0) {
+    return string.slice(0, endpoint);
+  } else {
+    return string;
+  }
+};
 
-const MessagesDisplayItem = ({ item }) => {
+const MessagesDisplayItem = ({ item, inbox }) => {
   const classes = useStyles();
   const textContentPeek = messageContentStringTrim(item.textContent);
-  const subjectText = messageSubjectStringTrim(item.subject)
+  const subjectText = messageSubjectStringTrim(item.subject);
   return (
     <Paper key={item.subject} className={classes.displayItemContainer}>
-      <ListItem >
+      <ListItem>
         <Grid container direction="row" justify="space-between">
-          <Grid item xs={2} className={classes.displayItemFromSub}>
-            {/* <ListItemText
-              className={classes.textElement}
-              primary={item.sender}
-            /> */}
+          <Grid item xs={3} className={classes.displayItemFromSub}>
             <Typography className={classes.senderText}>
-              {item.sender}
+              {
+                inbox?item.sender:item.recipient
+              }
             </Typography>
-            {/* <ListItemText className={classes.senderText} primary={item.subject} /> */}
-            {/* <Typography className={classes.senderText}>
-              {subjectText}
-            </Typography> */}
           </Grid>
           <Grid item xs={1}></Grid>
-          <Grid item xs={8}>
+          <Grid item xs={6}>
             <ExpansionPanel>
-              <ExpansionPanelSummary
-              expandIcon={<ExpandMoreIcon />}>
-                <ListItemText
-                  primary={subjectText}
-                />
+              <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                <ListItemText primary={subjectText} />
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>{item.textContent}</ExpansionPanelDetails>
             </ExpansionPanel>
           </Grid>
-          <Grid item xs={1}>
+          <Grid item xs={2}>
             <Container className={classes.displayItemDate}>
-              {/* <ListItemText primary={item.date} className={classes.senderText}/> */}
               <Typography className={classes.senderText}>
-              {item.date}
-            </Typography>
+                {item.date}
+              </Typography>
             </Container>
           </Grid>
         </Grid>
       </ListItem>
-      </Paper>
+    </Paper>
   );
 };
 
 export const MessagesDisplay = (props) => {
   const classes = useStyles(props);
   const theme = useTheme();
+  const dispatch = useDispatch();
+  let count = 0;
+  useEffect(() => {
+    dispatch({ type: "SENT_EMAIL_STATUS_RESET" });
+  }, []);
   return (
     <List className={classes.listContainer}>
-      {props.messages.length ? (
-        props.messages.map((message) => <MessagesDisplayItem key={message.subject} item={message} />)
+      {  
+      props.messages.length ? (
+        props.messages.map((message) => {
+          count += 1;   
+          return <MessagesDisplayItem key={count} item={message} inbox={props.inbox}/>;
+        })
       ) : (
         <div>No Messages at this time</div>
       )}
