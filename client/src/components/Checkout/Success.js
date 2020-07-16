@@ -39,11 +39,13 @@ const Success = () => {
           <CircularProgress className={classes.progressSpinner} />
         </div>) :
         <div>
-          <h1>Done</h1>
+          <h2>Your payment was successful!</h2>
           <div>
-            <a href={receipt_url}>Receipt</a>
+            <a className={classes.successReceipt} href={receipt_url}>
+              <h1>View your receipt</h1>
+            </a>
           </div>
-          <Link to='/billing'>Back to Billing</Link>
+          {/* <Link to='/billing'>Back to Billing</Link> */}
         </div>
       }
       

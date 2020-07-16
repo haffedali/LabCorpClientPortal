@@ -62,5 +62,8 @@ export const useStyles = makeStyles((theme) => ({
   },
   progressSpinner: {
     color: theme.HIGHLIGHT
+  },
+  successReceipt: {
+    color: theme.HIGHLIGHT,
   }
 }));
