@@ -17,7 +17,7 @@ export default function scheduleReducer(state = {}, action) {
         case SEND_DATE_FAILED:
             return { ...state, request: 'Failed'}
         case ALERT_CLOSED:
-            return { ...state, alertOpen: false }
+            return { ...state, alertOpen: false, request: 'Done'}
         default:
             return state
 

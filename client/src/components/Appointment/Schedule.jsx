@@ -64,8 +64,40 @@ const DatePicker = (props) => {
     };
 
     let alert = '';
+    const message = props.request
+    switch (message) {
+        case null:
+            alert = (
+                <h2>Request Date and Time For Testing</h2>
+            );
+            break;
+        case 'Pending':
+            alert = (
+                <Alert severity="info">Pending Request</Alert>
+            );
+            break;
+        case 'Success':
+            alert = (
+                <Alert severity="success">You've Successfully Submitted A Request</Alert>
+            );
+            break;
+        case 'Done':
+            alert = ''
+            break;
+        case props.alert.alertOpen === false:
+            alert = (
+                <h2>Request Date and Time For Testing</h2>
+            );
+            break;
+        case 'Failed':
+            alert = (
+                <Alert severity="error">Failed to make request please Email labtest@labcorp.com for test request</Alert>
+            );
+            break;
 
-    if (!props.request) {
+
+    }
+/*     if (!props.request) {
         alert = (
             <h2>Request Date and Time For Testing</h2>
         )
@@ -73,17 +105,17 @@ const DatePicker = (props) => {
 
     if (props.request && props.request === 'Pending') {
         alert = (
-                <Alert severity="info">Pending Request</Alert>
+            <Alert severity="info">Pending Request</Alert>
         );
     }
 
     if (props.request && props.request === 'Success') {
         alert = (
-                <Alert severity="success">You've Successfully Submitted A Request</Alert>
+            <Alert severity="success">You've Successfully Submitted A Request</Alert>
         )
     }
 
-    if (props.alert.alertOpen === false ) {
+    if (props.alert.alertOpen === false) {
         alert = (
             <h2>Request Date and Time For Testing</h2>
         )
@@ -93,7 +125,7 @@ const DatePicker = (props) => {
         alert = (
             <Alert severity="error">Failed to make request please Email labtest@labcorp.com for test request</Alert>
         )
-    }
+    } */
     return (
         <Container className={classes.schedule} justify='center'>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
